@@ -21,7 +21,8 @@ require.config({
 require([
     'app',
     'domReady',
-    'js/controllers/LoginCrtl'
+    'js/controllers/LoginCrtl',
+    'js/controllers/common/NavbarCrtl'
 ], function (app, domReady) {
 
     app.run(
@@ -67,7 +68,7 @@ require([
                     .state("login", {
                         url: "/login",
                         templateUrl: './views/LoginView.html',
-                        controller: "LoginController as LoginController"
+                        controller: "LoginController as Login"
                     })
 
                     ///////////

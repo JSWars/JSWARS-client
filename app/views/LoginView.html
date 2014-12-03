@@ -1,47 +1,52 @@
-<md-toolbar>
-    <h2 class="md-toolbar-tools">
-        <span>Toolbar: light-theme (default)</span>
-    </h2>
-</md-toolbar>
+<div class="tile-light">
+    <div class="container">
 
+        <div class="row">
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h2>Sign up for free!</h2>
 
-<div layout="row" layout-padding >
-    <div flex="50" offset="25">
-        <md-tabs md-selected="data.selectedIndex">
-            <md-tab id="login" aria-controls="login-content">
-                Iniciar sesión
-            </md-tab>
-            <md-tab id="signup" aria-controls="signup-content">
-                Registrarte
-            </md-tab>
-        </md-tabs>
-        {{test}}
-        {{data.selectedIndex}}
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa dolorum fugit.
+                        </p>
+                        <ul>
+                            <li>Create, train and share your agente resutls</li>
+                            <li>Get 10 batch training sessions per day</li>
+                            <li></li>
+                        </ul>
+                        <p><a class="btn btn-info btn-lg" href="#/register/">Sign up now!</a></p>
+                    </div>
+                </div>
+            </div>
 
-        <button ng-click="test= 'marica'"></button>
-        <ng-switch on="data.selectedIndex" class="tabpanel-container">
-            <div role="loginpanel" id="login-content" ng-switch-when="0" md-swipe-left="next()"
-                 md-swipe-right="previous()">
+            <div class="col-md-6" id="login-tile">
+                <h1 class="block-title">Sign In</h1>
 
-                <md-content md-theme="light-blue-dark">
-                    <form style="padding: 20px;">
-                        <div class="row">
-                            <md-text-float label="Username" ng-model="user.username"></md-text-float>
-                            <md-text-float label="Password" ng-model="user.password" type="email"></md-text-float>
+                <div class="tile">
+                    <form role="form" class="g p-15">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control input-sm" id="exampleInputEmail1"
+                                   placeholder="Enter email">
                         </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control input-sm" id="exampleInputPassword1"
+                                   placeholder="Password">
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-sm m-t-10">Login</button>
+                        </div>
+
                     </form>
-                </md-content>
 
-                View for Item #1<br/>
-                data.selectedIndex = 0
+
+                </div>
+
+
             </div>
-            <div role="signuppanel" id="signup-content" ng-switch-when="1" md-swipe-left="next()"
-                 md-swipe-right="previous()">
-                View for Item #3<br/>
-                data.selectedIndex = 1
-            </div>
-        </ng-switch>
-
-
+        </div>
     </div>
 </div>
