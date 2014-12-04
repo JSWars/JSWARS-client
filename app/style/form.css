@@ -207,8 +207,10 @@ input[type="checkbox"], input[type="radio"]{
    border-top-color: rgba(255,255,255,0.6);
 }
 
-.btn-info{
-    background: linear-gradient(to bottom, rgba(0, 54, 98, 0.30) 0%, rgb(35, 59, 173) 100%) !important;
+.btn-register{
+    background: linear-gradient(to bottom, rgba(251, 253, 255, 0.33) 0%, rgb(230, 229, 232) 100%) !important;
+    color: #000000 !important;
+    font-weight: bold;
 }
 
 /* --------------------------------------------------------

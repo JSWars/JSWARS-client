@@ -1665,9 +1665,11 @@ a.list-group-item.active > .badge,
     margin: 0;
 }
 
-.tile-light {
+.tile-dark-medium {
     background: rgba(0,0,0,0.25);
  }
+
+.tile-da
 
 .tile , .tile-dark, .tile-title, .table th {
     background: rgba(0,0,0,0.35);
@@ -1705,6 +1707,12 @@ a.list-group-item.active > .badge,
     padding: 7px 10px;
     background: rgba(0,0,0,0.35);
     border-radius: 2px 0px 0px 2px !important;
+}
+
+#footer{
+    background: rgba(0,0,0,0.35);
+    color: rgba(255, 255, 255, 0.43);
+    text-shadow: none;
 }
 
 #error-page {
