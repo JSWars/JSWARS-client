@@ -114,7 +114,7 @@ input[type="checkbox"], input[type="radio"]{
     cursor: pointer;
 }
 
-#login .icheckbox_minimal {
+#signin .icheckbox_minimal {
     border: 0;
     background: rgba(0, 0, 0, 0.5);
     width: 17px;

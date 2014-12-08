@@ -1669,8 +1669,6 @@ a.list-group-item.active > .badge,
     background: rgba(0,0,0,0.25);
  }
 
-.tile-da
-
 .tile , .tile-dark, .tile-title, .table th {
     background: rgba(0,0,0,0.35);
 }
@@ -1701,7 +1699,7 @@ a.list-group-item.active > .badge,
 }
 
 
-#login .login-control {
+#signin .login-control {
     width: 100%;
     border: 0;
     padding: 7px 10px;
@@ -1709,7 +1707,8 @@ a.list-group-item.active > .badge,
     border-radius: 2px 0px 0px 2px !important;
 }
 
-#footer{
+footer{
+    padding: 20px 0;
     background: rgba(0,0,0,0.35);
     color: rgba(255, 255, 255, 0.43);
     text-shadow: none;
@@ -1994,17 +1993,22 @@ a.list-group-item.active > .badge,
     }
 
     /* Login */
-    #login {
+    #signin {
         padding: 30px;
     }
 
-    #login > header > h1, #error-page h1 {
-        font-size: 60px;
+    #signup{
+        padding: 30px;
+        background-color: #22231C;
+    }
+    
+    #signup .signup-background{
+        height: 362px;
+        background-image: url("../img/sections/signup-code.png");
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
-    #login .box {
-        width: 500px; 
-    }
 }
 
 @media (min-width: 480px) {
@@ -2238,11 +2242,11 @@ a.list-group-item.active > .badge,
     }
 
     /* Login */
-    #login {
+    #signin {
         padding: 30px 15px;
     }
 
-    #login .box {
+    #signin .box {
         width: 100%;
         width: calc(100% - 30px); 
     }

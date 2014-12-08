@@ -1,12 +1,15 @@
 "use strict";
-// contents of main.js:
 require.config({
-    'baseUrl': './',
+    'baseUrl': 'js/',
     'paths': {
-        'app': 'js/app',
         'domReady': 'components/domReady/domReady',
         'angular': 'components/angular/angular',
         'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
+        'angular-resource': 'components/angular-resource/angular-resource',
+        'controllers': 'controllers',
+        'factories': 'factories',
+        'directives': 'directives',
+        'filters': 'filters'
     },
     'shim': {
         'angular': {
@@ -14,6 +17,21 @@ require.config({
         },
         'angular-ui-router': {
             'deps': ['angular']
+        },
+        'angular-resource': {
+            'deps': ['angular']
+        },
+        'controllers': {
+            deps: ['angular']
+        },
+        'factories': {
+            deps: ['angular']
+        },
+        'directives': {
+            deps: ['angular']
+        },
+        'filters': {
+            deps: ['angular']
         }
     }
 });
@@ -21,8 +39,8 @@ require.config({
 require([
     'app',
     'domReady',
-    'js/controllers/LoginCrtl',
-    'js/controllers/common/NavbarCrtl'
+    'controllers/SigninCrtl',
+    'controllers/common/NavbarCrtl'
 ], function (app, domReady) {
 
     app.run(
@@ -60,28 +78,23 @@ require([
 
                 // Use $stateProvider to configure your states.
                 $stateProvider
-
-                    //////////
-                    // Home //
-                    //////////
-
-                    .state("login", {
-                        url: "/login",
-                        templateUrl: './views/LoginView.html',
-                        controller: "LoginController as Login"
+                    .state("signin", {
+                        url: "/signin",
+                        templateUrl: '../views/SigninView.html',
+                        controller: "SigninController as Signin"
                     })
-
-                    ///////////
-                    // About //
-                    ///////////
+                    .state("signup", {
+                        url: "/signup",
+                        templateUrl: '../views/SignupView.html',
+                        controller: "SignupController as Signup"
+                    })
 
                     .state('about', {
                         url: '/about'
                     });
             }
         ]
-    )
-    ;
+    );
 
     domReady(function () {
         angular.bootstrap(document.documentElement, [app.name]);
