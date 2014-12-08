@@ -14,4 +14,4 @@ build
 
 node_modules
 .idea
-app/components
+app/js/components
