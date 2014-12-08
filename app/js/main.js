@@ -40,6 +40,7 @@ require([
     'app',
     'domReady',
     'controllers/SigninCrtl',
+    'controllers/SignupCrtl',
     'controllers/common/NavbarCrtl'
 ], function (app, domReady) {
 
