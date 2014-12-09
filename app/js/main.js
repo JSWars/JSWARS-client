@@ -40,6 +40,7 @@ require([
     'app',
     'domReady',
     'controllers/SigninCrtl',
+    'controllers/SignupCrtl',
     'controllers/common/NavbarCrtl'
 ], function (app, domReady) {
 
@@ -62,6 +63,20 @@ require([
 
                 // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
                 $urlRouterProvider
+
+                    .rule(function ($injector, $location) {
+
+                        var path = $location.path();
+                        var hasTrailingSlash = path[path.length - 1] === '/';
+
+                        if (hasTrailingSlash) {
+
+                            //if last charcter is a slash, return the same url without the slash
+                            var newPath = path.substr(0, path.length - 1);
+                            return newPath;
+                        }
+
+                    })
 
                     // The `when` method says if the url is ever the 1st param, then redirect to the 2nd param
                     // Here we are just setting up some convenience urls.
