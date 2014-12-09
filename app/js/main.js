@@ -3,8 +3,11 @@ require.config({
     'baseUrl': 'js/',
     'paths': {
         'domReady': 'components/domReady/domReady',
+        'jquery': 'components/jquery/dist/jquery',
+        'bootstrap': 'components/bootstrap/dist/js/bootstrap',
         'angular': 'components/angular/angular',
         'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
+        'angular-ui-bootstrap': 'components/angular-bootstrap/ui-bootstrap-tpls',
         'angular-resource': 'components/angular-resource/angular-resource',
         'controllers': 'controllers',
         'factories': 'factories',
@@ -12,10 +15,16 @@ require.config({
         'filters': 'filters'
     },
     'shim': {
+        'bootstrap': {
+            deps: ['jquery']
+        },
         'angular': {
             'exports': 'angular'
         },
         'angular-ui-router': {
+            'deps': ['angular']
+        },
+        'angular-ui-bootstrap': {
             'deps': ['angular']
         },
         'angular-resource': {
@@ -39,8 +48,10 @@ require.config({
 require([
     'app',
     'domReady',
+    'bootstrap',
     'controllers/SigninCrtl',
     'controllers/SignupCrtl',
+    'controllers/RankingsCrtl',
     'controllers/common/NavbarCrtl'
 ], function (app, domReady) {
 
@@ -102,6 +113,11 @@ require([
                         url: "/signup",
                         templateUrl: '../views/SignupView.html',
                         controller: "SignupController as Signup"
+                    })
+                    .state("rankings", {
+                        url: "/rankings",
+                        templateUrl: '../views/RankingsView.html',
+                        controller: "RankingsController as Rankings"
                     })
 
                     .state('about', {

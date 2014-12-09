@@ -3,6 +3,7 @@ define([
     'angular',
     'angular-ui-router',
     'angular-resource',
+    'angular-ui-bootstrap',
     'controllers',
     'factories',
     'directives',
@@ -11,7 +12,13 @@ define([
     var app;
 
     app = angular.module('tfg', [
-        'ui.router'
+        'ui.router',
+        'ngResource',
+        'ui.bootstrap',
+        'controllers',
+        'factories',
+        'directives',
+        'filters'
     ]);
 
     return app;

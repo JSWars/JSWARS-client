@@ -88,7 +88,7 @@ body, a, input, .help-block {
 
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'open-sans-light', sans-serif;
+    font-family: 'open-sans-semibold', sans-serif;
     font-weight: normal;
 }
 
@@ -1368,6 +1368,11 @@ hr {
 
 .tab-right > li {
     float: right;
+}
+
+.nav {
+    font-family: open-sans-regular;
+    text-transform: uppercase;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
