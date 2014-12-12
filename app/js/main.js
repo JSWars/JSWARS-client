@@ -9,14 +9,11 @@ require.config({
         'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
         'angular-ui-bootstrap': 'components/angular-bootstrap/ui-bootstrap-tpls',
         'angular-resource': 'components/angular-resource/angular-resource',
-        'controllers': 'controllers',
-        'factories': 'factories',
-        'directives': 'directives',
-        'filters': 'filters'
+        'appbootstrap': 'appbootstrap'
     },
     'shim': {
         'bootstrap': {
-            deps: ['jquery']
+            'deps': ['jquery']
         },
         'angular': {
             'exports': 'angular'
@@ -30,107 +27,42 @@ require.config({
         'angular-resource': {
             'deps': ['angular']
         },
-        'controllers': {
-            deps: ['angular']
+        'approuter': {
+            'deps': ['app']
         },
-        'factories': {
-            deps: ['angular']
-        },
-        'directives': {
-            deps: ['angular']
-        },
-        'filters': {
-            deps: ['angular']
+        'appbootstrap':{
+            'deps': ['approuter']
         }
-    }
+    },
+    'priority': [
+        "angular",
+        "jquery"
+    ]
 });
 
 require([
     'app',
-    'domReady',
+    'approuter',
+    'appbootstrap',
     'bootstrap',
-    'controllers/SigninCrtl',
-    'controllers/SignupCrtl',
-    'controllers/RankingsCrtl',
-    'controllers/common/NavbarCrtl'
-], function (app, domReady) {
 
-    app.run(
-        ['$rootScope', '$state', '$stateParams',
-            function ($rootScope, $state, $stateParams) {
-                $rootScope.$state = $state;
-                $rootScope.$stateParams = $stateParams;
-            }
-        ]
-    );
+    'factories/ConfigFactory',
+    'factories/RankingsFactory',
+    'factories/UserFactory',
 
-    app.config(
-        ['$stateProvider', '$urlRouterProvider',
-            function ($stateProvider, $urlRouterProvider) {
+    'controllers/SigninController',
+    'controllers/SignupController',
+    'controllers/RankingsController',
+    'controllers/UserController',
+    'controllers/RootController',
+    'controllers/common/NavbarController',
 
-                /////////////////////////////
-                // Redirects and Otherwise //
-                /////////////////////////////
+    'directives/MapDirective',
 
-                // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
-                $urlRouterProvider
+    'services/StateService',
 
-                    .rule(function ($injector, $location) {
-
-                        var path = $location.path();
-                        var hasTrailingSlash = path[path.length - 1] === '/';
-
-                        if (hasTrailingSlash) {
-
-                            //if last charcter is a slash, return the same url without the slash
-                            var newPath = path.substr(0, path.length - 1);
-                            return newPath;
-                        }
-
-                    })
-
-                    // The `when` method says if the url is ever the 1st param, then redirect to the 2nd param
-                    // Here we are just setting up some convenience urls.
-                    .when('/c?id', '/contacts/:id')
-                    .when('/user/:id', '/contacts/:id')
-
-                    // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
-                    .otherwise('/');
+    'filters/CountryFilter'
 
 
-                //////////////////////////
-                // State Configurations //
-                //////////////////////////
-
-                // Use $stateProvider to configure your states.
-                $stateProvider
-                    .state("signin", {
-                        url: "/signin",
-                        templateUrl: '../views/SigninView.html',
-                        controller: "SigninController as Signin"
-                    })
-                    .state("signup", {
-                        url: "/signup",
-                        templateUrl: '../views/SignupView.html',
-                        controller: "SignupController as Signup"
-                    })
-                    .state("rankings", {
-                        url: "/rankings",
-                        templateUrl: '../views/RankingsView.html',
-                        controller: "RankingsController as Rankings"
-                    })
-
-                    .state('about', {
-                        url: '/about'
-                    });
-            }
-        ]
-    );
-
-    domReady(function () {
-        angular.bootstrap(document.documentElement, [app.name]);
-    });
-
-
-})
-;
+], function (app) {
+});

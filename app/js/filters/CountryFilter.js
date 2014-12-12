@@ -1,8 +1,8 @@
 define([
-        'filters'
+        'filters/Filters'
     ],
-    function (filter) {
-        filter
+    function (Filters) {
+        Filters
             .filter('CountryFilter', function () {
                 return function (input) {
                     var countries = {
@@ -255,7 +255,7 @@ define([
                         "YE": "Yemen",
                         "ZM": "Zambia",
                         "ZW": "Zimbabwe"
-                    }
+                    };
 
                     return countries[input] || input;
 

@@ -32,11 +32,12 @@
                             <td class="text-center">
                                 <strong>{{$index}}</strong>
                             </td>
-                            <td><a ng-href="#/country/{{rankingItem.country}}"
+                            <td>
+                                <a ng-href="#/country/{{rankingItem.country}}"
                                    tooltip="{{rankingItem.country | CountryFilter}}"
                                    tooltip-append-to-body="true"><img ng-src="/img/flags/16/{{rankingItem.country}}.png"
                                                                       alt=""/> </a><a
-                                    ng-href="#/user/{{username}}"><span class="icon"></span>
+                                    ng-href="#/user/{{rankingItem.username}}"><span class="icon"></span>
                                 {{rankingItem.username}}</a>
                             </td>
                             <td class="text-right">
@@ -75,8 +76,7 @@
                             <td class="text-center">
                                 <strong>{{$index}}</strong>
                             </td>
-                            <td><a ng-href="#/country/{{rankingItem.country}}"
-                                   tooltip="{{rankingItem.country | CountryFilter}}" tooltip-append-to-body="true">
+                            <td><a ng-href="#/country/{{rankingItem.country}}">
                                 <img ng-src="/img/flags/16/{{rankingItem.country}}.png" alt=""/> {{rankingItem.country |
                                 CountryFilter}}</a>
                             </td>
@@ -96,5 +96,10 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="tile-dark-medium">
+    <div class="container">
+        <div world-map style="background-color: transparent"></div>
     </div>
 </div>
