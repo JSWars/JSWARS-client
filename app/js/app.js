@@ -4,6 +4,8 @@ define([
     'angular-ui-router',
     'angular-resource',
     'angular-ui-bootstrap',
+    'angular-moment',
+    'angular-easypiechart',
     'controllers/Controllers',
     'services/Services',
     'factories/Factories',
@@ -13,8 +15,10 @@ define([
     var app;
     app = angular.module('tfg', [
         'ui.router',
-        'ngResource',
         'ui.bootstrap',
+        'ngResource',
+        'angularMoment',
+        'easypiechart',
         'controllers',
         'services',
         'factories',

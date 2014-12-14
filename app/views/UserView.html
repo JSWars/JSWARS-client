@@ -1,24 +1,65 @@
 <!-- Profile -->
-<div class="text-center s-widget p-15" id="profile-menu">
-    <a href="" data-toggle="dropdown">
-        <img class="profile-pic animated" ng-src="{{user.avatar}}" alt="">
-    </a>
-    <ul class="dropdown-menu profile-menu">
-        <li><a href="">My Profile</a> <i class="icon left"></i><i class="icon right"></i></li>
-        <li><a href="">Messages</a> <i class="icon left"></i><i class="icon right"></i></li>
-        <li><a href="">Settings</a> <i class="icon left"></i><i class="icon right"></i></li>
-        <li><a href="">Sign Out</a> <i class="icon left"></i><i class="icon right"></i></li>
-    </ul>
+
+<div class="container">
+    <div class="tile-light m-b-15">
+        <div class="cover p-relative">
+            <img src="img/cover-bg.jpg" class="w-100" alt="">
+
+            <img class="profile-pic img-thumbnail" ng-src="{{user.avatar}}" alt="">
+
+            <div class="profile-btn">
+                <button class="btn btn-alt btn-sm"><i class="icon-bubble"></i> <span>Message</span></button>
+                <button class="btn btn-alt btn-sm"><i class="icon-user-2"></i> <span>Friend</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="tile-dark-medium text-center p-15">
     <h4 class="m-0">{{user.name}}</h4>
     @{{user.username}}
 </div>
 
-<div class="clearfix"></div>
-<hr class="whiter">
+
 <div class="container">
     <div class="row">
         <div class="col-md-9 p-15">
 
+
+            <!--<div class="">
+                <h3 class="block-title">Ratios</h3>
+
+                <div class="tile text-center">
+                    <div class="tile-dark p-10">
+                        <div class="pie-chart-tiny" easypiechart percent="86">
+                            <span class="percent">{{86}}</span>
+                            <span class="pie-title">Win/Loose Ratio</span>
+                        </div>
+                        <div class="pie-chart-tiny" easypiechart percent="40">
+                            <span class="percent">{{40}}</span>
+                            <span class="pie-title">Win/Agent Ratio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+
+            <div class="clearfix"></div>
+
+
+            <div class="panel panel-default tile">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Panel title</h3>
+                </div>
+                <div class="panel-body">
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+                    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                    vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+                <div class="panel-footer">Panel footer</div>
+            </div>
 
         </div>
         <div class="col-md-3 p-15">
@@ -42,7 +83,8 @@
                         <span class="icon pull-left"></span>
 
                         <div class="media-body">
-                            <span class="label label-inherit" ng-class="{'label-success': user.online, 'label-error' : !user.online}"><strong>Online</strong></span>
+                            <span class="label label-inherit"
+                                  ng-class="{'label-success': user.online, 'label-error' : !user.online}"><strong>Online</strong></span>
                         </div>
                     </div>
 
@@ -60,7 +102,7 @@
                     <div class="media">
                         <span class="icon pull-left"></span>
 
-                        <div class="media-body"> <strong>Lives in </strong>
+                        <div class="media-body"><strong>Lives in </strong>
                             <a ng-href="#/country/{{user.country}}">
                                 <img ng-src="/img/flags/16/{{user.country}}.png"
                                      alt="{{user.country | CountryFilter}}"/> {{user.country | CountryFilter}}</a>
@@ -72,7 +114,7 @@
 
                         <div class="media-body">
                             <strong>User since</strong>
-                            {{user.created | date: 'MMM d, y' }}
+                            {{user.created | date: "MM/dd/yyyy" }}
                         </div>
                     </div>
 
@@ -101,7 +143,8 @@
                             {{activityItem.object}} {{activityItem.action}} over {{activityItem.id}}
 
                             <div class="clearfix"></div>
-                            <small class="muted"><span from-now="{{activityItem.moment}}"></span></small>
+                            <small class="muted">
+                                <span am-time-ago="activityItem.moment"></span>
                         </div>
                     </div>
                     <div class="media p-5 text-center l-100">
