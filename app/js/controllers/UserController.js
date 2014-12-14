@@ -1,8 +1,7 @@
 define([
     'controllers/Controllers',
-    'components/moment/moment',
     'factories/UserFactory'
-], function (Controllers, Moment) {
+], function (Controllers) {
     Controllers.controller("UserController", ['$scope', '$stateParams', 'User', 'State', function ($scope, $stateParams, User, State) {
 
         State.setState({});

@@ -5,6 +5,7 @@ require.config({
         'domReady': 'components/domReady/domReady',
         'jquery': 'components/jquery/dist/jquery',
         'bootstrap': 'components/bootstrap/dist/js/bootstrap',
+        'moment': "components/moment/moment",
         'angular': 'components/angular/angular',
         'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
         'angular-ui-bootstrap': 'components/angular-bootstrap/ui-bootstrap-tpls',
@@ -30,8 +31,13 @@ require.config({
         'approuter': {
             'deps': ['app']
         },
-        'appbootstrap':{
+        'appbootstrap': {
             'deps': ['approuter']
+        }
+    },
+    config: {
+        moment: {
+            noGlobal: true
         }
     },
     'priority': [
@@ -58,6 +64,7 @@ require([
     'controllers/common/NavbarController',
 
     'directives/MapDirective',
+    'directives/FromNowDirective',
 
     'services/StateService',
 
