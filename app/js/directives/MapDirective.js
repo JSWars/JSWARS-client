@@ -1,7 +1,7 @@
 define([
     'directives/Directives',
     'assets/maps/world',
-    'components/jvectormap/jquery-jvectormap'
+    'components/jvectormap/jquery.jvectormap.min'
 ], function (Directives, WorldMapData) {
     Directives.directive("worldMap", [function () {
         return {
@@ -14,7 +14,7 @@ define([
                 });
                 element
                     .find("svg")
-                    .height(300)
+                    .height(300);
             }
         }
     }])

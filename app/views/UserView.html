@@ -20,14 +20,16 @@
         <div class="col-md-9 p-15">
 
 
-
         </div>
         <div class="col-md-3 p-15">
 
             <div class="tile">
-                <h2 class="tile-title">About me</h2>
+                <h2 class="tile-title">About</h2>
+
+
                 <div class="tile-config dropdown">
-                    <a data-toggle="dropdown" href="" class="tooltips tile-menu" title="" data-original-title="Options"></a>
+                    <a data-toggle="dropdown" href="" class="tooltips tile-icon-menu" title=""
+                       data-original-title="Options"> <span class="icon"></span></a>
                     <ul class="dropdown-menu pull-right text-right">
                         <li><a href="">Edit</a></li>
                         <li><a href="">Delete</a></li>
@@ -35,25 +37,45 @@
                 </div>
 
                 <div class="listview icon-list">
+
                     <div class="media">
-                        <i class="icon pull-left"></i>
-                        <div class="media-body">Software Developer at Google</div>
+                        <span class="icon pull-left"></span>
+
+                        <div class="media-body">
+                            <span class="label label-inherit" ng-class="{'label-success': user.online, 'label-error' : !user.online}"><strong>Online</strong></span>
+                        </div>
                     </div>
+
 
                     <div class="media">
                         <i class="icon pull-left"></i>
-                        <div class="media-body">Studied at Oxford University</div>
+
+                        <div class="media-body">
+                            <strong>Ranking</strong>
+                            <span>{{user.ranking}}</span>
+                        </div>
+                    </div>
+
+
+                    <div class="media">
+                        <span class="icon pull-left"></span>
+
+                        <div class="media-body"> <strong>Lives in </strong>
+                            <a ng-href="#/country/{{user.country}}">
+                                <img ng-src="/img/flags/16/{{user.country}}.png"
+                                     alt="{{user.country | CountryFilter}}"/> {{user.country | CountryFilter}}</a>
+                        </div>
                     </div>
 
                     <div class="media">
-                        <i class="icon pull-left"></i>
-                        <div class="media-body">Lives in Saturn, Milkyway</div>
+                        <span class="icon pull-left"></span>
+
+                        <div class="media-body">
+                            <strong>User since</strong>
+                            {{user.created | date: 'MMM d, y' }}
+                        </div>
                     </div>
 
-                    <div class="media">
-                        <i class="icon pull-left"></i>
-                        <div class="media-body">From Titan, Jupitor</div>
-                    </div>
                 </div>
             </div>
 

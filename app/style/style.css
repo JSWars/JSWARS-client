@@ -598,6 +598,17 @@ hr {
     background-image: url(../img/icon/tile-actions.png);
 }
 
+.tile-config > .tile-icon-menu {
+    width: 34px;
+    height: 26px;
+    display: inline-block;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-left: 12px;
+    padding-top: 4px;
+}
+
 .tile-config > a:hover {
     background-color: rgba(0,0,0,0.3);
 }
@@ -1196,6 +1207,10 @@ hr {
     font-weight: normal;
     padding: 2px 8px 2px;
     font-family: open-sans-regular;
+}
+
+.label-inherit{
+    font-size: 100%;
 }
 
 .h1 .label, h2 .label, h3 .label, h4, .label {
