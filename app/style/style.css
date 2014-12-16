@@ -523,12 +523,16 @@ hr {
     width: 100%;
 }
 
+
 /* Profile */
+#profile-bar hgroup{
+    margin-top: 16px;
+}
+
 .profile-pic {
-    width: 120px;
-    margin: 9px 0 4px;
-    border-radius: 100px !important;
-    border: 6px solid rgba(0,0,0,0.2);
+    max-width: 85px;
+    margin-right: 10px;
+    border: 3px solid rgba(0,0,0,0.3);
 }
 
 .cover img {

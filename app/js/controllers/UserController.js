@@ -8,6 +8,7 @@ define([
 
         $scope.user = User.get({username: $stateParams.username});
         $scope.activity = User.activity({username: $stateParams.username});
+        $scope.agents = User.agents({username: $stateParams.username});
 
     }]);
 });

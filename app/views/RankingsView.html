@@ -30,7 +30,7 @@
                         <tbody>
                         <tr ng-repeat="rankingItem in rankings.bestPlayers">
                             <td class="text-center">
-                                <strong>{{$index}}</strong>
+                                <strong>{{$index+1}}</strong>
                             </td>
                             <td>
                                 <a ng-href="#/country/{{rankingItem.country}}"
@@ -74,7 +74,7 @@
                         <tbody>
                         <tr ng-repeat="rankingItem in rankings.bestCountries">
                             <td class="text-center">
-                                <strong>{{$index}}</strong>
+                                <strong>{{$index+1}}</strong>
                             </td>
                             <td><a ng-href="#/country/{{rankingItem.country}}">
                                 <img ng-src="/img/flags/16/{{rankingItem.country}}.png" alt=""/> {{rankingItem.country |

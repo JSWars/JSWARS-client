@@ -8,6 +8,11 @@ define([
                     url: Config.host + 'users/:username/activity',
                     method: 'GET',
                     isArray:true
+                },
+                agents: {
+                    url: Config.host + 'users/:username/agents',
+                    method: 'GET',
+                    isArray:true
                 }
             });
         }]);

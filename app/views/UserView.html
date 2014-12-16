@@ -1,5 +1,5 @@
 <!-- Profile -->
-
+<!--
 <div class="container">
     <div class="tile-light m-b-15">
         <div class="cover p-relative">
@@ -14,12 +14,62 @@
         </div>
     </div>
 </div>
+-->
 
 
+<div class="tile-dark-medium  p-15"
+     style="background-image: url('img/body/loday_pattern.png');  box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.9), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.9)">
+    <div class="container" id="profile-bar">
+        <div class="row">
 
-<div class="tile-dark-medium text-center p-15">
-    <h4 class="m-0">{{user.name}}</h4>
-    @{{user.username}}
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img class="profile-pic" ng-src="{{user.avatar}}" alt="">
+                    </div>
+                    <div class="col-md-8 text-center">
+                        <hgroup>
+                            <h4 class="m-0">{{user.name}}</h4>
+                            <h5>@{{user.username}}</h5>
+                        </hgroup>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-7">
+
+                <div class="text-center">
+                    <a class="shortcut " href="">
+                        <img src="img/shortcuts/money.png" alt="">
+                        <small class="t-overflow">Purchases</small>
+                    </a>
+                    <a class="shortcut " href="">
+                        <img src="img/shortcuts/twitter.png" alt="">
+                        <small class="t-overflow">Tweets</small>
+                    </a>
+                    <a class="shortcut " href="">
+                        <img src="img/shortcuts/calendar.png" alt="">
+                        <small class="t-overflow">Calendar</small>
+                    </a>
+                    <a class="shortcut " href="">
+                        <img src="img/shortcuts/stats.png" alt="">
+                        <small class="t-overflow">Statistics</small>
+                    </a>
+                    <a class="shortcut " href="">
+                        <img src="img/shortcuts/connections.png" alt="">
+                        <small class="t-overflow">Connection</small>
+                    </a>
+                    <a class="shortcut " href="">
+                        <img src="img/shortcuts/reports.png" alt="">
+                        <small class="t-overflow">Reports</small>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
@@ -28,7 +78,7 @@
         <div class="col-md-9 p-15">
 
 
-            <!--<div class="">
+            <div class="">
                 <h3 class="block-title">Ratios</h3>
 
                 <div class="tile text-center">
@@ -44,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            -->
+
 
             <div class="clearfix"></div>
 
@@ -58,8 +108,35 @@
                     Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
                     vulputate fringilla. Donec lacinia congue felis in faucibus.
                 </div>
-                <div class="panel-footer">Panel footer</div>
             </div>
+
+            <h3 class="block-title">Agents</h3>
+            <table class="table table-responsive tile">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Created</th>
+                    <th class="text-right">Victories</th>
+                    <th class="text-right">Losses</th>
+                    <th class="text-right">Rank</th>
+                    <th style="width: 75px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="agent in agents">
+                    <td><a ng-href="#/agent/{{agent.id}}">{{agent.name}}</a></td>
+                    <td><span am-time-ago="agent.moment"
+                              tooltip="{{agent.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
+                    <td class="text-right">{{agent.wins}}</td>
+                    <td class="text-right">{{agent.losses}}</td>
+                    <td class="text-right">{{agent.rank}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-xs">Challenge</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
 
         </div>
         <div class="col-md-3 p-15">
@@ -145,6 +222,7 @@
                             <div class="clearfix"></div>
                             <small class="muted">
                                 <span am-time-ago="activityItem.moment"></span>
+                            </small>
                         </div>
                     </div>
                     <div class="media p-5 text-center l-100">
