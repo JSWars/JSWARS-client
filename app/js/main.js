@@ -63,10 +63,12 @@ require([
     'factories/ConfigFactory',
     'factories/RankingsFactory',
     'factories/UserFactory',
+    'factories/BattleFactory',
 
     'controllers/SigninController',
     'controllers/SignupController',
     'controllers/RankingsController',
+    'controllers/BattleController',
     'controllers/UserController',
     'controllers/RootController',
     'controllers/common/NavbarController',

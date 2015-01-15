@@ -69,10 +69,15 @@ define([
                         templateUrl: '../views/UserView.html',
                         controller: "UserController"
                     })
+                    .state("battle", {
+                        url: "/battle/{id}",
+                        templateUrl: '../views/BattleView.html',
+                        controller: "BattleController"
+                    })
                     .state('about', {
                         url: '/about'
                     });
             }
         ]
     );
-})
+});

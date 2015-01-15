@@ -7,12 +7,17 @@ define([
                 activity: {
                     url: Config.host + 'users/:username/activity',
                     method: 'GET',
-                    isArray:true
+                    isArray: true
                 },
                 agents: {
                     url: Config.host + 'users/:username/agents',
                     method: 'GET',
-                    isArray:true
+                    isArray: true
+                },
+                tournaments: {
+                    url: Config.host + 'users/:username/tournaments',
+                    method: 'GET',
+                    isArray: true
                 }
             });
         }]);

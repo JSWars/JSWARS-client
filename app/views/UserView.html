@@ -72,13 +72,11 @@
 
 </div>
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-9 p-15">
 
-
-            <div class="">
+            <!--<div class="">
                 <h3 class="block-title">Ratios</h3>
 
                 <div class="tile text-center">
@@ -93,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
 
             <div class="clearfix"></div>
@@ -130,9 +128,51 @@
                     <td class="text-right">{{agent.wins}}</td>
                     <td class="text-right">{{agent.losses}}</td>
                     <td class="text-right">{{agent.rank}}</td>
-                    <td>
+                    <td class="text-center">
                         <button type="button" class="btn btn-primary btn-xs">Challenge</button>
                     </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3 class="block-title">Tournaments</h3>
+            <table class="table table-responsive tile">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Started</th>
+                    <th>Ended</th>
+                    <th class="text-right">Agents</th>
+                    <th class="text-right">Victories</th>
+                    <th class="text-right">Losses</th>
+                    <th class="text-right">Rank</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="tournament in tournaments">
+                    <td>
+                        <a ng-href="#/tournaments/{{tournament.id}}/">
+                            {{tournament.name}} <sup><span class="icon"></span></sup>
+                        </a>
+                    </td>
+                    <td>
+                        <span am-time-ago="tournament.startMoment"
+                              tooltip="{{tournament.startMoment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+                    </td>
+                    <td>
+                        <span am-time-ago="tournament.endMoment"
+                              tooltip="{{tournament.endMoment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+                    </td>
+                    <td class="text-right">{{tournament.agentsCount}}</td>
+                    <td class="text-right">{{tournament.wins}}</td>
+                    <td class="text-right">{{tournament.losses}}</td>
+                    <td class="text-right">
+                        <a ng-href="#/tournaments/{{tournament.id}}/">
+                            {{tournament.rank}} <sup><span class="icon"></span></sup>
+                        </a>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>
