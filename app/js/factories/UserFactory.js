@@ -2,7 +2,7 @@ define([
         'factories/Factories'
     ],
     function (Factories) {
-        Factories.factory('User', ['$resource', 'Config', function UserFactory($resource, Config) {
+        Factories.factory('User', ['$resource', 'Config', function User($resource, Config) {
             return $resource(Config.host + 'users/:username', {}, {
                 activity: {
                     url: Config.host + 'users/:username/activity',

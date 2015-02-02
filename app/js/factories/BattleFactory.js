@@ -1,8 +1,9 @@
 define([
-        'factories/Factories'
+        'factories/Factories',
+        'factories/ConfigFactory'
     ],
     function (Factories) {
-        Factories.factory('Battle', ['$resource', 'Config', function BattleFactory($resource, Config) {
+        Factories.factory('Battle', ['$resource', 'Config', function Battle($resource, Config) {
             return $resource(Config.host + 'battle/:id', {}, {
             });
         }]);

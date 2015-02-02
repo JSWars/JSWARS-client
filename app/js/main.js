@@ -60,10 +60,6 @@ require([
     'appbootstrap',
     'bootstrap',
 
-    'factories/ConfigFactory',
-    'factories/RankingsFactory',
-    'factories/UserFactory',
-    'factories/BattleFactory',
 
     'controllers/SigninController',
     'controllers/SignupController',

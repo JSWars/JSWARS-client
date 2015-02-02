@@ -1,6 +1,7 @@
 define([
     'controllers/Controllers',
-    'factories/UserFactory'
+    'factories/UserFactory',
+    'factories/BattleFactory'
 ], function (Controllers) {
     Controllers.controller("BattleController", ['$scope', '$stateParams', 'State', 'Battle', function ($scope, $stateParams, State, Battle) {
 
