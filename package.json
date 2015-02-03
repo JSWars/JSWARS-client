@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "Proyecto de inteligencia artificial.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "protractor test.js"
   },
   "author": "Marcos Perez Ferro y Luis Sebastián Huerta",
   "license": "MIT",
   "dependencies": {
+    "protractor": "^1.6.1"
   },
   "devDependencies": {
     "bower": "^1.3.12",
@@ -28,7 +29,7 @@
     "plusplus": true,
     "regexp": true,
     "undef": true,
-    "strict": true,
+    "strict": false,
     "trailing": true,
     "asi": false,
     "boss": false,
@@ -71,7 +72,21 @@
     "passfail": false,
     "white": false,
     "maxerr": 100,
-    "predef": ["angular","require","define"],
+    "predef": [
+      "angular",
+      "require",
+      "define",
+      "jQuery",
+	  "after",
+	  "afterEach",
+	  "before",
+	  "beforeEach",
+	  "browser",
+	  "describe",
+	  "expect",
+	  "inject",
+	  "it"
+    ],
     "indent": 4
   }
 }

@@ -1,8 +1,8 @@
 define([
-    'controllers/Controllers',
-    'factories/UserFactory'
+	'controllers/Controllers',
+	'factories/UserFactory'
 ], function (Controllers) {
-    Controllers.controller("SignupController", ['$scope',  function SignupController($scope) {
+	Controllers.controller("SignupController", ['$scope', function SignupController($scope) {
 
-    }]);
+	}]);
 });

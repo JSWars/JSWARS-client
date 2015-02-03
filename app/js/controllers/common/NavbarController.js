@@ -1,8 +1,8 @@
 define([
-        'controllers/Controllers'
-    ],
-    function (Controllers) {
-        Controllers.controller("NavbarController", ['$scope', function ($scope) {
+		'controllers/Controllers'
+	],
+	function (Controllers) {
+		Controllers.controller("NavbarController", ['$scope', function ($scope) {
 
-        }])
-    });
+		}])
+	});

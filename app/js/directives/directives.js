@@ -1,6 +1,6 @@
 define([
-   'angular'
+	'angular'
 ], function (angular) {
-   'use strict';
-   return angular.module('directives', []);
+	'use strict';
+	return angular.module('directives', []);
 });

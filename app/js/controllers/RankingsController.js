@@ -1,13 +1,13 @@
 define([
-    'controllers/Controllers',
-    'factories/RankingsFactory'
+	'controllers/Controllers',
+	'factories/RankingsFactory'
 ], function (Controllers) {
-    Controllers.controller("RankingsController", ['$scope', 'Rankings', 'State', function ($scope, Rankings, State) {
-        $scope.rankingRange = 24;
-        $scope.rankings = Rankings.get();
+	Controllers.controller("RankingsController", ['$scope', 'Rankings', 'State', function ($scope, Rankings, State) {
+		$scope.rankingRange = 24;
+		$scope.rankings = Rankings.get();
 
-        State.setState({
-            title: "Rankings"
-        });
-    }]);
+		State.setState({
+			title: "Rankings"
+		});
+	}]);
 });

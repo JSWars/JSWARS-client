@@ -1,6 +1,6 @@
 define([
-   'angular'
+	'angular'
 ], function (angular) {
-   'use strict';
-   return angular.module('factories', []);
+	'use strict';
+	return angular.module('factories', []);
 });

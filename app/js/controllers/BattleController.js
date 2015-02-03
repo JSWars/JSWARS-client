@@ -1,15 +1,15 @@
 define([
-    'controllers/Controllers',
-    'factories/UserFactory',
-    'factories/BattleFactory'
+	'controllers/Controllers',
+	'factories/UserFactory',
+	'factories/BattleFactory'
 ], function (Controllers) {
-    Controllers.controller("BattleController", ['$scope', '$stateParams', 'State', 'Battle', function ($scope, $stateParams, State, Battle) {
+	Controllers.controller("BattleController", ['$scope', '$stateParams', 'State', 'Battle', function ($scope, $stateParams, State, Battle) {
 
-        State.setState({
-            title: "Jugador 1 VS Jugador 2"
-        });
+		State.setState({
+			title: "Jugador 1 VS Jugador 2"
+		});
 
-        $scope.battle = Battle.get({id: $stateParams.id})
+		$scope.battle = Battle.get({id: $stateParams.id})
 
-    }]);
+	}]);
 });
