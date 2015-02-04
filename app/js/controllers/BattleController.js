@@ -9,7 +9,7 @@ define([
 			title: "Jugador 1 VS Jugador 2"
 		});
 
-		$scope.battle = Battle.get({id: $stateParams.id})
+		$scope.battle = Battle.get({id: $stateParams.id});
 
 	}]);
 });

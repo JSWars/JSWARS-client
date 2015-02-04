@@ -1,10 +1,10 @@
 define([
-		'directives/directives',
+		'directives/Directives',
 		'factories/CountriesFactory',
 		'services/SessionService'
 	],
-	function (directives) {
-		directives
+	function (Directives) {
+		Directives
 			.directive('profileUpdate', ['$modal', '$compile', function ($modal, $compile) {
 				return {
 					restrict: 'A',

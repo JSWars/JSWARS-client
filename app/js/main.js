@@ -64,6 +64,7 @@ require([
 	'appbootstrap',
 	'bootstrap',
 
+	'directives/GameDirective',
 
 	'controllers/SigninController',
 	'controllers/SignupController',
@@ -73,11 +74,15 @@ require([
 	'controllers/RootController',
 	'controllers/common/NavbarController',
 
-	'directives/MapDirective',
+	'directives/MapDrtv',
 
 	'services/StateService',
 
 	'filters/CountryFilter'
 
 ], function (app) {
+
+	app.config(function($logProvider){
+		$logProvider.debugEnabled(true);
+	});
 });

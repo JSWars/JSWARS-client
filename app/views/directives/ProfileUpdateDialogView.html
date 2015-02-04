@@ -19,12 +19,28 @@
 						 id="profileName"
 						 name="name"
 						 ng-model="profile.name" required/>
-
 				<div ng-messages="updateProfileForm.name.$error">
 					<label for="profileName" ng-message="required" class="error">Obligatorio</label>
 				</div>
 			</div>
+		</div>
 
+		<div class="form-group">
+			<label for="profileEmail" class="col-lg-3 control-label">Email</label>
+
+			<div class="col-lg-9">
+				<input class="form-control"
+						 type="email"
+						 id="profileEmail"
+						 name="name"
+						 ng-model="profile.email" required/>
+
+				<div ng-messages="updateProfileForm.email.$error">
+					<label for="profileEmail" ng-message="required" class="error">Obligatorio</label>
+					<label for="profileEmail" ng-message="email" class="error">Incorrect format</label>
+
+				</div>
+			</div>
 		</div>
 
 		<div class="form-group">
@@ -33,8 +49,8 @@
 			<div class="col-lg-9">
 				<div ng-file-drop ng-model="files" class="drop-box"
 					  drag-over-class="dragover" multiple="false"
-					  allow-dir="true" accept="image/*,application/pdf">
-					Drop Images or PDFs files here
+					  allow-dir="true" accept="image/*,application/pdf" id="profileAvatar">
+					Arrastra tu avatar aquí
 				</div>
 				<div ng-messages="updateProfileForm.avatar.$error">
 					<label for="profileAvatar" ng-message="required" class="error">Obligatorio</label>
