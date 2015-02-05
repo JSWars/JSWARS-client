@@ -4,6 +4,17 @@ define([
 	],
 	function (Factories) {
 		Factories.factory('Battle', ['$resource', 'Config', function Battle($resource, Config) {
-			return $resource(Config.host + 'battle/:id', {}, {});
+			return $resource(Config.host + 'battle/:id', {}, {
+				map: {
+					url: Config.host + 'battle/:id/map',
+					method: 'GET',
+					isArray: false
+				},
+				chunk: {
+					url: Config.host + 'battle/:id/chunk/:chunkid',
+					method: 'GET',
+					isArray: false
+				}
+			});
 		}]);
 	});
