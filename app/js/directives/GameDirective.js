@@ -14,7 +14,9 @@ define([
 
 
 				function Map(data) {
-					//this.tilesResources = '/img/tiles/' + data.tilesets[0].image;
+					this.tiles = data.tilesets[0];
+					this.tilesResource = new Image();
+					this.tilesResource.src = '/img/tiles/' + this.tiles.image;
 					this.width = data.width;
 					this.height = data.height;
 					this.tileHeight = data.tileheight; //PX
@@ -35,6 +37,8 @@ define([
 							layer.data = doubleDimData;
 						}
 					});
+					this.tiles.xCount = this.tiles.imageheight / this.tiles.tileheight;
+					this.tiles.yCount = this.tiles.imagewidth / this.tiles.tilewidth;
 				}
 
 
@@ -47,13 +51,13 @@ define([
 				function Game(container, map) {
 
 					this.map = map;
-					this.SQUARE_PX = map.tileHeight; //PX
-					this.SQUARE_STROKE = 2; // PX
+					this.SQUARE_HEIGHT_PX = map.tileHeight; //PX
+					this.SQUARE_WIDTH_PX = map.tileWidth; //PX
 
 					this.stage = new Kinetic.Stage({
 						container: container,
-						width: map.width * this.SQUARE_PX,
-						height: map.height * this.SQUARE_PX
+						width: map.width * this.SQUARE_WIDTH_PX,
+						height: map.height * this.SQUARE_HEIGHT_PX
 					});
 
 
@@ -63,10 +67,12 @@ define([
 					};
 
 					//Draw each map layer
-					angular.forEach(map.layers, angular.bind(this, function (layer) {
-						this.drawMap(kineticLayers.map, layer.data);
-						this.stage.add(kineticLayers.map);
-					}));
+					this.map.tilesResource.onload = angular.bind(this, function () {
+						angular.forEach(map.layers, angular.bind(this, function (layer) {
+							this.drawMap(kineticLayers.map, layer.data);
+							this.stage.add(kineticLayers.map);
+						}));
+					});
 
 					/*
 					 var players = {x: 5, y: 5};
@@ -110,8 +116,6 @@ define([
 
 				 */
 				Game.prototype.drawMap = function (layer, map) {
-					var blockSize = this.SQUARE_PX;
-					var randomColor = this.getColor();
 
 					var group = new Kinetic.Group({
 						id: new Date().getTime(),
@@ -119,28 +123,72 @@ define([
 						y: 0
 					});
 
+					//this.tiles.xCount
+					//this.tiles.yCount
+
 					for (var y = 0; y < map.length; y = y + 1) {
 						for (var x = 0; x < map[y].length; x = x + 1) {
-							var mapItem = map[y][x];
-
-							if (mapItem !== 0) {
-								var rectOptions = {
-									x: x * blockSize,
-									y: y * blockSize,
-									width: blockSize,
-									height: blockSize,
-									fill: randomColor,
-									stroke: '#000000',
-									strokeWidth: this.SQUARE_STROKE
-								};
-								group.add(new Kinetic.Rect(rectOptions));
+							if (map[y][x] === 0) {
+								continue;
 							}
+							var tile = new Kinetic.Image({
+								x: x * this.SQUARE_WIDTH_PX,
+								y: y * this.SQUARE_HEIGHT_PX,
+								width: this.SQUARE_WIDTH_PX,
+								height: this.SQUARE_HEIGHT_PX,
+								name: "image",
+								image: this.map.tilesResource,
+								crop: {
+									//Restamos 1 por que si no desplazamos a la derecha una casilla
+									x: ((map[y][x] % this.map.tiles.xCount)-1) * this.map.tiles.tilewidth,
+									y: Math.floor(map[y][x] / this.map.tiles.yCount) * this.map.tiles.tileheight,
+									width: this.SQUARE_WIDTH_PX,
+									height: this.SQUARE_HEIGHT_PX
+								}
+							});
 
+							group.add(tile);
 						}
 					}
 
 					layer.add(group);
 					layer.draw();
+
+
+					/*
+					 var blockSize = this.SQUARE_PX;
+					 var randomColor = this.getColor();
+
+					 var group = new Kinetic.Group({
+					 id: new Date().getTime(),
+					 x: 0,
+					 y: 0
+					 });
+
+					 for (var y = 0; y < map.length; y = y + 1) {
+					 for (var x = 0; x < map[y].length; x = x + 1) {
+					 var mapItem = map[y][x];
+
+					 if (mapItem !== 0) {
+					 var rectOptions = {
+					 x: x * blockSize,
+					 y: y * blockSize,
+					 width: blockSize,
+					 height: blockSize,
+					 fill: randomColor,
+					 stroke: '#000000',
+					 strokeWidth: this.SQUARE_STROKE
+					 };
+					 group.add(new Kinetic.Rect(rectOptions));
+					 }
+
+					 }
+					 }
+
+					 layer.add(group);
+					 layer.draw();
+
+					 */
 
 				};
 
