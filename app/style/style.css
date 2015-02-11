@@ -2326,10 +2326,3 @@ footer {
 [game] {
 	text-align: center;
 }
-.kineticjs-content{
-	max-width: 100%;
-}
-.kineticjs-content canvas {
-	width: 100% !important;
-	height: auto !important;
-}

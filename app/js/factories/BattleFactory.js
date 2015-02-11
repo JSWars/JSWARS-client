@@ -11,9 +11,9 @@ define([
 					isArray: false
 				},
 				chunk: {
-					url: Config.host + 'battle/:id/chunk/:chunkid',
+					url: Config.host + 'battle/:id/chunks/:chunkid',
 					method: 'GET',
-					isArray: false
+					isArray: true //todo: probably object
 				}
 			});
 		}]);
