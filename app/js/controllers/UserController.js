@@ -2,7 +2,7 @@ define([
 	'controllers/Controllers',
 	'factories/UserFactory',
 	'factories/ConfigFactory',
-	'services/SessionService',
+	'factories/SessionFactory',
 	'directives/ProfileUpdateDialogDrtv'
 ], function (Controllers) {
 	Controllers.controller("UserController", ['$scope', '$stateParams', '$modal', 'Session', 'User', 'State', function ($scope, $stateParams, $modal, Session, User, State) {

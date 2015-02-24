@@ -1,23 +1,22 @@
 define([
-		'services/Services'
+		'services/Services',
+		'factories/SessionFactory'
 	],
 	function (Services) {
-		Services.service('Session', ['$timeout', '$q', function ($timeout, $q) {
+		Services.service('Session', ['$timeout', '$q', 'Session', function ($timeout, $q, Session) {
 			return {
 				/**
 				 *
 				 * @returns {{username: string}}
 				 */
-				get: function getUser() {
-					//Returning always the same user for testing porpuses
-					//Simulating a delay
-					return {
-						username: 'djwmarcx',
-						email: 'djwedo@gmail.com',
-						country: 'ES',
-						avantar: 'img/avatars/Awesome.png',
-						name: 'Marcos Pérez Ferro'
-					};
+				get: function get() {
+					Session.get()
+						.$promise
+						.then(function () {
+
+						}, function () {
+
+						});
 				}
 			};
 

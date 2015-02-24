@@ -67,8 +67,20 @@ define([
 					.state("user", {
 						url: "/user/{username}",
 						templateUrl: '../views/UserView.html',
-						controller: "UserController"
+						controller: "UserController",
+						abstract:true
 					})
+					.state("user.overall", {
+						url: '',
+						templateUrl: '../views/user/OverallView.html'
+
+						//controller: "UserController"
+					})
+					//.state("user.agents", {
+					//	url: "/user/{username}/agents",
+					//	templateUrl: '../views/AgentListView.html',
+					//	//controller: "UserController"
+					//})
 					.state("battle", {
 						url: "/battle/{id}",
 						templateUrl: '../views/BattleView.html',
