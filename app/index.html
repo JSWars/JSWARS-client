@@ -49,10 +49,10 @@
 			</li>
 			<li><a href="http://dev.blog.tfg.com">Blog</a></li>
 		</ul>
-		<ul class="nav navbar-nav navbar-right">
+		<ul class="nav navbar-nav navbar-right" ng-cloak>
 
-			<li><a href="#/signin" class="">Sign in</a></li>
-			<li><a href="#/signup" class="btn btn-register">Sign up</a></li>
+			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)"><i class="fa fa-github"></i> Sign in with GitHub</a></li>
+			<li ng-if="session.username"><a class="btn btn-register" ng-href="#/user/{{session.username}}/">Welcome {{session.username}}</a></li>
 		</ul>
 	</nav>
 </header>

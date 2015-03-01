@@ -57,6 +57,9 @@
 					<button type="button" class="btn btn-primary btn-xs">Challenge</button>
 				</td>
 			</tr>
+			<tr ng-if="agents.length==0">
+				<td colspan="6">No agents uploaded already</td>
+			</tr>
 			</tbody>
 		</table>
 
@@ -86,8 +89,8 @@
 					</a>
 				</td>
 				<td>
-                        <span am-time-ago="tournament.startMoment"
-										tooltip="{{tournament.startMoment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+					<span am-time-ago="tournament.startMoment"
+							tooltip="{{tournament.startMoment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
 				</td>
 				<td>
                         <span am-time-ago="tournament.endMoment"
@@ -101,7 +104,9 @@
 						{{tournament.rank}} <sup><span class="icon"></span></sup>
 					</a>
 				</td>
-
+			</tr>
+			<tr ng-if="tournaments.length==0">
+				<td colspan="7">No tournaments</td>
 			</tr>
 			</tbody>
 		</table>
@@ -112,7 +117,6 @@
 
 		<div class="tile">
 			<h2 class="tile-title">About</h2>
-
 
 			<div class="tile-config dropdown">
 				<a data-toggle="dropdown" href="" class="tooltips tile-icon-menu" title=""
@@ -125,17 +129,17 @@
 
 			<div class="listview icon-list">
 
-				<div class="media">
-					<span class="icon pull-left"></span>
+				<!--<div class="media">-->
+				<!--<span class="icon pull-left"></span>-->
 
-					<div class="media-body">
-                            <span class="label label-inherit"
-											 ng-class="{'label-success': user.online, 'label-error' : !user.online}"><strong>Online</strong></span>
-					</div>
-				</div>
+				<!--<div class="media-body">-->
+				<!--<span class="label label-inherit"-->
+				<!--ng-class="{'label-success': user.online, 'label-error' : !user.online}"><strong>Online</strong></span>-->
+				<!--</div>-->
+				<!--</div>-->
 
 
-				<div class="media">
+				<div class="media" ng-if="user.ranking">
 					<i class="icon pull-left"></i>
 
 					<div class="media-body">
@@ -145,7 +149,7 @@
 				</div>
 
 
-				<div class="media">
+				<div class="media" ng-if="user.country">
 					<span class="icon pull-left"></span>
 
 					<div class="media-body"><strong>Lives in </strong>
@@ -155,7 +159,7 @@
 					</div>
 				</div>
 
-				<div class="media">
+				<div class="media" ng-if="user.created">
 					<span class="icon pull-left"></span>
 
 					<div class="media-body">

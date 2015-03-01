@@ -3,20 +3,23 @@ define([
 		'factories/SessionFactory'
 	],
 	function (Services) {
-		Services.service('Session', ['$timeout', '$q', 'Session', function ($timeout, $q, Session) {
+		Services.service('SessionService', ['$timeout', '$q', '$log', 'SessionFactory', function ($timeout, $q, $log, SessionFactory) {
 			return {
 				/**
 				 *
 				 * @returns {{username: string}}
 				 */
 				get: function get() {
-					Session.get()
+					var deferred = $q.defer();
+					SessionFactory.get()
 						.$promise
-						.then(function () {
-
-						}, function () {
-
+						.then(function (session) {
+							deferred.resolve(session);
+						}, function (errorResponse) {
+							$log.error(errorResponse);
+							deferred.reject(errorResponse);
 						});
+					return deferred.promise;
 				}
 			};
 

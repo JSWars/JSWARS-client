@@ -1,8 +1,8 @@
 define([
 	'controllers/Controllers',
-	'factories/UserFactory'
+	'services/UserService'
 ], function (Controllers) {
 	Controllers.controller("ActivityWidgetController", ['$scope', '$stateParams', 'User', function ($scope, $stateParams, User) {
-		$scope.activity = User.activity({username: $stateParams.username});
+		//$scope.activity = User.activity({username: $stateParams.username});
 	}]);
 });

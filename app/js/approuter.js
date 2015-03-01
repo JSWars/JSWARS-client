@@ -49,16 +49,16 @@ define([
 
 				// Use $stateProvider to configure your states.
 				$stateProvider
-					.state("signin", {
-						url: "/signin",
-						templateUrl: '../views/SigninView.html',
-						controller: "SigninController"
-					})
-					.state("signup", {
-						url: "/signup",
-						templateUrl: '../views/SignupView.html',
-						controller: "SignupController"
-					})
+					//.state("signin", {
+					//	url: "/signin",
+					//	templateUrl: '../views/SigninView.html',
+					//	controller: "SigninController"
+					//})
+					//.state("signup", {
+					//	url: "/signup",
+					//	templateUrl: '../views/SignupView.html',
+					//	controller: "SignupController"
+					//})
 					.state("rankings", {
 						url: "/rankings",
 						templateUrl: '../views/RankingsView.html',
@@ -70,10 +70,16 @@ define([
 						controller: "UserController",
 						abstract:true
 					})
+
 					.state("user.overall", {
 						url: '',
 						templateUrl: '../views/user/OverallView.html'
+						//controller: "UserController"
+					})
 
+					.state("user.agents", {
+						url: 'agents',
+						templateUrl: '../views/user/AgentsViews.html'
 						//controller: "UserController"
 					})
 					//.state("user.agents", {
@@ -86,6 +92,7 @@ define([
 						templateUrl: '../views/BattleView.html',
 						controller: "BattleController"
 					})
+
 					.state('about', {
 						url: '/about'
 					});
