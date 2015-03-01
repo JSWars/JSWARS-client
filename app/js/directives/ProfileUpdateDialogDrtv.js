@@ -1,7 +1,8 @@
 define([
 		'directives/Directives',
 		'factories/CountriesFactory',
-		'services/SessionService'
+		'services/SessionService',
+		'services/UserService'
 	],
 	function (Directives) {
 		Directives
@@ -13,9 +14,7 @@ define([
 					},
 					link: function ($scope, element, attrs) {
 
-						function ProfileUpdateModalController($modalScope, $modalInstance, Session, Countries) {
-
-
+						function ProfileUpdateModalController($modalScope, $modalInstance, SessionService, UserService, Countries) {
 							$modalScope.countries = [];
 							angular.forEach(Countries, function (country, code) {
 								$modalScope.countries.push({
@@ -24,33 +23,51 @@ define([
 								});
 							});
 
-							$modalScope.profile = Session.get();
+							SessionService.get()
+								.then(function (session) {
+									$modalScope.profile = session;
+									//Transform regular country code to object
+									if (!angular.isUndefined($modalScope.profile.country)) {
+										$modalScope.profile.country = {
+											code: $modalScope.profile.country,
+											name: Countries[$modalScope.profile.country]
+										};
+									}
+								}, function () {
+									$modalInstance.dismiss({errorId: 'SESSION_ERROR'});
+								});
 
-							//Transform regular country code to object
-							$modalScope.profile.country = {
-								code: $modalScope.profile.country,
-								name: Countries[$modalScope.profile.country]
-							};
-
-							$scope.onSelectCountry = function ($item, $model, $label) {
-								console.log($item, $model, $label);
-							};
+							//$scope.onSelectCountry = function ($item, $model, $label) {
+							//	console.log($item, $model, $label);
+							//};
 
 							$modalScope.update = function () {
-								//Transform country object to code again
-								$modalScope.profile.country = $modalScope.profile.country.code;
 								//Here we need to update profile
+								UserService.update({
+									username: $modalScope.profile.username,
+									name: $modalScope.profile.name,
+									email: $modalScope.profile.email,
+									//avatar: $modalScope.profile.avatar,
+									country: $modalScope.profile.country.code
+								})
+									.then(function () {
+										$modalInstance.close();
+									},
+									function () {
+										$modalInstance.dismiss({errorId: 'UPDATE_ERROR'});
+									});
+
 							};
 
 							$modalScope.cancel = function () {
-								$modalInstance.dismiss('Ventana cerrada');
+								$modalInstance.dismiss({errorId: 'MODAL_CLOSED'});
 							};
 						}
 
 						$scope.open = function () {
 							$modal.open({
 								templateUrl: '/views/directives/ProfileUpdateDialogView.html',
-								controller: ['$scope', '$modalInstance', 'Session', 'Countries', ProfileUpdateModalController]
+								controller: ['$scope', '$modalInstance', 'SessionService', 'UserService', 'Countries', ProfileUpdateModalController]
 							})
 								.result.then(function (result) {
 									($scope.onComplete || angular.noop)(false);

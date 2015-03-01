@@ -2,8 +2,13 @@ define([
 		'factories/Factories'
 	],
 	function (Factories) {
-		Factories.factory('User', ['$resource', 'Config', function User($resource, Config) {
-			return $resource(Config.host + 'users/:username', {}, {
+		Factories.factory('UserFactory', ['$resource', 'Config', function UserFactory($resource, Config) {
+			return $resource('/api/users/:username', {
+				'username': '@username'
+			}, {
+				update: {
+					method: 'PUT'
+				},
 				activity: {
 					url: Config.host + 'users/:username/activity',
 					method: 'GET',

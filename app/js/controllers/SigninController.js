@@ -1,7 +1,9 @@
 define([
-	'controllers/Controllers',
+	'controllers/Controllers'
 ], function (Controllers) {
 	Controllers.controller("SigninController", ['$scope', function SigninController($scope) {
+
+
 
 	}]);
 });

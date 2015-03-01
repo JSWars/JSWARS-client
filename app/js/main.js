@@ -10,6 +10,7 @@ require.config({
 		'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
 		'angular-ui-bootstrap': 'components/angular-bootstrap/ui-bootstrap-tpls',
 		'angular-resource': 'components/angular-resource/angular-resource',
+		'angular-messages': 'components/angular-messages/angular-messages',
 		'angular-moment': 'components/angular-moment/angular-moment',
 		'angular-easypiechart': 'components/jquery.easy-pie-chart/dist/angular.easypiechart',
 		'angular-file-upload': 'components/angular-file-upload/angular-file-upload',
@@ -29,6 +30,9 @@ require.config({
 			'deps': ['angular']
 		},
 		'angular-resource': {
+			'deps': ['angular']
+		},
+		'angular-messages': {
 			'deps': ['angular']
 		},
 		'angular-moment': {
@@ -73,6 +77,8 @@ require([
 	'controllers/UserController',
 	'controllers/RootController',
 	'controllers/common/NavbarController',
+
+	'controllers/user/ActivityWidgetController',
 
 	'directives/MapDrtv',
 

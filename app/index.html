@@ -1,58 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>TFG!</title>
+	<meta charset="UTF-8">
+	<title>TFG!</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <link href="js/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-    <link href="style/style.css" rel="stylesheet"/>
-    <link href="style/form.css" rel="stylesheet"/>
-    <link href="style/font-awesome.css" rel="stylesheet"/>
-    <link href="style/generics.css" rel="stylesheet"/>
-    <link href="style/icons.css" rel="stylesheet"/>
+	<link href="js/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+	<link href="js/components/bootstrap-social/bootstrap-social.css" rel="stylesheet"/>
+	<link href="style/style.css" rel="stylesheet"/>
+	<link href="style/form.css" rel="stylesheet"/>
+	<link href="style/font-awesome.css" rel="stylesheet"/>
+	<link href="style/generics.css" rel="stylesheet"/>
+	<link href="style/icons.css" rel="stylesheet"/>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="js/components/html5shiv/dist/html5shiv.min.js"></script>
-    <![endif]-->
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="js/components/html5shiv/dist/html5shiv.min.js"></script>
+	<![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="img/favicon.png">
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="img/favicon.png">
 </head>
 <body id="skin-blur-yellow" ng-controller="RootController">
 
 <header id="header" class="media">
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="#">IA Battle</a>
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="#/howworks">How it works</a>
-            </li>
-            <li>
-                <a href="#/tournaments">Tournaments</a>
-            </li>
-            <li class="active">
-                <a href="#/training">Training</a>
-            </li>
-            <li>
-                <a href="#/rankings">Rankings</a>
-            </li>
-            <li><a href="http://dev.blog.tfg.com">Blog</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/signin">Sign in</a></li>
-            <li><a href="#/signup" class="btn btn-register">Sign up</a></li>
-        </ul>
-    </nav>
+	<a href="" id="menu-toggle"></a>
+	<a class="logo pull-left" href="#">IA Battle</a>
+	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+		<ul class="nav navbar-nav">
+			<li>
+				<a href="#/howworks">How it works</a>
+			</li>
+			<li>
+				<a href="#/tournaments">Tournaments</a>
+			</li>
+			<li class="active">
+				<a href="#/training">Training</a>
+			</li>
+			<li>
+				<a href="#/rankings">Rankings</a>
+			</li>
+			<li><a href="http://dev.blog.tfg.com">Blog</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right" ng-cloak>
+
+			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)"><i class="fa fa-github"></i> Sign in with GitHub</a></li>
+			<li ng-if="session.username"><a class="btn btn-register" ng-href="#/user/{{session.username}}/">Welcome {{session.username}}</a></li>
+		</ul>
+	</nav>
 </header>
 
 <h1 class="text-center" ng-if="title">{{title}}</h1>
@@ -61,30 +63,30 @@
 
 <div class="clearfix"></div>
 <footer class="tile-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-2 col-xs-offset-3">
-                <h4>Developers</h4>
-                <ul>
-                    <li><a href="">API</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-2">
-                <h4>Legal information</h4>
-                <ul>
-                    <li><a href="">Terms</a></li>
-                    <li><a href="">Privacy</a></li>
-                    <li><a href="">Cookies</a></li>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2 col-xs-offset-3">
+				<h4>Developers</h4>
+				<ul>
+					<li><a href="">API</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-2">
+				<h4>Legal information</h4>
+				<ul>
+					<li><a href="">Terms</a></li>
+					<li><a href="">Privacy</a></li>
+					<li><a href="">Cookies</a></li>
 
-                </ul>
-            </div>
-            <div class="col-sm-2">
-                <h4>Courtesy of</h4>
-                <ul>
-                </ul>
-            </div>
-        </div>
-    </div>
+				</ul>
+			</div>
+			<div class="col-sm-2">
+				<h4>Courtesy of</h4>
+				<ul>
+				</ul>
+			</div>
+		</div>
+	</div>
 </footer>
 
 

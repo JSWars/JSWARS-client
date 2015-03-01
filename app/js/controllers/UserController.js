@@ -1,20 +1,31 @@
 define([
 	'controllers/Controllers',
-	'factories/UserFactory',
-	'factories/ConfigFactory',
 	'services/SessionService',
+	'factories/ConfigFactory',
 	'directives/ProfileUpdateDialogDrtv'
 ], function (Controllers) {
-	Controllers.controller("UserController", ['$scope', '$stateParams', '$modal', 'Session', 'User', 'State', function ($scope, $stateParams, $modal, Session, User, State) {
+	Controllers.controller("UserController", ['$scope', '$stateParams', '$modal', 'SessionService', 'UserService', 'State', function ($scope, $stateParams, $modal, SessionService, UserService, State) {
 
 		State.setState({});
 
-		$scope.session = Session.get();
+		SessionService.get()
+			.then(function (session) {
+				$scope.session = session;
+			}, function () {
 
-		$scope.user = User.get({username: $stateParams.username});
-		$scope.activity = User.activity({username: $stateParams.username});
-		$scope.agents = User.agents({username: $stateParams.username});
-		$scope.tournaments = User.tournaments({username: $stateParams.username});
+			});
+
+		UserService.get({username: $stateParams.username})
+			.then(function (user) {
+				$scope.user = user;
+			}, function () {
+
+			});
+
+
+		//$scope.activity = User.activity({username: $stateParams.username});
+		//$scope.agents = User.agents({username: $stateParams.username});
+		//$scope.tournaments = User.tournaments({username: $stateParams.username});
 
 		$scope.edit = function (attr) {
 			switch (attr) {
