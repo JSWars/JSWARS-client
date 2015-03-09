@@ -2,7 +2,7 @@ define([
 	'controllers/Controllers',
 	'services/AgentService'
 ], function (Controllers) {
-	Controllers.controller("NewAgentController", ['$scope', '$state', '$stateParams', 'AgentService', 'State', function ($scope, $state, $stateParams, AgentService, State) {
+	Controllers.controller('NewAgentController', ['$scope', '$state', '$stateParams', 'AgentService', 'State', function ($scope, $state, $stateParams, AgentService, State) {
 
 		State.setState({});
 
