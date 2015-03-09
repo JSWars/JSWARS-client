@@ -1,19 +1,17 @@
 define([
 		'directives/Directives',
-		'factories/CountriesFactory',
 		'services/SessionService',
 		'services/UserService'
 	],
 	function (Directives) {
 		Directives
-			.directive('profileUpdate', ['$modal', '$compile', function ($modal, $compile) {
+			.directive('profileUpdate', ['$modal', '$compile', function ProfileUpdateDirective($modal, $compile) {
 				return {
 					restrict: 'A',
 					scope: {
 						'onComplete': '='
 					},
 					link: function ($scope, element, attrs) {
-
 						function ProfileUpdateModalController($modalScope, $modalInstance, SessionService, UserService, Countries) {
 							$modalScope.countries = [];
 							angular.forEach(Countries, function (country, code) {

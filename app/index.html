@@ -9,7 +9,9 @@
 	<meta name="author" content="">
 
 	<link href="js/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-	<link href="js/components/bootstrap-social/bootstrap-social.css" rel="stylesheet"/>
+	<link href="js/components/bootstrap-social/bootstrap-social.css"/>
+	<link href="js/components/codemirror/lib/codemirror.css" rel="stylesheet"/>
+	<link href="js/components/codemirror/theme/ambiance.css" rel="stylesheet" />
 	<link href="style/style.css" rel="stylesheet"/>
 	<link href="style/form.css" rel="stylesheet"/>
 	<link href="style/font-awesome.css" rel="stylesheet"/>
@@ -51,8 +53,10 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right" ng-cloak>
 
-			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)"><i class="fa fa-github"></i> Sign in with GitHub</a></li>
-			<li ng-if="session.username"><a class="btn btn-register" ng-href="#/user/{{session.username}}/">Welcome {{session.username}}</a></li>
+			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)"><i
+				class="fa fa-github"></i> Sign in with GitHub</a></li>
+			<li ng-if="session.username"><a class="btn btn-register" ng-href="#/user/{{session.username}}/">Welcome
+				{{session.username}}</a></li>
 		</ul>
 	</nav>
 </header>

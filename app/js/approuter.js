@@ -74,19 +74,28 @@ define([
 					.state("user.overall", {
 						url: '',
 						templateUrl: '../views/user/OverallView.html'
-						//controller: "UserController"
+						//controller: "UserController",
+
+						//La parte de las subviews no funciona, por ahora lo hago con ng-include
+						//views:{
+						//	'activity':{
+						//		templateUrl: '../views/user/ActivityWidgetView.html'
+						//	}
+						//}
 					})
 
+					//AGENTS
 					.state("user.agents", {
-						url: 'agents',
-						templateUrl: '../views/user/AgentsViews.html'
-						//controller: "UserController"
+						url: '/agents',
+						template: '<ui-view/>',
+						abstract:true
 					})
-					//.state("user.agents", {
-					//	url: "/user/{username}/agents",
-					//	templateUrl: '../views/AgentListView.html',
-					//	//controller: "UserController"
-					//})
+					.state("user.agents.new", {
+						url: '/new',
+						templateUrl: '../views/user/NewAgentView.html',
+						controller: "NewAgentController"
+					})
+
 					.state("battle", {
 						url: "/battle/{id}",
 						templateUrl: '../views/BattleView.html',

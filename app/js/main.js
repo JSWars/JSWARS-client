@@ -1,18 +1,20 @@
 "use strict";
 require.config({
-	'baseUrl': 'js/',
+	'baseUrl': './js/',
 	'paths': {
 		'domReady': 'components/domReady/domReady',
 		'jquery': 'components/jquery/dist/jquery',
 		'bootstrap': 'components/bootstrap/dist/js/bootstrap',
 		'moment': 'components/moment/moment',
+		'codemirror': 'components/codemirror/lib/codemirror',
+		'codemirror-wrapper': 'wrappers/CodeMirrorWrapper',
 		'angular': 'components/angular/angular',
 		'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
 		'angular-ui-bootstrap': 'components/angular-bootstrap/ui-bootstrap-tpls',
 		'angular-resource': 'components/angular-resource/angular-resource',
 		'angular-messages': 'components/angular-messages/angular-messages',
+		'angular-codemirror': 'components/angular-ui-codemirror/ui-codemirror',
 		'angular-moment': 'components/angular-moment/angular-moment',
-		'angular-easypiechart': 'components/jquery.easy-pie-chart/dist/angular.easypiechart',
 		'angular-file-upload': 'components/angular-file-upload/angular-file-upload',
 		'appbootstrap': 'appbootstrap'
 	},
@@ -38,11 +40,11 @@ require.config({
 		'angular-moment': {
 			'deps': ['angular']
 		},
-		'angular-easypiechart': {
-			'deps': ['angular']
+		'angular-codemirror': {
+			'deps': ['angular', 'codemirror-wrapper']
 		},
-		'angular-file-upload':{
-			'deps':['angular']
+		'angular-file-upload': {
+			'deps': ['angular']
 		},
 		'approuter': {
 			'deps': ['app']
@@ -64,6 +66,7 @@ require.config({
 
 require([
 	'app',
+	'constants',
 	'approuter',
 	'appbootstrap',
 	'bootstrap',
@@ -79,6 +82,7 @@ require([
 	'controllers/common/NavbarController',
 
 	'controllers/user/ActivityWidgetController',
+	'controllers/user/NewAgentController',
 
 	'directives/MapDrtv',
 
@@ -87,8 +91,7 @@ require([
 	'filters/CountryFilter'
 
 ], function (app) {
-
-	app.config(function($logProvider){
+	app.config(['$logProvider', function ($logProvider) {
 		$logProvider.debugEnabled(true);
-	});
+	}]);
 });

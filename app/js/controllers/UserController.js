@@ -1,39 +1,55 @@
 define([
 	'controllers/Controllers',
 	'services/SessionService',
+	'services/AgentService',
 	'factories/ConfigFactory',
-	'directives/ProfileUpdateDialogDrtv'
+	'directives/ProfileUpdateDialogDrtv',
+	'controllers/user/ActivityWidgetController'
 ], function (Controllers) {
-	Controllers.controller("UserController", ['$scope', '$stateParams', '$modal', 'SessionService', 'UserService', 'State', function ($scope, $stateParams, $modal, SessionService, UserService, State) {
+	Controllers.controller("UserController", ['$scope', '$log', '$stateParams', '$modal', 'SessionService', 'UserService', 'AgentService', 'State', function UserController($scope, $log, $stateParams, $modal, SessionService, UserService, AgentService, State) {
 
 		State.setState({});
 
+		//Obtain user stored in client session to compare with current profile id
 		SessionService.get()
 			.then(function (session) {
 				$scope.session = session;
 			}, function () {
-
+				$log.error('Error obtaining session info');
 			});
 
-		UserService.get({username: $stateParams.username})
-			.then(function (user) {
-				$scope.user = user;
+
+		//Profile data externalized because is called an page load and after profile update
+		var loadProfileData = function () {
+			UserService.get({username: $stateParams.username})
+				.then(function (user) {
+					$scope.user = user;
+				}, function () {
+					$log.error('Error loading profile info');
+				});
+		};
+
+		//Profile update directive callback
+		$scope.profileUpdated = function (err) {
+			if (err) {
+				return;
+			}
+			loadProfileData();
+		};
+
+		AgentService.query({
+			username: $stateParams.username
+		})
+			.then(function (agents) {
+				$scope.agents = agents;
 			}, function () {
-
+				$log.error('Error loading agent list');
 			});
 
-
-		//$scope.activity = User.activity({username: $stateParams.username});
-		//$scope.agents = User.agents({username: $stateParams.username});
 		//$scope.tournaments = User.tournaments({username: $stateParams.username});
 
-		$scope.edit = function (attr) {
-			switch (attr) {
-				case 'name':
-
-					break;
-			}
-		};
+		//First profile load
+		loadProfileData();
 
 	}]);
 });

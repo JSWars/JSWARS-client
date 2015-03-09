@@ -1,27 +1,12 @@
 define([
 		'services/Services',
-		'factories/SessionFactory'
+		'factories/SessionFactory',
+		'decorators/FactoryDecorator'
 	],
 	function (Services) {
-		Services.service('SessionService', ['$timeout', '$q', '$log', 'SessionFactory', function ($timeout, $q, $log, SessionFactory) {
+		Services.service('SessionService', ['FactoryDecorator', 'SessionFactory', function (FactoryDecorator, SessionFactory) {
 			return {
-				/**
-				 *
-				 * @returns {{username: string}}
-				 */
-				get: function get() {
-					var deferred = $q.defer();
-					SessionFactory.get()
-						.$promise
-						.then(function (session) {
-							deferred.resolve(session);
-						}, function (errorResponse) {
-							$log.error(errorResponse);
-							deferred.reject(errorResponse);
-						});
-					return deferred.promise;
-				}
+				get: FactoryDecorator.decorate(SessionFactory.get)
 			};
-
 		}]);
 	});

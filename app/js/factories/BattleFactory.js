@@ -3,7 +3,7 @@ define([
 		'factories/ConfigFactory'
 	],
 	function (Factories) {
-		Factories.factory('Battle', ['$resource', 'Config', function Battle($resource, Config) {
+		Factories.factory('BattleFactory', ['$resource', 'Config', function BattleFactory($resource, Config) {
 			return $resource(Config.host + 'battle/:id', {}, {
 				map: {
 					url: Config.host + 'battle/:id/map',

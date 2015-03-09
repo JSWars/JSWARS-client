@@ -64,7 +64,7 @@
 		</table>
 
 		<div class="text-right">
-			<button class="btn btn-primary" ng-if="session.username == user.username"> Upload new Agent</button>
+			<button class="btn btn-primary" ng-if="session.username == user.username" ui-sref="user.agents.new"> Upload new Agent</button>
 		</div>
 
 		<h3 class="block-title">Last tournaments</h3>
@@ -172,6 +172,7 @@
 		</div>
 
 
-		<div ui-view="activity"></div>
+		<div ng-include="'views/user/ActivityWidgetView.html'" ></div>
+		<!--ng-controller="ActivityWidgetController"-->
 	</div>
 </div>
