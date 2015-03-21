@@ -3,7 +3,7 @@ define([
 	'assets/maps/world',
 	'components/jvectormap/jquery-jvectormap'
 ], function (Directives) {
-	Directives.directive("worldMap", [function () {
+	Directives.directive("worldMap", [function WorldMapDirective() {
 		return {
 			restrict: 'A',
 			link: function (scope, element, attrs) {

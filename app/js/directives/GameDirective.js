@@ -2,12 +2,16 @@ define([
 	'directives/Directives',
 	'components/kineticjs/kinetic',
 	'services/AnimationFrameService',
-	'factories/CountriesFactory',
 	'factories/BattleFactory'
 ], function (Directives, Kinetic) {
-	Directives.directive("game", ['$log', '$interval', 'Countries', 'AnimationFrame', 'Battle', function ($log, $interval, Countries, AnimationFrame, Battle) {
+	Directives.directive("game", ['$log', '$interval', 'Countries', 'AnimationFrame', 'BattleFactory', function GameDirective($log, $interval, Countries, AnimationFrame, BattleFactory) {
 		return {
 			restrict: 'A',
+			scope: {
+				start: '=',
+				pause: '=',
+				next: '='
+			},
 			link: function ($scope, element, attrs) {
 
 				var domElement = element[0];
@@ -172,30 +176,39 @@ define([
 				 */
 				Game.prototype.start = function () {
 					var _self = this;
-					this.play.frame = 0;
+					this.play.frame = -1;
 					this.play.last = 0;
-					Battle.chunk({id: 12, chunkId: 1}) //todo: get parameters from state
+					BattleFactory.chunk({id: 12, chunkId: 1}) //todo: get parameters from state
 						.$promise
 						.then(function (frames) {
 							_self.frames = frames;
 							console.log("Game Started!");
-							AnimationFrame.request(angular.bind(_self, _self.frame));
+							_self.requestionAnimationId = AnimationFrame.request(angular.bind(_self, _self.frame));
 						}, function () {
 							alert("Error ocurred loading game chunks")
 						});
 				};
 
-				Game.prototype.stop = function () {
-					AnimationFrame.cancel(angular.bind(this, this.frame));
+				Game.prototype.pause = function () {
+					AnimationFrame.cancel(this.requestionAnimationId);
 				};
 
-				Game.prototype.frame = function () {
+				Game.prototype.frame = function (single, offset) {
+					if (typeof offset !== 'number') {
+						offset = 1;
+					}
+
 					var _self = this;
 					var now = new Date().getTime();
-					if ((now - this.play.last) >= 0/*(1000 / 60)*/) {
-						var frameTeams = this.frames[this.play.frame];
+					if ((now - this.play.last) >= 0) {
+						this.play.frame = this.play.frame + offset;
+						var frame = this.frames[this.play.frame];
 						//Iterate over all teams
-						angular.forEach(frameTeams, function (team) {
+						if (angular.isUndefined(frame)) {
+							console.log("Game Ended");
+							return;
+						}
+						angular.forEach(frame.teams, function (team) {
 							var teamKineticGroup = _self.kinetic.layers.players.children[team.id];
 							//Create team kinetic group if doesnt exists
 							if (angular.isUndefined(teamKineticGroup)) {
@@ -232,25 +245,32 @@ define([
 							});
 							_self.kinetic.layers.players.draw();
 						});
-						this.play.frame = this.play.frame + 1;
 						this.play.last = now;
 					}
-					//Wait for net animation frame request
-					AnimationFrame.request(angular.bind(this, this.frame));
+					if (typeof single === 'boolean' && single === true) {
+
+					} else {
+						//Wait for net animation frame request
+						this.requestionAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
+					}
 				};
 
 				var mapInstance;
 				var gameInstance;
 
+				$scope.next = function (offset) {
+					gameInstance.frame(true,offset);
+				};
+
 				$scope.start = function () {
 					gameInstance.start();
 				};
 
-				$scope.stop = function () {
-					gameInstance.stop();
+				$scope.pause = function () {
+					gameInstance.pause();
 				};
 
-				Battle.map({id: 12})//todo: get parameters from state
+				BattleFactory.map({id: 12})//todo: get parameters from state
 					.$promise
 					.then(
 					function (mapData) {

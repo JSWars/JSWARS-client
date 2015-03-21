@@ -1,4 +1,3 @@
-"use strict";
 define([
 	'angular',
 	'angular-ui-router',
@@ -6,7 +5,7 @@ define([
 	'angular-messages',
 	'angular-ui-bootstrap',
 	'angular-moment',
-	'angular-easypiechart',
+	'angular-codemirror',
 	'angular-file-upload',
 	'controllers/Controllers',
 	'services/Services',
@@ -18,17 +17,16 @@ define([
 	app = angular.module('tfg', [
 		'ui.router',
 		'ui.bootstrap',
+		'ui.codemirror',
 		'ngResource',
 		'ngMessages',
 		'angularFileUpload',
 		'angularMoment',
-		'easypiechart',
 		'controllers',
 		'services',
 		'factories',
 		'directives',
 		'filters'
 	]);
-
 	return app;
 });

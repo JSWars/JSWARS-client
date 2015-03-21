@@ -1,6 +1,5 @@
 define([
-		'filters/Filters',
-		'factories/CountriesFactory'
+		'filters/Filters'
 	],
 	function (Filters) {
 		Filters
@@ -8,7 +7,6 @@ define([
 				return function (input) {
 					var countries = Countries;
 					return countries[input] || input;
-
 				};
 			}]);
 	});

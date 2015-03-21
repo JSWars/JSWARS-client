@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-8 text-center">
                         <hgroup>
-                            <h4 class="m-0">{{user.name}} <span profile-update class="icon" ng-if="session.username == user.username"></span></h4>
+                            <h4 class="m-0">{{user.name}} <span profile-update on-complete="profileUpdated" class="icon" ng-if="session.username == user.username"></span></h4>
                             <h5>@{{user.username}}</h5>
                         </hgroup>
                     </div>
