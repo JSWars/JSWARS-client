@@ -3,8 +3,8 @@ define([
 		'services/SessionService'
 	],
 	function (Controllers) {
-		Controllers.controller("RootController", ['$scope', '$rootScope', 'SessionService', function RootController($scope, $rootScope, SessionService) {
-			$rootScope.$on("state.title", function (x, data) {
+		Controllers.controller('RootController', ['$scope', '$rootScope', 'SessionService', function ($scope, $rootScope, SessionService) {
+			$rootScope.$on('state.title', function (x, data) {
 				$scope.title = data.title;
 			});
 

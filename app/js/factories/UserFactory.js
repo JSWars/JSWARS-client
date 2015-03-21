@@ -3,7 +3,7 @@ define([
 	],
 	function (Factories) {
 		Factories.factory('UserFactory', ['$resource', 'Config', function UserFactory($resource, Config) {
-			return $resource('/api/users/:username', {
+			return $resource(Config.host + 'users/:username', {
 				'username': '@username'
 			}, {
 				update: {
