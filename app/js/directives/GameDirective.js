@@ -10,7 +10,8 @@ define([
 			scope: {
 				start: '=',
 				pause: '=',
-				next: '='
+				next: '=',
+				map: '='
 			},
 			link: function ($scope, element, attrs) {
 
@@ -60,6 +61,15 @@ define([
 				 */
 				function Game(container, map) {
 
+
+					this.STATES = {
+						'STOPPED': 'stopped',
+						'PLAYING': 'playing',
+						'PAUSED': 'paused',
+						'ENDED': 'ended'
+					};
+					this.state = this.STATES.STOPPED;
+					this.fps = 10;
 					this.map = map;
 					this.SQUARE_HEIGHT_PX = map.tileHeight; //PX
 					this.SQUARE_WIDTH_PX = map.tileWidth; //PX
@@ -191,6 +201,7 @@ define([
 				 */
 				Game.prototype.start = function () {
 					var _self = this;
+					this.state = this.STATES.PLAYING;
 					this.play.frame = -1;
 					this.play.last = 0;
 					BattleFactory.chunk({id: 12, chunkId: 1}) //todo: get parameters from state
@@ -206,6 +217,7 @@ define([
 
 				Game.prototype.pause = function () {
 					AnimationFrame.cancel(this.requestionAnimationId);
+					this.state = this.STATES.PAUSED;
 				};
 
 				Game.prototype.frame = function (single, offset) {
@@ -215,11 +227,12 @@ define([
 
 					var _self = this;
 					var now = new Date().getTime();
-					if ((now - this.play.last) >= 0) {
+					if ((now - this.play.last) >= (1000 / _self.fps)) {
 						this.play.frame = this.play.frame + offset;
 						var frame = this.frames[this.play.frame];
 						//Iterate over all teams
 						if (angular.isUndefined(frame)) {
+							_self.state = _self.STATES.ENDED;
 							console.log("Game Ended");
 							return;
 						}
@@ -309,32 +322,31 @@ define([
 				var gameInstance;
 
 				$scope.next = function (offset) {
-					gameInstance.frame(true, offset);
+					if (gameInstance.state === gameInstance.STATES.PAUSED) {
+						gameInstance.frame(true, offset);
+					}
 				};
 
 				$scope.start = function () {
-					gameInstance.start();
+					if (gameInstance.state === gameInstance.STATES.STOPPED || gameInstance.state === gameInstance.STATES.ENDED) {
+						gameInstance.start();
+					}
 				};
 
 				$scope.pause = function () {
-					gameInstance.pause();
+					if (gameInstance.state === gameInstance.STATES.PLAYING) {
+						gameInstance.pause();
+					}
 				};
 
-				BattleFactory.map({id: 12})//todo: get parameters from state
-					.$promise
-					.then(
-					function (mapData) {
-						mapInstance = new Map(mapData);
-						gameInstance = new Game(domElement, mapInstance);
-						element
-							.css('background-image', 'url("img/map/background.jpg")');
-						gameInstance.start();
 
-					},
-					function () {
-						$log.error("Something goes wrong loading the map :(");
-					}
-				);
+				//Initial instances
+				mapInstance = new Map($scope.map);
+				gameInstance = new Game(domElement, mapInstance);
+				element
+					.css('background-image', 'url("img/map/background.jpg")');
+				gameInstance.start();
+
 			}
 		};
 	}])

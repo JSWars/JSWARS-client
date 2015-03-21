@@ -9,8 +9,10 @@ define([
 		State.setState({
 			title: "Jugador 1 VS Jugador 2"
 		});
-
-		$scope.battle = BattleFactory.get({id: $stateParams.id});
-
+		BattleFactory.get({id: $stateParams.id})
+			.$promise
+			.then(function (battle) {
+				$scope.battle = battle;
+			});
 	}]);
 });

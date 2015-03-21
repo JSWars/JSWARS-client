@@ -5,8 +5,8 @@ define([
 	function (Factories) {
 		Factories.factory('BattleFactory', ['$resource', 'Config', function BattleFactory($resource, Config) {
 			return $resource(Config.host + 'battle/:id', {}, {
-				map: {
-					url: Config.host + 'battle/:id/map',
+				get: {
+					url: Config.host + 'battle/:id',
 					method: 'GET',
 					isArray: false
 				},
