@@ -82,7 +82,9 @@ require([
 	'controllers/common/NavbarController',
 
 	'controllers/user/ActivityWidgetController',
-	'controllers/user/NewAgentController',
+	'controllers/user/AgentNewController',
+	'controllers/user/AgentDetailController',
+
 
 	'directives/MapDrtv',
 

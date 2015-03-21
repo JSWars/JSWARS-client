@@ -61,19 +61,19 @@ define([
 					//})
 					.state("rankings", {
 						url: "/rankings",
-						templateUrl: '../views/RankingsView.html',
+						templateUrl: 'views/RankingsView.html',
 						controller: "RankingsController"
 					})
 					.state("user", {
 						url: "/user/{username}",
-						templateUrl: '../views/UserView.html',
+						templateUrl: 'views/UserView.html',
 						controller: "UserController",
 						abstract:true
 					})
 
 					.state("user.overall", {
 						url: '',
-						templateUrl: '../views/user/OverallView.html'
+						templateUrl: 'views/user/OverallView.html'
 						//controller: "UserController",
 
 						//La parte de las subviews no funciona, por ahora lo hago con ng-include
@@ -92,13 +92,23 @@ define([
 					})
 					.state("user.agents.new", {
 						url: '/new',
-						templateUrl: '../views/user/NewAgentView.html',
-						controller: "NewAgentController"
+						templateUrl: 'views/user/AgentNewView.html',
+						controller: "AgentNewController"
+					})
+					.state("user.agents.detail", {
+						url: '/:id',
+						templateUrl: 'views/user/AgentDetailView.html',
+						controller: "AgentDetailController"
+					})
+					.state("user.agents.version.detail", {
+						url: '/:id/:version',
+						templateUrl: 'views/user/AgentDetailView.html',
+						controller: "AgentDetailController"
 					})
 
 					.state("battle", {
-						url: "/battle/{id}",
-						templateUrl: '../views/BattleView.html',
+						url: "/battle/:id",
+						templateUrl: 'views/BattleView.html',
 						controller: "BattleController"
 					})
 

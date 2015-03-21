@@ -10,6 +10,7 @@ define([
 
 		State.setState({});
 
+
 		//Obtain user stored in client session to compare with current profile id
 		SessionService.get()
 			.then(function (session) {
