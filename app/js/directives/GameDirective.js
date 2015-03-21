@@ -11,7 +11,7 @@ define([
 				start: '=',
 				pause: '=',
 				next: '=',
-				map: '='
+				battle: '='
 			},
 			link: function ($scope, element, attrs) {
 
@@ -204,7 +204,7 @@ define([
 					this.state = this.STATES.PLAYING;
 					this.play.frame = -1;
 					this.play.last = 0;
-					BattleFactory.chunk({id: 12, chunkId: 1}) //todo: get parameters from state
+					BattleFactory.chunk({id: $scope.battle.id, chunkId: 1}) //todo: get parameters from state
 						.$promise
 						.then(function (frames) {
 							_self.frames = frames;
@@ -296,7 +296,7 @@ define([
 									var newUnitKineticNode = new Kinetic.Circle({
 										x: unit.position.x * _self.map.tiles.tilewidth,
 										y: unit.position.y * _self.map.tiles.tileheight,
-										fill: team.color, //Todo: random coloooor!
+										fill: team.color,
 										radius: (_self.SQUARE_HEIGHT_PX / 2) * unit.radius,
 										stroke: 'white',
 										strokeWidth: 1
@@ -322,26 +322,23 @@ define([
 				var gameInstance;
 
 				$scope.next = function (offset) {
-					if (gameInstance.state === gameInstance.STATES.PAUSED) {
-						gameInstance.frame(true, offset);
-					}
+					gameInstance.frame(true, offset);
 				};
 
 				$scope.start = function () {
-					if (gameInstance.state === gameInstance.STATES.STOPPED || gameInstance.state === gameInstance.STATES.ENDED) {
+					if (gameInstance.state !== gameInstance.STATES.PLAYING) {
 						gameInstance.start();
 					}
 				};
 
 				$scope.pause = function () {
-					if (gameInstance.state === gameInstance.STATES.PLAYING) {
+					if (gameInstance.state !== gameInstance.STATES.PLAYING) {
 						gameInstance.pause();
 					}
 				};
 
-
 				//Initial instances
-				mapInstance = new Map($scope.map);
+				mapInstance = new Map($scope.battle.map);
 				gameInstance = new Game(domElement, mapInstance);
 				element
 					.css('background-image', 'url("img/map/background.jpg")');
