@@ -4,7 +4,7 @@ define([
 	'services/AnimationFrameService',
 	'factories/BattleFactory'
 ], function (Directives, Kinetic) {
-	Directives.directive("game", ['$log', '$interval', 'Countries', 'AnimationFrame', 'Battle', function GameDirective($log, $interval, Countries, AnimationFrame, Battle) {
+	Directives.directive("Game", ['$log', '$interval', 'Countries', 'AnimationFrame', 'Battle', function GameDirective($log, $interval, Countries, AnimationFrame, Battle) {
 		return {
 			restrict: 'A',
 			link: function ($scope, element, attrs) {
