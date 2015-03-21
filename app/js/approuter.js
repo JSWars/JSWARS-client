@@ -68,7 +68,7 @@ define([
 						url: "/user/{username}",
 						templateUrl: '../views/UserView.html',
 						controller: "UserController",
-						abstract:true
+						abstract: true
 					})
 
 					.state("user.overall", {
