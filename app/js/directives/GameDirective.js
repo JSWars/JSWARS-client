@@ -67,10 +67,12 @@ define([
 					this.kinetic = {
 						layers: {
 							map: new Kinetic.Layer(),
-							players: new Kinetic.Layer()
+							players: new Kinetic.Layer(),
+							bullets: new Kinetic.Layer()
 						},
 						mapGroups: [],
-						teamGroups: []
+						teamGroups: [],
+						bulletGroup: undefined
 					};
 
 					this.stage = new Kinetic.Stage({
@@ -78,6 +80,18 @@ define([
 						width: element.width(),//map.width * this.SQUARE_WIDTH_PX,
 						height: map.tileWidth / map.tileHeight * element.width()//map.height * this.SQUARE_HEIGHT_PX
 					});
+
+					//Add bullets default group
+					this.kinetic.bulletGroup = new Kinetic.Group({
+						id: 'bulletGroup',
+						x: 0,
+						y: 0,
+						scaleX: this.stage.getWidth() / ((this.map.tileWidth - 2) * this.map.tiles.tilewidth),
+						scaleY: this.stage.getHeight() / ((this.map.tileHeight - 2) * this.map.tiles.tileheight)
+					});
+
+					this.kinetic.layers.bullets.add(this.kinetic.bulletGroup);
+
 
 					//Todo: update width on resize
 
@@ -94,6 +108,7 @@ define([
 							this.drawMap(this.kinetic.layers.map, layer.data);
 							this.stage.add(this.kinetic.layers.map);
 							this.stage.add(this.kinetic.layers.players);
+							this.stage.add(this.kinetic.layers.bullets);
 						}));
 					});
 
@@ -185,7 +200,7 @@ define([
 							console.log("Game Started!");
 							_self.requestionAnimationId = AnimationFrame.request(angular.bind(_self, _self.frame));
 						}, function () {
-							alert("Error ocurred loading game chunks")
+							alert("Error ocurred loading game chunks");
 						});
 				};
 
@@ -208,32 +223,70 @@ define([
 							console.log("Game Ended");
 							return;
 						}
+
+						//Iterate over bullets
+						if (frame.bullets.length > 0) {
+							angular.forEach(frame.bullets, function (bullet) {
+								var bulletKineticNode = _self.kinetic.bulletGroup.children[bullet.id];
+								if (angular.isUndefined(bulletKineticNode)) {
+									bulletKineticNode = new Kinetic.Star({
+										x: bullet.position.x * _self.map.tiles.tilewidth,
+										y: bullet.position.y * _self.map.tiles.tileheight,
+										numPoints: 5,
+										innerRadius: ((_self.SQUARE_HEIGHT_PX / 2)) * (bullet.radius - 0.5),
+										outerRadius: ((_self.SQUARE_HEIGHT_PX / 2)) * (bullet.radius + 0.5),
+										fill: 'red',
+										stroke: 'white',
+										strokeWidth: 1
+									});
+									_self.kinetic.bulletGroup.add(bulletKineticNode);
+								} else {
+									bulletKineticNode.setPosition({
+										x: bullet.position.x * _self.map.tiles.tilewidth,
+										y: bullet.position.y * _self.map.tiles.tileheight
+									});
+								}
+
+								bulletKineticNode.exist = true;
+							});
+
+							angular.forEach(_self.kinetic.bulletGroup.children, function (bulletKineticNode, index) {
+								if (angular.isUndefined(bulletKineticNode.exist)) {
+									bulletKineticNode.remove();
+								} else {
+									bulletKineticNode.exist = undefined;
+								}
+							});
+							_self.kinetic.layers.bullets.draw();
+						}
+
+
+						//Iterate over teams
 						angular.forEach(frame.teams, function (team) {
 							var teamKineticGroup = _self.kinetic.layers.players.children[team.id];
 							//Create team kinetic group if doesnt exists
 							if (angular.isUndefined(teamKineticGroup)) {
-								var newTeamKineticGroup = new Kinetic.Group({
+								teamKineticGroup = new Kinetic.Group({
 									id: "team_" + team.id,
 									x: 0,
 									y: 0,
 									scaleX: _self.stage.getWidth() / ((_self.map.tileWidth - 2) * _self.map.tiles.tilewidth),
 									scaleY: _self.stage.getHeight() / ((_self.map.tileHeight - 2) * _self.map.tiles.tileheight)
 								});
-								_self.kinetic.layers.players.add(newTeamKineticGroup);
-								teamKineticGroup = _self.kinetic.layers.players.children[team.id];
+								_self.kinetic.layers.players.add(teamKineticGroup);
 							}
 
-							//Iterate over all units in team
+							//Iterate over units in team
 							angular.forEach(team.units, function (unit, index) {
 								var unitKineticNode = teamKineticGroup.children[index];
 								if (angular.isUndefined(unitKineticNode)) {
 									var newUnitKineticNode = new Kinetic.Circle({
-										x: unit.position.x,
-										y: unit.position.y,
+										x: unit.position.x * _self.map.tiles.tilewidth,
+										y: unit.position.y * _self.map.tiles.tileheight,
 										fill: team.color, //Todo: random coloooor!
-										radius: (_self.SQUARE_HEIGHT_PX / 2) - 2,
+										radius: (_self.SQUARE_HEIGHT_PX / 2) * unit.radius,
 										stroke: 'white',
-										strokeWidth: 2
+										strokeWidth: 1
 									});
 									teamKineticGroup.add(newUnitKineticNode);
 								} else {
@@ -247,10 +300,7 @@ define([
 						});
 						this.play.last = now;
 					}
-					if (typeof single === 'boolean' && single === true) {
-
-					} else {
-						//Wait for net animation frame request
+					if (!(typeof single === 'boolean' && single === true)) {
 						this.requestionAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
 					}
 				};
@@ -259,7 +309,7 @@ define([
 				var gameInstance;
 
 				$scope.next = function (offset) {
-					gameInstance.frame(true,offset);
+					gameInstance.frame(true, offset);
 				};
 
 				$scope.start = function () {
