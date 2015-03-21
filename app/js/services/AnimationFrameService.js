@@ -32,10 +32,10 @@ define([
 
 			return {
 				request: function (fn) {
-					$window.requestAnimationFrame.call($window, fn);
+					return $window.requestAnimationFrame.call($window, fn);
 				},
 				cancel: function (fn) {
-					$window.cancelAnimationFrame.call($window, fn);
+					return $window.cancelAnimationFrame.call($window, fn);
 				}
 			};
 		}]);

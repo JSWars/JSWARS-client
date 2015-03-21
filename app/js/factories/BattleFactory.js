@@ -11,8 +11,7 @@ define([
 					isArray: false
 				},
 				chunk: {
-					//url: Config.host + 'battle/:id/chunk/:chunkId',
-					url: 'chunks.json',
+					url:  Config.host + 'battle/:id/chunk/:chunkId',
 					method: 'GET',
 					isArray: true //todo: probably object
 				}
