@@ -10,19 +10,19 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" ng-if="battle">
 		<div class="col-md-8 p-0">
-			<div game battle="battle" start="start" next="next" pause="pause" ng-if="battle"></div>
+			<div game battle="battle" start="start" next="next" pause="pause" on-start="onStart" on-frame="onFrame"></div>
 		</div>
 		<div class="col-md-4" style="padding-right: 0px">
 			<div class=" tile text-center">
 				<h2 class="tile-title">Replay controls</h2>
 
 				<div class="p-10">
-					<button class="btn btn-primary"  ng-click="next(-10)"><i class="fa fa-backward"></i></button>
-					<button class="btn btn-primary"  ng-click="next(-1)"><i class="fa fa-step-backward"></i></button>
-					<button class="btn btn-warning" ng-click="pause()"><i class="fa fa-stop"></i></button>
-					&nbsp;&nbsp;1:36 / <strong>05:25</strong>&nbsp;&nbsp;
+					<button class="btn btn-primary" ng-click="next(-10)"><i class="fa fa-backward"></i></button>
+					<button class="btn btn-primary" ng-click="next(-1)"><i class="fa fa-step-backward"></i></button>
+					<button class="btn btn-warning" ng-click="pause()"><i class="fa fa-pause"></i></button>
+					&nbsp;&nbsp;{{currentTime | date : 'ss:sss'}} / <strong>{{totalTime | date : 'ss:sss'}}</strong>&nbsp;&nbsp;
 					<button class="btn btn-primary" ng-click="start()"><i class="fa fa-play"></i></button>
 					<button class="btn btn-primary" ng-click="next(1)"><i class="fa fa-step-forward"></i></button>
 					<button class="btn btn-primary" ng-click="next(10)"><i class="fa fa-forward"></i></button>
