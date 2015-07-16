@@ -258,8 +258,8 @@ define([
 
 					//Iterate over bullets
 					if (frame.bullets.length > 0) {
-						angular.forEach(frame.bullets, function (bullet) {
-							var bulletKineticNode = _self.kinetic.bulletGroup.children[bullet.id];
+						angular.forEach(frame.bullets, function (bullet,key) {
+							var bulletKineticNode = _self.kinetic.bulletGroup.children[key];
 							if (angular.isUndefined(bulletKineticNode)) {
 								bulletKineticNode = new Kinetic.Star({
 									x: bullet.position.x * _self.map.tiles.tilewidth,
