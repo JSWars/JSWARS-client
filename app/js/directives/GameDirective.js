@@ -265,8 +265,8 @@ define([
 									x: bullet.position.x * _self.map.tiles.tilewidth,
 									y: bullet.position.y * _self.map.tiles.tileheight,
 									numPoints: 5,
-									innerRadius: ((_self.SQUARE_HEIGHT_PX / 2)) * (bullet.radius - 0.5),
-									outerRadius: ((_self.SQUARE_HEIGHT_PX / 2)) * (bullet.radius + 0.5),
+									innerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius - 0.2),
+									outerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius + 0.2),
 									fill: 'red',
 									stroke: 'white',
 									strokeWidth: 1
@@ -311,15 +311,17 @@ define([
 						//Iterate over units in team
 						angular.forEach(team.units, function (unit, index) {
 							var unitKineticNode = teamKineticGroup.children[index];
-							if (unit.alive === false) {
-								unitKineticNode.destroy();
+							if (unit.alive === false ) {
+								if(!angular.isUndefined(unitKineticNode)){
+									unitKineticNode.destroy();
+								}
 							} else {
 								if (angular.isUndefined(unitKineticNode)) {
 									var newUnitKineticNode = new Kinetic.Circle({
 										x: unit.position.x * _self.map.tiles.tilewidth,
 										y: unit.position.y * _self.map.tiles.tileheight,
 										fill: team.color,
-										radius: (_self.SQUARE_HEIGHT_PX / 2) * unit.radius,
+										radius: _self.SQUARE_HEIGHT_PX * unit.radius,
 										stroke: 'white',
 										strokeWidth: 1
 									});
