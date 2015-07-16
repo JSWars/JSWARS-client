@@ -20,8 +20,8 @@ define([
 
 			$scope.onFrame = function (currentTime, frame) {
 				$scope.currentTime = currentTime;
-				angular.forEach(frame.teams, function (team) {
-
+				angular.forEach(frame.teams, function (team,key) {
+					$scope.battle.teams[key].units = team.units;
 				});
 			};
 

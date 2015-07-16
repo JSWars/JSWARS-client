@@ -294,7 +294,7 @@ define([
 
 
 					//Iterate over teams
-					angular.forEach(frame.agents, function (team) {
+					angular.forEach(frame.teams, function (team) {
 						var teamKineticGroup = _self.kinetic.layers.players.children[team.id];
 						//Create team kinetic group if doesnt exists
 						if (angular.isUndefined(teamKineticGroup)) {
@@ -311,21 +311,26 @@ define([
 						//Iterate over units in team
 						angular.forEach(team.units, function (unit, index) {
 							var unitKineticNode = teamKineticGroup.children[index];
-							if (angular.isUndefined(unitKineticNode)) {
-								var newUnitKineticNode = new Kinetic.Circle({
-									x: unit.position.x * _self.map.tiles.tilewidth,
-									y: unit.position.y * _self.map.tiles.tileheight,
-									fill: team.color,
-									radius: (_self.SQUARE_HEIGHT_PX / 2) * unit.radius,
-									stroke: 'white',
-									strokeWidth: 1
-								});
-								teamKineticGroup.add(newUnitKineticNode);
+							if (unit.alive === false) {
+								unitKineticNode.destroy();
 							} else {
-								unitKineticNode.setPosition({
-									x: unit.position.x * _self.map.tiles.tilewidth,
-									y: unit.position.y * _self.map.tiles.tileheight
-								});
+								if (angular.isUndefined(unitKineticNode)) {
+									var newUnitKineticNode = new Kinetic.Circle({
+										x: unit.position.x * _self.map.tiles.tilewidth,
+										y: unit.position.y * _self.map.tiles.tileheight,
+										fill: team.color,
+										radius: (_self.SQUARE_HEIGHT_PX / 2) * unit.radius,
+										stroke: 'white',
+										strokeWidth: 1
+									});
+									teamKineticGroup.add(newUnitKineticNode);
+								} else {
+
+									unitKineticNode.setPosition({
+										x: unit.position.x * _self.map.tiles.tilewidth,
+										y: unit.position.y * _self.map.tiles.tileheight
+									});
+								}
 							}
 						});
 						_self.kinetic.layers.players.draw();
