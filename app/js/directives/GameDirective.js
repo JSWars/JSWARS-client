@@ -232,9 +232,8 @@ define([
 				};
 
 				Game.prototype.frame = function (single, offset) {
-					if (!(typeof single === 'boolean' && single === true)) {
-						this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
-					}
+					var _self = this;
+
 					var now = new Date().getTime();
 
 					if (typeof offset === 'number') {
@@ -245,23 +244,26 @@ define([
 
 					this.play.lastTime = now;
 
-					var _self = this;
-
 					this.play.frame = Math.floor(this.play.currentTime / this.frameDuration);
 					var frame = this.frames[this.play.frame];
+
 					//Iterate over all teams
 					if (angular.isUndefined(frame)) {
 						_self.state = _self.STATES.ENDED;
-						console.log("Game Ended");
 						return;
+					} else {
+						if (!(typeof single === 'boolean' && single === true)) {
+							this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
+						}
 					}
 
 					//Iterate over bullets
-					if (frame.bullets.length > 0) {
-						angular.forEach(frame.bullets, function (bullet,key) {
-							var bulletKineticNode = _self.kinetic.bulletGroup.children[key];
+					if (Object.keys(frame.bullets).length > 0) {
+						angular.forEach(frame.bullets, function (bullet, key) {
+							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_'+key)[0];
 							if (angular.isUndefined(bulletKineticNode)) {
 								bulletKineticNode = new Kinetic.Star({
+									name: 'bllt_' + key,
 									x: bullet.position.x * _self.map.tiles.tilewidth,
 									y: bullet.position.y * _self.map.tiles.tileheight,
 									numPoints: 5,
@@ -311,8 +313,8 @@ define([
 						//Iterate over units in team
 						angular.forEach(team.units, function (unit, index) {
 							var unitKineticNode = teamKineticGroup.children[index];
-							if (unit.alive === false ) {
-								if(!angular.isUndefined(unitKineticNode)){
+							if (unit.alive === false) {
+								if (!angular.isUndefined(unitKineticNode)) {
 									unitKineticNode.destroy();
 								}
 							} else {
