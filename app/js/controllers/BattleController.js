@@ -15,14 +15,14 @@ define([
 				$scope.frameCount = frameCount;
 				$scope.fps = fps;
 				$scope.totalTime = moment(frameCount * (1000 / fps)).toDate();
-				console.log(fps)
-
 			};
 
 
-			$scope.onFrame = function (frame) {
-					$scope.frame = frame;
-					$scope.currentTime = moment(frame * (1000 / $scope.fps)).toDate();
+			$scope.onFrame = function (currentTime, frame) {
+				$scope.currentTime = currentTime;
+				angular.forEach(frame.teams, function (team) {
+
+				});
 			};
 
 			BattleFactory.get({id: $stateParams.id})

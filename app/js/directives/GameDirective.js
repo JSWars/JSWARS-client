@@ -239,7 +239,7 @@ define([
 
 					if (typeof offset === 'number') {
 						this.play.currentTime += (offset * this.frameDuration)
-					}else{
+					} else {
 						this.play.currentTime += now - this.play.lastTime;
 					}
 
@@ -294,7 +294,7 @@ define([
 
 
 					//Iterate over teams
-					angular.forEach(frame.teams, function (team) {
+					angular.forEach(frame.agents, function (team) {
 						var teamKineticGroup = _self.kinetic.layers.players.children[team.id];
 						//Create team kinetic group if doesnt exists
 						if (angular.isUndefined(teamKineticGroup)) {
@@ -333,7 +333,7 @@ define([
 					this.play.last = now;
 
 					$timeout(function () {
-						$scope.onFrame(_self.play.frame);
+						$scope.onFrame(_self.play.currentTime, frame);
 					}, 0);
 				};
 
