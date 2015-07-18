@@ -227,8 +227,8 @@ define([
 					console.log("Getting chunk " + chunkId);
 					BattleFactory.chunk({id: $scope.battle.id, chunkId: chunkId}) //todo: get parameters from state
 						.$promise
-						.then(function (chunkFrames) {
-							_self.chunks[chunkId] = chunkFrames;
+						.then(function (chunk) {
+							_self.chunks[chunkId] = chunk;
 							deferred.resolve()
 						}, function () {
 							deferred.reject();
@@ -265,7 +265,7 @@ define([
 					if (angular.isUndefined(_self.chunks[chunkId + 1]) && partialFrameId > ($scope.battle.chunkSize / 2)) {
 						_self.getChunk(chunkId + 1);
 					}
-					var frame = this.chunks[chunkId][partialFrameId];
+					var frame = this.chunks[chunkId][partialFrameId].data;
 
 					//Iterate over all teams
 					if (angular.isUndefined(frame)) {
