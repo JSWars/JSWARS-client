@@ -359,6 +359,7 @@ define([
 						});
 						_self.kinetic.layers.players.draw();
 						$scope.battle.teams[team.id].units = team.units;
+						$scope.battle.teams[team.id].health = team.health;
 					});
 					this.play.last = now;
 
