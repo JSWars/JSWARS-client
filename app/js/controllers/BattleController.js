@@ -12,17 +12,12 @@ define([
 			});
 
 			$scope.onStart = function (frameCount, fps) {
-				$scope.frameCount = frameCount;
-				$scope.fps = fps;
-				$scope.totalTime = moment(frameCount * (1000 / fps)).toDate();
+				$scope.totalTime = moment($scope.battle.frameCount * (1000 / $scope.battle.fps)).toDate();
 			};
 
 
 			$scope.onFrame = function (currentTime, frame) {
 				$scope.currentTime = currentTime;
-				angular.forEach(frame.teams, function (team,key) {
-					$scope.battle.teams[key].units = team.units;
-				});
 			};
 
 			BattleFactory.get({id: $stateParams.id})

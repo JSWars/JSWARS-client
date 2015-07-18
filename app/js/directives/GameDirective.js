@@ -4,7 +4,7 @@ define([
 	'services/AnimationFrameService',
 	'factories/BattleFactory'
 ], function (Directives, Kinetic) {
-	Directives.directive("game", ['$log', '$timeout', '$interval', 'Countries', 'AnimationFrame', 'BattleFactory', function GameDirective($log, $timeout, $interval, Countries, AnimationFrame, BattleFactory) {
+	Directives.directive("game", ['$log', '$q', '$timeout', '$interval', 'Countries', 'AnimationFrame', 'BattleFactory', function GameDirective($log, $q, $timeout, $interval, Countries, AnimationFrame, BattleFactory) {
 		return {
 			restrict: 'A',
 			scope: {
@@ -209,16 +209,31 @@ define([
 					this.play.last = 0;
 					this.play.currentTime = 0;
 					this.play.lastTime = new Date().getTime();
-					BattleFactory.chunk({id: $scope.battle.id, chunkId: 1}) //todo: get parameters from state
-						.$promise
-						.then(function (frames) {
-							_self.frames = frames;
-							console.log("Game Started!");
+					this.chunks = [];
+					var chunkId = 0;
+					this.getChunk(chunkId)
+						.then(function (chunkFrames) {
 							$scope.onStart(_self.frameCount, _self.fps);
 							_self.requestAnimationId = AnimationFrame.request(angular.bind(_self, _self.frame));
 						}, function () {
 							alert("Error ocurred loading game chunks");
 						});
+				};
+
+
+				Game.prototype.getChunk = function (chunkId) {
+					var _self = this;
+					var deferred = $q.defer();
+					console.log("Getting chunk " + chunkId);
+					BattleFactory.chunk({id: $scope.battle.id, chunkId: chunkId}) //todo: get parameters from state
+						.$promise
+						.then(function (chunkFrames) {
+							_self.chunks[chunkId] = chunkFrames;
+							deferred.resolve()
+						}, function () {
+							deferred.reject();
+						});
+					return deferred.promise;
 				};
 
 				Game.prototype.continue = function () {
@@ -245,7 +260,12 @@ define([
 					this.play.lastTime = now;
 
 					this.play.frame = Math.floor(this.play.currentTime / this.frameDuration);
-					var frame = this.frames[this.play.frame];
+					var chunkId = Math.floor(this.play.frame / $scope.battle.chunkSize);
+					var partialFrameId = this.play.frame - (chunkId * $scope.battle.chunkSize);
+					if (angular.isUndefined(_self.chunks[chunkId + 1]) && partialFrameId > ($scope.battle.chunkSize / 2)) {
+						_self.getChunk(chunkId + 1);
+					}
+					var frame = this.chunks[chunkId][partialFrameId];
 
 					//Iterate over all teams
 					if (angular.isUndefined(frame)) {
@@ -338,6 +358,7 @@ define([
 							}
 						});
 						_self.kinetic.layers.players.draw();
+						$scope.battle.teams[team.id].units = team.units;
 					});
 					this.play.last = now;
 
