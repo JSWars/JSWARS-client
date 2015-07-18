@@ -231,13 +231,13 @@ define([
 					this.state = this.STATES.PAUSED;
 				};
 
-				Game.prototype.frame = function (single, offset) {
+				Game.prototype.frame = function (_single, _offset) {
 					var _self = this;
 
 					var now = new Date().getTime();
 
-					if (typeof offset === 'number') {
-						this.play.currentTime += (offset * this.frameDuration)
+					if (typeof _offset === 'number') {
+						this.play.currentTime += (_offset * this.frameDuration)
 					} else {
 						this.play.currentTime += now - this.play.lastTime;
 					}
@@ -252,7 +252,7 @@ define([
 						_self.state = _self.STATES.ENDED;
 						return;
 					} else {
-						if (!(typeof single === 'boolean' && single === true)) {
+						if (!(typeof _single === 'boolean' && _single === true)) {
 							this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
 						}
 					}
@@ -260,15 +260,15 @@ define([
 					//Iterate over bullets
 					if (Object.keys(frame.bullets).length > 0) {
 						angular.forEach(frame.bullets, function (bullet, key) {
-							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_'+key)[0];
+							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
 							if (angular.isUndefined(bulletKineticNode)) {
 								bulletKineticNode = new Kinetic.Star({
 									name: 'bllt_' + key,
 									x: bullet.position.x * _self.map.tiles.tilewidth,
 									y: bullet.position.y * _self.map.tiles.tileheight,
 									numPoints: 5,
-									innerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius - 0.2),
-									outerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius + 0.2),
+									innerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius - 0.1),
+									outerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius + 0.1),
 									fill: 'red',
 									stroke: 'white',
 									strokeWidth: 1
@@ -283,16 +283,16 @@ define([
 
 							bulletKineticNode.exist = true;
 						});
-
-						angular.forEach(_self.kinetic.bulletGroup.children, function (bulletKineticNode, index) {
-							if (angular.isUndefined(bulletKineticNode.exist)) {
-								bulletKineticNode.remove();
-							} else {
-								bulletKineticNode.exist = undefined;
-							}
-						});
-						_self.kinetic.layers.bullets.draw();
 					}
+
+					angular.forEach(_self.kinetic.bulletGroup.children, function (bulletKineticNode, index) {
+						if (angular.isUndefined(bulletKineticNode.exist)) {
+							bulletKineticNode.remove();
+						} else {
+							bulletKineticNode.exist = undefined;
+						}
+					});
+					_self.kinetic.layers.bullets.draw();
 
 
 					//Iterate over teams

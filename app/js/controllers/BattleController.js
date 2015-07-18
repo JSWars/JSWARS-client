@@ -21,7 +21,6 @@ define([
 			$scope.onFrame = function (currentTime, frame) {
 				$scope.currentTime = currentTime;
 				angular.forEach(frame.teams, function (team,key) {
-					debugger;
 					$scope.battle.teams[key].units = team.units;
 				});
 			};
