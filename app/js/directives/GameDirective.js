@@ -223,6 +223,7 @@ define([
 
 				Game.prototype.getChunk = function (chunkId) {
 					var _self = this;
+					_self.chunks[chunkId] = null;
 					var deferred = $q.defer();
 					console.log("Getting chunk " + chunkId);
 					BattleFactory.chunk({id: $scope.battle.id, chunkId: chunkId}) //todo: get parameters from state
@@ -278,7 +279,7 @@ define([
 					}
 
 					//Iterate over bullets
-					if (Object.keys(frame.bullets).length > 0) {
+					if (!angular.isUndefined(frame.bullets) && Object.keys(frame.bullets).length > 0) {
 						angular.forEach(frame.bullets, function (bullet, key) {
 							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
 							if (angular.isUndefined(bulletKineticNode)) {
