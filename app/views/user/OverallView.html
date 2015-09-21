@@ -54,7 +54,7 @@
 				<td class="text-right">{{agent.losses}}</td>
 				<td class="text-right">{{agent.rank}}</td>
 				<td class="text-center">
-					<button type="button" class="btn btn-primary btn-xs">Challenge</button>
+					<button type="button" class="btn btn-primary btn-xs">Add to Battle</button>
 				</td>
 			</tr>
 			<tr ng-if="agents.length==0">
@@ -105,8 +105,8 @@
 					</a>
 				</td>
 			</tr>
-			<tr ng-if="tournaments.length==0">
-				<td colspan="7">No tournaments</td>
+			<tr ng-if="tournaments === undefined || tournaments.length === 0">
+				<td colspan="7" class="text-center">No tournaments found</td>
 			</tr>
 			</tbody>
 		</table>
