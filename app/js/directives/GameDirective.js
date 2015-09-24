@@ -226,7 +226,7 @@ define([
 					_self.chunks[chunkId] = null;
 					var deferred = $q.defer();
 					console.log("Getting chunk " + chunkId);
-					BattleFactory.chunk({id: $scope.battle.id, chunkId: chunkId}) //todo: get parameters from state
+					BattleFactory.chunk({id: $scope.battle._id, chunkId: chunkId}) //todo: get parameters from state
 						.$promise
 						.then(function (chunk) {
 							_self.chunks[chunkId] = chunk;
@@ -392,7 +392,7 @@ define([
 				};
 
 				//Initial instances
-				mapInstance = new Map($scope.battle.map);
+				mapInstance = new Map($scope.battle.map.data);
 				var fps = $scope.battle.fps;
 				var frameCount = $scope.battle.frameCount;
 				gameInstance = new Game(domElement, mapInstance, fps, frameCount);

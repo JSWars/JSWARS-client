@@ -85,7 +85,6 @@ require([
 	'controllers/user/AgentNewController',
 	'controllers/user/AgentDetailController',
 
-
 	'directives/MapDrtv',
 
 	'services/StateService',
