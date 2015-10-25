@@ -2,10 +2,10 @@ define([
 		'controllers/Controllers',
 		'moment',
 		'factories/UserFactory',
-		'factories/BattleFactory',
+		'services/BattleService',
 		'directives/GameDirective'
 	], function (Controllers, moment) {
-		Controllers.controller("BattleController", ['$scope', '$timeout', '$stateParams', 'State', 'BattleFactory', function ($scope, $timeout, $stateParams, State, BattleFactory) {
+		Controllers.controller("BattleController", ['$scope', '$timeout', '$stateParams', 'State', 'BattleService', function ($scope, $timeout, $stateParams, State, BattleService) {
 
 			State.setState({
 				title: "Jugador 1 VS Jugador 2"
@@ -15,12 +15,11 @@ define([
 				$scope.totalTime = moment($scope.battle.frameCount * (1000 / $scope.battle.fps)).toDate();
 			};
 
-
 			$scope.onFrame = function (currentTime, frame) {
 				$scope.currentTime = currentTime;
 			};
 
-			BattleFactory.get({id: $stateParams.id})
+			BattleService.get({id: $stateParams.id})
 				.$promise
 				.then(function (battle) {
 					$scope.battle = battle;

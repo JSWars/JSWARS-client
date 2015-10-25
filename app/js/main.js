@@ -16,6 +16,7 @@ require.config({
 		'angular-codemirror': 'components/angular-ui-codemirror/ui-codemirror',
 		'angular-moment': 'components/angular-moment/angular-moment',
 		'angular-file-upload': 'components/angular-file-upload/angular-file-upload',
+		'angular-prograss': 'components/ngprogress/build/ngprogress',
 		'appbootstrap': 'appbootstrap'
 	},
 	'shim': {
@@ -44,6 +45,9 @@ require.config({
 			'deps': ['angular', 'codemirror-wrapper']
 		},
 		'angular-file-upload': {
+			'deps': ['angular']
+		},
+		'angular-prograss': {
 			'deps': ['angular']
 		},
 		'approuter': {
@@ -85,7 +89,7 @@ require([
 	'controllers/user/AgentNewController',
 	'controllers/user/AgentDetailController',
 
-	'directives/MapDrtv',
+	//'directives/MapDrtv',
 
 	'services/StateService',
 
@@ -95,4 +99,20 @@ require([
 	app.config(['$logProvider', function ($logProvider) {
 		$logProvider.debugEnabled(true);
 	}]);
+
+	app.run(['$rootScope', '$http', 'ngProgressFactory', function ($rootScope, $http, ngProgressFactory) {
+		var progressbar = ngProgressFactory.createInstance();
+
+		$rootScope.isLoading = function () {
+			return $http.pendingRequests.length > 0;
+		};
+
+		$rootScope.$watch('isLoading', function (loading) {
+			if (loading) {
+				progressbar.start();
+			} else {
+				progressbar.complete();
+			}
+		});
+	}])
 });

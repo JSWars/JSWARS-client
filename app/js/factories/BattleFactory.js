@@ -14,6 +14,11 @@ define([
 					url:  Config.host + 'battle/:id/chunk/:chunkId',
 					method: 'GET',
 					isArray: true //todo: probably object
+				},
+				queue:{
+					url:  Config.host + 'battle/',
+					method: 'POST',
+					isArray: false //todo: probably object
 				}
 			});
 		}]);

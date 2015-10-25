@@ -391,14 +391,20 @@ define([
 					}
 				};
 
-				//Initial instances
-				mapInstance = new Map($scope.battle.map.data);
-				var fps = $scope.battle.fps;
-				var frameCount = $scope.battle.frameCount;
-				gameInstance = new Game(domElement, mapInstance, fps, frameCount);
-				element
-					.css('background-image', 'url("img/map/background.jpg")');
-				gameInstance.start();
+				$scope.$watch('battle', function (battle) {
+					if(!angular.isUndefined(battle)){
+						//Initial instances
+						mapInstance = new Map($scope.battle.map.data);
+						var fps = $scope.battle.fps;
+						var frameCount = $scope.battle.frameCount;
+						gameInstance = new Game(domElement, mapInstance, fps, frameCount);
+						element
+							.css('background-image', 'url("img/map/background.jpg")');
+						gameInstance.start();
+					}
+				});
+
+
 
 			}
 		};

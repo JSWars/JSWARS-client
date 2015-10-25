@@ -12,6 +12,7 @@
 	<link href="js/components/bootstrap-social/bootstrap-social.css"/>
 	<link href="js/components/codemirror/lib/codemirror.css" rel="stylesheet"/>
 	<link href="js/components/codemirror/theme/ambiance.css" rel="stylesheet"/>
+	<link href="js/components/ngprogress/ngProgress.css" rel="stylesheet">
 	<link href="style/style.css" rel="stylesheet"/>
 	<link href="style/form.css" rel="stylesheet"/>
 	<link href="style/font-awesome.css" rel="stylesheet"/>
@@ -23,11 +24,11 @@
 	<script src="js/components/html5shiv/dist/html5shiv.min.js"></script>
 	<![endif]-->
 
-	<!-- Fav and touch icons -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+	<!--&lt;!&ndash; Fav and touch icons &ndash;&gt;-->
+	<!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">-->
+	<!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">-->
+	<!--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">-->
+	<!--<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">-->
 	<link rel="shortcut icon" href="img/favicon.png">
 </head>
 <body id="skin-blur-yellow" ng-controller="RootController">
@@ -55,7 +56,9 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right" ng-cloak>
 
-			<li ng-if="session.username" popover-template="'fightPopover.html'" style="background-color: rgba(160, 0, 0, 0.3);" popover-placement="bottom" popover-trigger="mouseenter" popover-title="'jajajja'">
+			<li ng-if="session.username" popover-template="'fightPopover.html'"
+				 style="background-color: rgba(160, 0, 0, 0.3);" popover-placement="bottom" popover-trigger="mouseenter"
+				 popover-title="'jajajja'">
 				<a href="">Fight!</a>
 			</li>
 			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)"><i
