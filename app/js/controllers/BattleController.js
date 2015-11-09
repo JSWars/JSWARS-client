@@ -20,7 +20,6 @@ define([
 			};
 
 			BattleService.get({id: $stateParams.id})
-				.$promise
 				.then(function (battle) {
 					$scope.battle = battle;
 				});
