@@ -1,9 +1,9 @@
-<div class="tile battle-creator">
+<div class="tile battle-creator" ng-if="battle.agents.lenght>0">
 	<h2 class="tile-title text-center" ng-click="hidden = !hidden">Configure Battle <span class="icon" ng-if="hidden == false" ></span> <span class="icon" ng-if="hidden == true"></span></h2>
 
 	<div class="row" ng-if="!hidden">
 		<div class="col-sm-5 text-right">
-			<div class="media p-10" ng-if="battle.agents[0]">
+			<div class="media p-10">
 				<div class="pull-right">
 					<img width="40" height="40" src="img/profile-pics/1.jpg" alt="">
 				</div>
@@ -11,15 +11,6 @@
 					<small class="text-muted">2 Hours ago by Adrien San</small>
 					<br>
 					<a class="t-overflow">Cras molestie fermentum nibh, ac semper</a>
-
-				</div>
-			</div>
-			<div class="media p-10" ng-if="!battle.agents[0]">
-				<div class="pull-right">
-					<img width="40" height="40" src="img/profile-pics/1.jpg" alt="">
-				</div>
-				<div class="media-body">
-					<a class="t-overflow">Please choose another agent</a>
 
 				</div>
 			</div>

@@ -16,6 +16,7 @@ define([
 						};
 
 						$rootScope.$on('addToBattle', function (event, data) {
+							alert("asdasdasd");
 							if ($scope.battle.agents.length >= 2) {
 								return;
 							}

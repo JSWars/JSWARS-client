@@ -94,6 +94,7 @@ require([
 	'controllers/user/AgentDetailController',
 
 	'directives/BattleCreatorDrtv',
+	'directives/BattleCreatorButtonDrtv',
 
 	'services/StateService',
 
