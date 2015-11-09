@@ -17,6 +17,7 @@ require.config({
 		'angular-moment': 'components/angular-moment/angular-moment',
 		'angular-file-upload': 'components/angular-file-upload/angular-file-upload',
 		'angular-prograss': 'components/ngprogress/build/ngprogress',
+		'angular-local-storage': 'components/angular-local-storage/dist/angular-local-storage',
 		'appbootstrap': 'appbootstrap'
 	},
 	'shim': {
@@ -48,6 +49,9 @@ require.config({
 			'deps': ['angular']
 		},
 		'angular-prograss': {
+			'deps': ['angular']
+		},
+		'angular-local-storage': {
 			'deps': ['angular']
 		},
 		'approuter': {
@@ -89,7 +93,7 @@ require([
 	'controllers/user/AgentNewController',
 	'controllers/user/AgentDetailController',
 
-	//'directives/MapDrtv',
+	'directives/BattleCreatorDrtv',
 
 	'services/StateService',
 

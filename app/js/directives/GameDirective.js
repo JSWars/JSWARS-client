@@ -261,21 +261,19 @@ define([
 					this.play.lastTime = now;
 
 					this.play.frame = Math.floor(this.play.currentTime / this.frameDuration);
-					var chunkId = Math.floor(this.play.frame / $scope.battle.chunkSize);
+					var chunkId = Math.floor((this.play.frame) / $scope.battle.chunkSize);
 					var partialFrameId = this.play.frame - (chunkId * $scope.battle.chunkSize);
 					if (angular.isUndefined(_self.chunks[chunkId + 1]) && partialFrameId > ($scope.battle.chunkSize / 2)) {
 						_self.getChunk(chunkId + 1);
 					}
-					var frame = this.chunks[chunkId][partialFrameId].data;
-
-					//Iterate over all teams
-					if (angular.isUndefined(frame)) {
-						_self.state = _self.STATES.ENDED;
-						return;
-					} else {
+					try {
+						var frame = this.chunks[chunkId][partialFrameId].data;
 						if (!(typeof _single === 'boolean' && _single === true)) {
 							this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
 						}
+					} catch (e) {
+						_self.state = _self.STATES.ENDED;
+						return;
 					}
 
 					//Iterate over bullets
@@ -392,7 +390,7 @@ define([
 				};
 
 				$scope.$watch('battle', function (battle) {
-					if(!angular.isUndefined(battle)){
+					if (!angular.isUndefined(battle)) {
 						//Initial instances
 						mapInstance = new Map($scope.battle.map.data);
 						var fps = $scope.battle.fps;
@@ -403,7 +401,6 @@ define([
 						gameInstance.start();
 					}
 				});
-
 
 
 			}

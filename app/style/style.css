@@ -2282,6 +2282,27 @@ footer {
 	}
 }
 
+/*Outside theme*/
+
+/*Battle creator floating widget*/
+.tile.battle-creator {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	margin-bottom: 0px;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+
+.tile.battle-creator .fight-button {
+	background: rgb(146, 1, 1);
+}
+
+.tile.battle-creator .tile-title {
+	border: 1px solid #2D2D2D;
+}
+
 .avatar {
 	max-width: 80px;
 }
