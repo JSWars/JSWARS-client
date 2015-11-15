@@ -1,0 +1,48 @@
+<div class="container">
+	<div class="block-area">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h2 class="block-title">Best players: </h2>
+				<div class="tile">
+
+					<table class="table table-bordered tile">
+						<thead>
+						<tr>
+							<th>Name</th>
+							<th>Map</th>
+							<th class="text-right">Run date</th>
+							<th class="text-right">Duration</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="battles in battles">
+							<td>baattle!!!</td>
+							<!--<td class="text-center">-->
+								<!--<strong>{{$index+1}}</strong>-->
+							<!--</td>-->
+							<!--<td>-->
+								<!--<a ng-href="#/country/{{rankingItem.country}}"-->
+									<!--tooltip="{{rankingItem.country | CountryFilter}}"-->
+									<!--tooltip-append-to-body="true"><img ng-src="/img/flags/16/{{rankingItem.country}}.png"-->
+																				  <!--alt=""/> </a><a-->
+								<!--ng-href="#/user/{{rankingItem.username}}"><span class="icon"></span>-->
+								<!--{{rankingItem.username}}</a>-->
+							<!--</td>-->
+							<!--<td class="text-right">-->
+								<!--{{rankingItem.agentsNo}}-->
+							<!--</td>-->
+							<!--<td class="text-right">-->
+								<!--{{rankingItem.victoriesNo}}-->
+							<!--</td>-->
+						</tr>
+						<tr ng-if="battles === undefined || battles.length === 0">
+							<td colspan="4" class="text-center">No battles registered</td>
+						</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

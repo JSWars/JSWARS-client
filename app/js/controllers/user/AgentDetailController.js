@@ -3,11 +3,9 @@ define([
 	'services/AgentService',
 	'services/AgentVersionService'
 ], function (Controllers) {
-	Controllers.controller('AgentDetailController', ['$scope', '$state', '$stateParams', 'AgentService', 'AgentVersionService', 'State', function ($scope, $state, $stateParams, AgentService, AgentVersionService, State) {
+	Controllers.controller('AgentDetailController', ['$scope', '$state', '$stateParams', '$timeout', 'AgentService', 'AgentVersionService', 'State', function ($scope, $state, $stateParams, $timeout, AgentService, AgentVersionService, State) {
 
 		State.setState({});
-
-		$scope.currentIndex = 0;
 
 		$scope.editorOptions = {
 			lineWrapping: true,
@@ -23,36 +21,28 @@ define([
 			.then(function (agent) {
 				$scope.agent = agent;
 			}, function () {
-				alert("error");
+				$scope.error = "Can't get agent";
 			});
 
-		AgentVersionService.query({
-			id: $stateParams.id,
-			username: $stateParams.username
-		})
-			.then(function (versions) {
-				$scope.versions = versions;
-				$scope.version = versions[0];
-			}, function () {
-				alert("error");
-			});
-
-		$scope.loadVersion = function (e, versionId) {
-			e.preventDefault();
-
-			AgentVersionService.get({
-				username: $stateParams.username,
+		var agentVersionsQuery = function () {
+			AgentVersionService.query({
 				id: $stateParams.id,
-				versionId: versionId
+				username: $stateParams.username
 			})
-				.then(function (response) {
-					$scope.isOld = true;
-					$scope.version = response;
+				.then(function (versions) {
+					$scope.versions = versions;
+					$scope.editVersion = versions[0];
 				}, function () {
-					alert("Error recovering version");
-				})
+					$scope.error = "Can't get agent versions";
+				});
 
+		};
+		agentVersionsQuery();
 
+		$scope.loadVersion = function (e, version) {
+			e.preventDefault();
+			$scope.isOld = true;
+			$scope.editVersion = version;
 		};
 
 		$scope.update = function (e) {
@@ -60,15 +50,23 @@ define([
 			AgentService.update({
 				username: $stateParams.username,
 				id: $stateParams.id,
-				code: $scope.version	.code
+				code: $scope.editVersion.code
 			})
 				.then(function (response) {
-					alert("Agent updated");
-					$state.reload();
+					$scope.message = "Agent saved. New version created";
+					$timeout(function () {
+						$scope.message = false;
+					}, 4000);
+					agentVersionsQuery();
 				}, function () {
-					alert("Error update agent")
-				})
-		}
+					$scope.error = "Can't create agent";
+					$timeout(function () {
+						$scope.error = false;
+					}, 4000);
 
-	}]);
-});
+				}
+			)
+		}
+	}
+	])
+})

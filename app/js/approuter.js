@@ -64,6 +64,11 @@ define([
 						templateUrl: 'views/RankingsView.html',
 						controller: "RankingsController"
 					})
+					.state("last-battles", {
+						url: "/last-battles",
+						templateUrl: 'views/LastBattlesView.html',
+						controller: "LastBattlesController"
+					})
 					.state("user", {
 						url: "/user/{username}",
 						templateUrl: 'views/UserView.html',
