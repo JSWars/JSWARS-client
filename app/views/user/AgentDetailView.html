@@ -67,8 +67,8 @@
 				</thead>
 				<tbody>
 				<tr ng-repeat="version in versions track by $index">
-					<td><span class="icon" ng-if="version._id == editVersion._id" tooltip="You are seeing this"></span></td>
-					<td><span class="icon" ng-if="$first" title="Used in battles" tooltip="Used in battles"></span></td>
+					<td class="text-center"><span class="icon" ng-if="version._id == editVersion._id" tooltip="You are seeing this"></span></td>
+					<td class="text-center"><span class="icon" ng-if="$first" title="Used in battles" tooltip="Used in battles"></span></td>
 					<td><span am-time-ago="version.moment"
 								 tooltip="{{version.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 					<td class="text-right">0</td>
