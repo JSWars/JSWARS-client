@@ -87,6 +87,7 @@ require([
 	'controllers/RankingsController',
 	'controllers/BattleController',
 	'controllers/UserController',
+	'controllers/OverallController',
 	'controllers/RootController',
 	'controllers/common/NavbarController',
 

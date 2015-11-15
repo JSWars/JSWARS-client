@@ -64,7 +64,7 @@
 		</table>
 
 		<div class="text-right">
-			<button class="btn btn-primary" ng-if="session.username == user.username" ui-sref="user.agents.new"> Upload new Agent</button>
+			<button class="btn btn-primary" ng-if="session.username == user.username" ui-sref="user.agents.new"> Create new agent</button>
 		</div>
 
 		<h3 class="block-title">Last tournaments</h3>
@@ -128,16 +128,6 @@
 			</div>
 
 			<div class="listview icon-list">
-
-				<!--<div class="media">-->
-				<!--<span class="icon pull-left"></span>-->
-
-				<!--<div class="media-body">-->
-				<!--<span class="label label-inherit"-->
-				<!--ng-class="{'label-success': user.online, 'label-error' : !user.online}"><strong>Online</strong></span>-->
-				<!--</div>-->
-				<!--</div>-->
-
 
 				<div class="media" ng-if="user.ranking">
 					<i class="icon pull-left"></i>

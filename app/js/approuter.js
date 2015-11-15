@@ -78,8 +78,8 @@ define([
 
 					.state("user.overall", {
 						url: '',
-						templateUrl: 'views/user/OverallView.html'
-						//controller: "UserController",
+						templateUrl: 'views/user/OverallView.html',
+						controller: "OverallController"
 
 						//La parte de las subviews no funciona, por ahora lo hago con ng-include
 						//views:{

@@ -35,7 +35,9 @@
 					</div>
 
 					<div class="text-right">
-						<button ng-click="update($event)" class="btn btn-primary" ng-disabled="!AgentForm.code.$dirty">Update Agent</button>
+						<button ng-click="update($event)" class="btn btn-primary" ng-disabled="!AgentForm.code.$dirty">Update
+							Agent
+						</button>
 					</div>
 
 				</form>
@@ -65,9 +67,10 @@
 				</thead>
 				<tbody>
 				<tr ng-repeat="version in versions track by $index">
-					<td><span class="icon" ng-if="version._id == editVersion._id" title="Seeing this"></span></td>
-					<td><span class="icon" ng-if="$first" title="Used in battles"></span></td>
-					<td>{{version.moment | date: 'medium'}}</td>
+					<td><span class="icon" ng-if="version._id == editVersion._id" tooltip="You are seeing this"></span></td>
+					<td><span class="icon" ng-if="$first" title="Used in battles" tooltip="Used in battles"></span></td>
+					<td><span am-time-ago="version.moment"
+								 tooltip="{{version.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 					<td class="text-right">0</td>
 					<td class="text-right">
 						<button ng-click="loadVersion($event,version)" class="btn btn-default btn-xs">View</button>
