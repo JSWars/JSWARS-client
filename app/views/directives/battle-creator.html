@@ -1,27 +1,27 @@
-<div class="tile battle-creator" ng-if="battle.agents.lenght>0">
-	<h2 class="tile-title text-center" ng-click="hidden = !hidden">Configure Battle <span class="icon" ng-if="hidden == false" ></span> <span class="icon" ng-if="hidden == true"></span></h2>
+<div class="tile battle-creator" ng-if="battle.agents.length>0">
+	<h2 class="tile-title text-center" ng-click="hidden = !hidden">Create Battle <span class="icon" ng-if="hidden == false" ></span> <span class="icon" ng-if="hidden == true"></span></h2>
 
 	<div class="row" ng-if="!hidden">
 		<div class="col-sm-5 text-right">
 			<div class="media p-10">
 				<div class="pull-right">
-					<img width="40" height="40" src="img/profile-pics/1.jpg" alt="">
+					<img width="40" height="40" src="{{battle.agents[0].user.github.avatar_url || '/img/avatars/default.png'}}" tooltip="{{battle.agents[0].user.username}}">
 				</div>
 				<div class="media-body">
-					<small class="text-muted">2 Hours ago by Adrien San</small>
+					<small class="text-muted">{{battle.agents[0].moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} by
+						<a ui-sref="user.overall({username:battle.agents[0].user.username})">{{battle.agents[0].user.username}}</a></small>
 					<br>
-					<a class="t-overflow">Cras molestie fermentum nibh, ac semper</a>
-
+					<span class="t-overflow">{{battle.agents[0].name}}</span>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-2 text-center ">
 			<div class="p-10">
-				<button class="btn btn-lg fight-button" disabled>FIGHT</button>
+				<button class="btn btn-lg fight-button" ng-disabled="!battle.agents.length>=2" ng-click="putInQueue($event)">FIGHT</button>
 			</div>
 		</div>
 		<div class="col-sm-5 text-left">
-			<div class="media p-10" ng-if="!battle.agents[0]">
+			<div class="media p-10" ng-if="!battle.agents[1]">
 				<div class="pull-left">
 					<img width="40" height="40" src="img/profile-pics/1.jpg" alt="">
 				</div>
@@ -29,14 +29,15 @@
 					<a class="t-overflow">Please choose another agent</a>
 				</div>
 			</div>
-			<div class="media p-10" ng-if="battle.agents[0]">
+			<div class="media p-10" ng-if="battle.agents[1]">
 				<div class="pull-left">
-					<img width="40" height="40" src="img/profile-pics/1.jpg" alt="">
+					<img width="40" height="40" src="{{battle.agents[1].user.github.avatar_url || '/img/avatars/default.png'}}" tooltip="{{battle.agents[1].user.username}}">
 				</div>
 				<div class="media-body">
-					<small class="text-muted">2 Hours ago by Adrien San</small>
+					<small class="text-muted">{{battle.agents[1].moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} by
+						<a ui-sref="user.overall({username:battle.agents[1].user.username})">{{battle.agents[1].user.username}}</a></small>
 					<br>
-					<a class="t-overflow">Cras molestie fermentum nibh, ac semper</a>
+					<span class="t-overflow">{{battle.agents[1].name}}</span>
 				</div>
 			</div>
 		</div>

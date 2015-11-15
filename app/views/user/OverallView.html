@@ -54,7 +54,7 @@
 				<td class="text-right">{{agent.losses}}</td>
 				<td class="text-right">{{agent.rank}}</td>
 				<td class="text-center">
-					<button type="button" class="btn btn-primary btn-xs" battle-creator-button="agent._id">Add to Battle</button>
+					<button type="button" class="btn btn-primary btn-xs" battle-creator-button="{id: agent._id, username: user.username}">Add to Battle</button>
 				</td>
 			</tr>
 			<tr ng-if="agents.length==0">

@@ -14,7 +14,8 @@ define([
 						element.click(function (event) {
 							event.preventDefault();
 							$rootScope.$emit("addToBattle", {
-								agentId: $scope.battleCreatorButton
+								agentId: $scope.battleCreatorButton.id,
+								username: $scope.battleCreatorButton.username
 							})
 						});
 					}
