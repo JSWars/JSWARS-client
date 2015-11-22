@@ -19,6 +19,11 @@ define([
 					url:  Config.host + 'battle/',
 					method: 'POST',
 					isArray: false //todo: probably object
+				},
+				queueGet:{
+					url:  Config.host + 'battle/queue/:id/',
+					method: 'GET',
+					isArray: false //todo: probably object
 				}
 			});
 		}]);

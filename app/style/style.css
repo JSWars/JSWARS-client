@@ -2323,6 +2323,10 @@ footer {
 	overflow: hidden;
 }
 
+.unit.die{
+	opacity: 0.5;
+}
+
 .unit:after {
 	content: '';
 	border-left: 3px solid #008000;

@@ -21,8 +21,13 @@ define([
 							BattleService.queue({
 								agents: [$scope.battle.agents[0]._id, $scope.battle.agents[1]._id]
 							})
-								.then(function () {
-									alert("Battle requested!");
+								.then(function (queueItem) {
+									BattleService.queueGet({id: queueItem._id})
+										.then(function (queueItem) {
+											document.location.hash = '#battle/' + queueItem.battle;
+										}, function (error) {
+											alert('error detected');
+										});
 									$scope.battle.agents = [];
 									LocalStorage.remove("battle.creator.agents");
 								}, function () {

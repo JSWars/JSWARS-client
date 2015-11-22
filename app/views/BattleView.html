@@ -36,9 +36,8 @@
 					</div>
 				</div>
 				<div class="units">
-					<span class="unit" ng-repeat="unit in team.units">
+					<span class="unit" ng-class="{die:!unit.alive}" ng-repeat="unit in team.units" ng-style="{'padding-top': 45-(45/100*unit.health) + 'px'}">
 					</span>
-					<!-- ng-style="{'padding-top': 49-(49/100*unit.health) + 'px'}"-->
 
 				</div>
 			</div>
