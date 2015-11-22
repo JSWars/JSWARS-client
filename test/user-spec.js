@@ -1,6 +1,6 @@
 describe('user data', function () {
 	it('should get user data', function () {
-		browser.get('http://dev.tfg.com/#/user/djwmarcx');
+		browser.get('http://jswars.io/#/user/djwmarcx');
 
 		var agentList = element.all(by.repeater('agent in agents'));
 		expect(agentList.count()).toEqual(5);

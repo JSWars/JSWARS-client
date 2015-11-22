@@ -14,7 +14,7 @@ Despues nos desplazaremos al final de nuestro fichero __httpd.conf__ y agregarem
 
 
     <VirtualHost *:80>
-        ServerName dev.tfg.com
+        ServerName jswars.io
 
         DocumentRoot "[RUTA A NUESTRO PROYECTO DE CLIENTE HTML]"
         <Directory "[RUTA A NUESTRO PROYECTO DE CLIENTE HTML]">
