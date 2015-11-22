@@ -14,7 +14,7 @@ Despues nos desplazaremos al final de nuestro fichero __httpd.conf__ y agregarem
 
 
     <VirtualHost *:80>
-        ServerName dev.tfg.com
+        ServerName jswars.io
 
         DocumentRoot "[RUTA A NUESTRO PROYECTO DE CLIENTE HTML]"
         <Directory "[RUTA A NUESTRO PROYECTO DE CLIENTE HTML]">
@@ -47,7 +47,7 @@ todo el tráfico dirigido al servidor de la plataforma, siempre a partir de la r
 Para que el virtualhost se funcional, debemmos abrir nuestro fichero __host__ (Que según si el sistema es Windows, Linux
 o Mac variará su ubicación) y agregar la siguiente línea:
 
-    127.0.0.1 dev.tfg.com
+    127.0.0.1 jswars.io
 
 Esto resolverá todo el tráfico a ese nombre de dominio a nuestrá máquina local y será procesado por nuestro virtualhost.
 
