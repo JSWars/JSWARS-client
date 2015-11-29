@@ -10,13 +10,20 @@ define([
 					link: function ($scope, element, attrs) {
 
 						$scope.hidden = false;
+						$scope.waiting = false;
 
 						$scope.battle = {
 							agents: LocalStorage.get("battle.creator.agents") || []
 						};
 
+						$scope.clearQueue = function (e) {
+							e.preventDefault();
+							$scope.battle.agents = [];
+						};
+
 						$scope.putInQueue = function (e) {
 							e.preventDefault();
+							$scope.waiting = true;
 
 							BattleService.queue({
 								agents: [$scope.battle.agents[0]._id, $scope.battle.agents[1]._id]
@@ -24,19 +31,21 @@ define([
 								.then(function (queueItem) {
 									BattleService.queueGet({id: queueItem._id})
 										.then(function (queueItem) {
+											$scope.waiting = false;
+											$scope.battle.agents = [];
+											LocalStorage.remove("battle.creator.agents");
 											document.location.hash = '#battle/' + queueItem.battle;
 										}, function (error) {
 											alert('error detected');
 										});
-									$scope.battle.agents = [];
-									LocalStorage.remove("battle.creator.agents");
+
 								}, function () {
 									alert("Error");
 								})
 						};
 
 						$rootScope.$on('addToBattle', function (event, data) {
-							if ($scope.battle.agents.length >= 2) {
+							if ($scope.battle.agents.length >= 2 || ($scope.battle.agents[0] !== undefined && $scope.battle.agents[0]._id === data.agentId)) {
 								return;
 							}
 

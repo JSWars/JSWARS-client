@@ -21,7 +21,8 @@
 			<div ng-repeat="team in battle.teams" class="tile">
 				<div class="tile-title row" ng-style="{'border-bottom': '3px solid ' + team.color}">
 					<div class="col-xs-4">
-						<img class="avatar" ng-src="{{team.user.avatar}}" alt=""/>
+						<a title="{{user.username}}" ui-sref="user.overall({username:team.user.username})"><img class="profile-pic"
+																																	  ng-src="{{team.user.avatar || '/img/avatars/default.png'}}"></a>
 					</div>
 					<div class="col-xs-8">
 						<h3>{{team.user.username}} </h3>
@@ -38,10 +39,10 @@
 				<div class="units">
 					<span class="unit" ng-class="{die:!unit.alive}" ng-repeat="unit in team.units" ng-style="{'padding-top': 45-(45/100*unit.health) + 'px'}">
 					</span>
-
 				</div>
 			</div>
-
+			<a class="btn btn-block btn-largue btn-alt" style="background-color:rgb(75, 58, 35)!important;border: 2px solid white !important;
+" ng-href="/api/battle/{{battleId}}/dump/" target="-_blank"><span class="icon"></span> Download battle file</a>
 		</div>
 	</div>
 </div>

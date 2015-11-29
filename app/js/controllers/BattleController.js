@@ -19,6 +19,8 @@ define([
 				$scope.currentTime = currentTime;
 			};
 
+			$scope.battleId = $stateParams.id;
+
 			BattleService.get({id: $stateParams.id})
 				.then(function (battle) {
 					$scope.battle = battle;
