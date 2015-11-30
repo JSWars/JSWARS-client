@@ -281,15 +281,13 @@ define([
 						angular.forEach(frame.bullets, function (bullet, key) {
 							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
 							if (angular.isUndefined(bulletKineticNode)) {
-								bulletKineticNode = new Kinetic.Star({
+								bulletKineticNode = 	new Kinetic.Circle({
 									name: 'bllt_' + key,
 									x: bullet.position.x * _self.map.tiles.tilewidth,
 									y: bullet.position.y * _self.map.tiles.tileheight,
-									numPoints: 5,
-									innerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius - 0.1),
-									outerRadius: _self.SQUARE_HEIGHT_PX * (bullet.radius + 0.1),
-									fill: 'red',
-									stroke: 'white',
+									fill: 'yellow',
+									radius: _self.SQUARE_HEIGHT_PX * (0.1),
+									stroke: 'black',
 									strokeWidth: 1
 								});
 								_self.kinetic.bulletGroup.add(bulletKineticNode);
