@@ -69,6 +69,13 @@ define([
 						templateUrl: 'views/LastBattlesView.html',
 						controller: "LastBattlesController"
 					})
+
+					.state("users", {
+						url: "/users",
+						templateUrl: 'views/UserListView.html',
+						controller: "UserListController"
+					})
+
 					.state("user", {
 						url: "/user/{username}",
 						templateUrl: 'views/UserView.html',
@@ -93,7 +100,7 @@ define([
 					.state("user.agents", {
 						url: '/agents',
 						template: '<ui-view/>',
-						abstract:true
+						abstract: true
 					})
 					.state("user.agents.new", {
 						url: '/new',
