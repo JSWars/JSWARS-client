@@ -19,6 +19,12 @@
 	<link href="style/generics.css" rel="stylesheet"/>
 	<link href="style/icons.css" rel="stylesheet"/>
 
+	<style>
+		.ng-cloak {
+			display: none;
+		}
+	</style>
+
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="js/components/html5shiv/dist/html5shiv.min.js"></script>
@@ -68,13 +74,21 @@
 	</nav>
 </header>
 
-<h1 class="text-center" ng-if="title">{{title}}</h1>
-<hr class="whiter" ng-if="title">
+<h1 class="text-center ng-cloak" ng-if="title">{{title}}</h1>
+<hr class="whiter ng-cloak" ng-if="title">
 
-<section ui-view></section>
+<section ui-view ng-if="online === true" class="ng-cloak"></section>
+<div class="text-center" style="margin-top: 300px"  ng-if="online === undefined"><img src="img/spinner.gif" width="30" alt="Loading..."></div>
+
+<section id="error-page" ng-if="online === false" class="tile ng-cloak">
+	<h1 class="m-b-10">ERROR 500</h1>
+
+	<p>Sorry, but the page you are looking for has a problem. Wait some minutes an try again. </p>
+	<a class="underline" href="mailto:">Maybe you want contact us</a>
+</section>
 
 <div class="clearfix"></div>
-<footer class="tile-dark">
+<footer class="tile-dark ng-cloak" ng-if="online === true">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-2 col-xs-offset-3">

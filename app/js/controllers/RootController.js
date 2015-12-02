@@ -3,10 +3,12 @@ define([
 		'services/SessionService'
 	],
 	function (Controllers) {
-		Controllers.controller('RootController', ['$scope', '$rootScope', 'SessionService', function ($scope, $rootScope, SessionService) {
+		Controllers.controller('RootController', ['$scope', '$rootScope', '$http', 'SessionService', function ($scope, $rootScope, $http, SessionService) {
 			$rootScope.$on('state.title', function (x, data) {
 				$scope.title = data.title;
 			});
+
+			$scope.online;
 
 			SessionService.get()
 				.then(function (session) {
@@ -14,6 +16,15 @@ define([
 				}, function () {
 
 				});
+
+			$http.get('/api/status/')
+				.then(function () {
+					$scope.online = true;
+				},
+				function () {
+					$scope.online = false;
+				});
+
 
 			$scope.ghLogin = function (e) {
 				e.preventDefault();
