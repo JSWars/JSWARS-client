@@ -47,7 +47,12 @@
 			</thead>
 			<tbody>
 			<tr ng-repeat="agent in agents">
-				<td><a ng-href="#/user/{{user.username}}/agents/{{agent._id}}">{{agent.name}}</a></td>
+				<td>
+					{{user}}
+					{{agent}}
+					<a  ng-href="#/user/{{user.username}}/agents/{{agent._id}}">{{agent.name}}</a>
+					<span>{{agent.name}}</span>
+				</td>
 				<td><span am-time-ago="agent.moment"
 							 tooltip="{{agent.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 				<td class="text-right">{{agent.wins}}</td>

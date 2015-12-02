@@ -4,7 +4,7 @@ define([
 	function (Factories) {
 		Factories.factory('Config', [function Config() {
 			return {
-				host: 'http://jswars.org/api/'
+				host: '/api/'
 			};
 		}]);
 	});
