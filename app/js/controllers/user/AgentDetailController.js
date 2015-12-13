@@ -58,8 +58,13 @@ define([
 						$scope.message = false;
 					}, 4000);
 					agentVersionsQuery();
-				}, function () {
-					$scope.error = "Can't create agent";
+				}, function (errorResponse) {
+					if (errorResponse.errorId = "INVALID_JAVASCRIPT") {
+						$scope.error = "Invalid agent syntax";
+						$scope.exceptionMessage = errorResponse.exceptionMessage;
+					} else {
+						$scope.error = "Can't create agent due to unknown error";
+					}
 					$timeout(function () {
 						$scope.error = false;
 					}, 4000);

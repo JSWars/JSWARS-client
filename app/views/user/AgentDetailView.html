@@ -10,7 +10,29 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="agentName">Name</label>
-								<input type="text" id="agentName" class="form-control" ng-model="agent.name"/>
+
+								<div class="formError" ng-messages="AgentForm.name.$error"
+									  ng-if="AgentForm.name.$dirty && !AgentForm.name.$valid">
+									<div class="formErrorContent">
+										<div ng-message="required">Name is required</div>
+										<div ng-message="minlength">Name need at least 5 characters</div>
+									</div>
+
+									<div class="formErrorArrow">
+										<div class="line10"><!-- --></div>
+										<div class="line9"><!-- --></div>
+										<div class="line8"><!-- --></div>
+										<div class="line7"><!-- --></div>
+										<div class="line6"><!-- --></div>
+										<div class="line5"><!-- --></div>
+										<div class="line4"><!-- --></div>
+										<div class="line3"><!-- --></div>
+										<div class="line2"><!-- --></div>
+										<div class="line1"><!-- --></div>
+									</div>
+								</div>
+								<input type="text" id="agentName" class="form-control" name="name" required minlength="5"
+										 ng-model="agent.name"/>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -29,13 +51,12 @@
 								 class="form-control auto-size input-sm" id="newAgentCode" name="code"></textarea>
 
 						<div ng-messages="NewAgentForm.code.$error">
-							<div ng-message="required">Name is required</div>
-							<div ng-message="minlength">Name need at least 5 characters</div>
+							<div ng-message="required">Code is required</div>
 						</div>
 					</div>
 
 					<div class="text-right">
-						<button ng-click="update($event)" class="btn btn-primary" ng-disabled="!AgentForm.code.$dirty">Update
+						<button ng-click="update($event)" class="btn btn-primary" ng-disabled="!AgentForm.code.$dirty && !AgentForm.name.$dirty ">Update
 							Agent
 						</button>
 					</div>
@@ -49,7 +70,11 @@
 			{{message}}
 		</div>
 		<div class="alert alert-danger" ng-if="error">
-			{{error}}
+			<strong>{{error}}</strong>
+
+			<div ng-if="exceptionMessage">
+				{{exceptionMessage}}
+			</div>
 		</div>
 
 		<h3 class="block-title m-t-0">Last 10 versions</h3>
@@ -67,8 +92,10 @@
 				</thead>
 				<tbody>
 				<tr ng-repeat="version in versions track by $index">
-					<td class="text-center"><span class="icon" ng-if="version._id == editVersion._id" tooltip="You are seeing this"></span></td>
-					<td class="text-center"><span class="icon" ng-if="$first" title="Used in battles" tooltip="Used in battles"></span></td>
+					<td class="text-center"><span class="icon" ng-if="version._id == editVersion._id"
+															tooltip="You are seeing this"></span></td>
+					<td class="text-center"><span class="icon" ng-if="$first" title="Used in battles"
+															tooltip="Used in battles"></span></td>
 					<td><span am-time-ago="version.moment"
 								 tooltip="{{version.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 					<td class="text-right">0</td>
