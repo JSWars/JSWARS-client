@@ -85,6 +85,7 @@ require([
 	'controllers/SignupController',
 	'controllers/LastBattlesController',
 	'controllers/RankingsController',
+	'controllers/DocumentationController',
 	'controllers/BattleController',
 	'controllers/UserController',
 	'controllers/UserListController',

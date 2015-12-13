@@ -76,6 +76,12 @@ define([
 						controller: "UserListController"
 					})
 
+					.state("documentation", {
+						url: "/documentation",
+						templateUrl: 'views/DocumentationView.html',
+						controller: "DocumentationController"
+					})
+
 					.state("user", {
 						url: "/user/{username}",
 						templateUrl: 'views/UserView.html',
