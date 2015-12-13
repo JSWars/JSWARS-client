@@ -6,6 +6,14 @@ define([
 ], function (Controllers) {
 	Controllers.controller("DocumentationController", ['$scope','State', function ($scope, State) {
 
+		$scope.editorOptions = {
+			lineWrapping: true,
+			lineNumbers: true,
+			mode: 'javascript',
+			readOnly: 'nocursor',
+			theme: 'ambiance'
+		};
+
 		State.setState({
 			title: "Documentation"
 		});

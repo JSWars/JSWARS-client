@@ -16,6 +16,20 @@
 							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
 						</p>
 
+
+
+
+					</div>
+
+
+				</div>
+
+				<div id="documentation" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">MAP</h2>
+					</div>
+
+					<div class="panel-body">
 						<p>
 							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
 							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
@@ -24,6 +38,106 @@
 							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
 						</p>
 
+					</div>
+
+
+				</div>
+
+				<div id="documentation" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">UNITS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+						</p>
+						<div ui-codemirror="editorOptions" name="code">
+{
+	"health": 100,
+	"alive": true,
+	"position": {
+	"x": 15.453490842124259,
+	"y": 12.265955445494608
+	},
+	"radius": 0.2
+},
+						</div>
+
+					</div>
+
+
+				</div>
+
+				<div id="documentation" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">BULLETS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+						</p>
+						<div ui-codemirror="editorOptions" name="code">
+{
+	"id": 187,
+	"teamId": 1,
+	"position": {
+		"x": 15.585620880794716,
+		"y": 20.66491619387774
+	},
+	"radius": 0.25
+}
+						</div>
+
+					</div>
+
+
+				</div>
+
+				<div id="documentation" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">ACTIONS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+						</p>
+						<div ui-codemirror="editorOptions" name="code">
+var unitId=0;
+
+var positionMove= new Utils.Vector2D(0,0);
+output.unit(unitId).addAction("moveTo", positionMove);
+
+var positionAttack= new Utils.Vector2D(0,0);
+output.unit(unitId).addAction("moveTo", positionAttack);
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+				<div id="documentation" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">AGENT</h2>
+					</div>
+
+					<div class="panel-body">
 						<p>
 							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
 							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
@@ -32,13 +146,6 @@
 							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
 						</p>
 
-						<p>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
-						</p>
 					</div>
 
 
@@ -69,7 +176,6 @@
 							</li>
 
 							<li class="media">
-								<a id="anchorID"> somewhere on the page
 								<i class="icon pull-left"></i>
 
 								<div class="media-body">From Titan, Jupitor</div>
