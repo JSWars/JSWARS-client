@@ -36,7 +36,8 @@ define([
 											LocalStorage.remove("battle.creator.agents");
 											document.location.hash = '#battle/' + queueItem.battle;
 										}, function (error) {
-											alert('error detected');
+											$scope.waiting = false;
+											$scope.error = "UNKNOWN_ERROR";
 										});
 
 								}, function () {
