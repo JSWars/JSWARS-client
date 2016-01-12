@@ -14,7 +14,7 @@ define([
 								deferred.resolve(response);
 							}, function (errorResponse) {
 								var data = errorResponse.data;
-								deferred.reject(angular.extend(errorResponse.data, {errorId: data.errorId || 'FATAL_ERROR'}));
+								deferred.reject(angular.extend({errorId: data.errorId || 'FATAL_ERROR'}, errorResponse.data));
 							});
 
 						return deferred.promise;
