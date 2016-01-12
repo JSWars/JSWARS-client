@@ -13,7 +13,8 @@ define([
 				next: '=',
 				battle: '=',
 				onFrame: '=',
-				onStart: '='
+				onStart: '=',
+				state: '='
 
 			},
 			link: function ($scope, element, attrs) {
@@ -70,7 +71,7 @@ define([
 						'PAUSED': 'paused',
 						'ENDED': 'ended'
 					};
-					this.state = this.STATES.STOPPED;
+					this.state = $scope.state = this.STATES.STOPPED;
 					this.fps = fps;
 					this.frameCount = frameCount || -1;
 					this.frameDuration = 1000 / fps;
@@ -204,7 +205,7 @@ define([
 				 */
 				Game.prototype.start = function () {
 					var _self = this;
-					this.state = this.STATES.PLAYING;
+					this.state = $scope.state = this.STATES.PLAYING;
 					this.play.frame = -1;
 					this.play.last = 0;
 					this.play.currentTime = 0;
@@ -239,12 +240,12 @@ define([
 
 				Game.prototype.continue = function () {
 					this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
-					this.state = this.STATES.PLAYING;
+					this.state = $scope.state = this.STATES.PLAYING;
 				};
 
 				Game.prototype.pause = function () {
 					AnimationFrame.cancel(this.requestAnimationId);
-					this.state = this.STATES.PAUSED;
+					this.state = $scope.state = this.STATES.PAUSED;
 				};
 
 				Game.prototype.frame = function (_single, _offset) {
@@ -281,7 +282,7 @@ define([
 						angular.forEach(frame.bullets, function (bullet, key) {
 							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
 							if (angular.isUndefined(bulletKineticNode)) {
-								bulletKineticNode = 	new Kinetic.Circle({
+								bulletKineticNode = new Kinetic.Circle({
 									name: 'bllt_' + key,
 									x: bullet.position.x * _self.map.tiles.tilewidth,
 									y: bullet.position.y * _self.map.tiles.tileheight,
@@ -368,17 +369,22 @@ define([
 				var mapInstance;
 				var gameInstance;
 
+
 				$scope.next = function (offset) {
 					gameInstance.frame(true, offset);
 				};
 
+				$scope.continue = function () {
+					gameInstance.play.lastTime = new Date().getTime();
+					gameInstance.continue();
+				};
+
 				$scope.start = function () {
-					if (gameInstance.state === gameInstance.STATES.PAUSED) {
-						gameInstance.play.lastTime = new Date().getTime();
-						gameInstance.continue();
-					} else if (gameInstance.state !== gameInstance.STATES.PLAYING) {
-						gameInstance.start();
+					if (gameInstance.state === gameInstance.STATES.PLAYING) {
+						gameInstance.pause();
 					}
+
+					gameInstance.start();
 				};
 
 				$scope.pause = function () {
