@@ -8,12 +8,12 @@ define([
 		Controllers.controller("LastBattlesController", ['$scope', '$timeout', '$stateParams', 'State', 'BattleService', function ($scope, $timeout, $stateParams, State, BattleService) {
 
 			State.setState({
-				title: "Últimas Batallas"
+				title: "Last Battles"
 			});
 
-			BattleService.get()
-				.then(function (battle) {
-					$scope.battle = battle;
+			BattleService.list()
+				.then(function (battles) {
+					$scope.battles = battles;
 				});
 		}]);
 	}

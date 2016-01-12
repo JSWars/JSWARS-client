@@ -5,6 +5,11 @@ define([
 	function (Factories) {
 		Factories.factory('BattleFactory', ['$resource', 'Config', function BattleFactory($resource, Config) {
 			return $resource(Config.host + 'battle/:id', {}, {
+				list: {
+					url: Config.host + 'battle/',
+					method: 'GET',
+					isArray: true
+				},
 				get: {
 					url: Config.host + 'battle/:id',
 					method: 'GET',
