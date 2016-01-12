@@ -9,6 +9,7 @@ define([
 			restrict: 'A',
 			scope: {
 				start: '=',
+				continue: '=',
 				pause: '=',
 				next: '=',
 				battle: '=',

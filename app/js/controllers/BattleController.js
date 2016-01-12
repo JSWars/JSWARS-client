@@ -7,9 +7,6 @@ define([
 	], function (Controllers, moment) {
 		Controllers.controller("BattleController", ['$scope', '$timeout', '$stateParams', 'State', 'BattleService', function ($scope, $timeout, $stateParams, State, BattleService) {
 
-			State.setState({
-				title: "Jugador 1 VS Jugador 2"
-			});
 
 			$scope.onStart = function (frameCount, fps) {
 				$scope.totalTime = moment($scope.battle.frameCount * (1000 / $scope.battle.fps)).toDate();
@@ -24,6 +21,11 @@ define([
 			BattleService.get({id: $stateParams.id})
 				.then(function (battle) {
 					$scope.battle = battle;
+
+					State.setState({
+						title: battle.teams[0].name + " vs " + battle.teams[1].name
+					});
+
 				});
 		}]);
 	}
