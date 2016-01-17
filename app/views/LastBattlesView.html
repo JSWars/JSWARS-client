@@ -9,18 +9,35 @@
 					<table class="table table-bordered tile">
 						<thead>
 						<tr>
-							<th>Name</th>
-							<th class="text-right">Run date</th>
-							<th class="text-right">Duration</th>
+							<th></th>
+							<th>Time ago</th>
+							<th>Duration</th>
 							<!--<th class="text-right">Map</th>-->
 						</tr>
 						</thead>
 						<tbody>
 						<tr ng-repeat="battle in battles.docs">
 							<td>
-
 								<a ng-href="#/battle/{{battle._id}}">
-									<strong>{{battle.agents[0].name}}</strong> vs <strong>{{battle.agents[0].name}}</strong></a></td>
+									<table style="width:100%">
+										<tbody>
+										<tr>
+											<td class="text-center" style="border-bottom: 2px solid black; padding-bottom: 5px"
+												 ng-style="{'border-bottom-color': battle.agents[0].color}">
+												<strong
+													tooltip="By: {{battle.agents[0].user.username}}">{{battle.agents[0].name}}</strong>
+											</td>
+											<td class="text-center">vs</td>
+											<td class="text-center" style="border-bottom: 2px solid black; padding-bottom: 5px"
+												 ng-style="{'border-bottom-color': battle.agents[1].color}">
+												<strong
+													tooltip="By: {{battle.agents[1].user.username}}">{{battle.agents[0].name}}</strong>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</a>
+							</td>
 							<td><span am-time-ago="battle.moment"
 										 tooltip="{{battle.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 							<td>{{battle.duration.toFixed(0) || 0}} seconds</td>
@@ -32,11 +49,12 @@
 						</tbody>
 					</table>
 
+				</div>
+				<p class="text-center">
 					<pagination total-items="battles.total" ng-model="page" num-pages="battles.pages"
 									ng-change="pageChanged()"></pagination>
 
-
-				</div>
+				</p>
 			</div>
 		</div>
 	</div>

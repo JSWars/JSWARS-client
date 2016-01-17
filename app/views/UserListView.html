@@ -3,6 +3,7 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<h2 class="block-title">User list:</h2>
+
 				<div class="tile">
 					<table class="table table-bordered tile">
 						<thead>
@@ -21,9 +22,12 @@
 										</a>
 									</div>
 									<div class="media-body">
-										<small class="text-muted">Since: {{user.created | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
+										<small class="text-muted">Since: {{user.created | amDateFormat:'dddd, MMMM Do YYYY,
+											h:mm:ss a'}}
+										</small>
 										<br>
-										<a class="t-overflow" ui-sref="user.overall({username:user.username})" title="{{user.username}}">{{user.username}}</a>
+										<a class="t-overflow" ui-sref="user.overall({username:user.username})"
+											title="{{user.username}}">{{user.username}}</a>
 									</div>
 								</div>
 							</td>
@@ -33,10 +37,11 @@
 						</tr>
 						</tbody>
 					</table>
-
-					<pagination total-items="users.total" ng-model="page" num-pages="users.pages" ng-change="pageChanged()"></pagination>
-
 				</div>
+				<p class="text-center">
+					<pagination total-items="users.total" ng-model="page" num-pages="users.pages"
+									ng-change="pageChanged()"></pagination>
+				</p>
 			</div>
 		</div>
 	</div>
