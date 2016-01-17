@@ -33,7 +33,7 @@ define([
 										.then(function (queueItem) {
 											$scope.waiting = false;
 											$scope.battle.agents = [];
-											LocalStorage.remove("battle.creator.agents");
+											//LocalStorage.remove("battle.creator.agents");
 											document.location.hash = '#battle/' + queueItem.battle;
 										}, function (error) {
 											$scope.waiting = false;
