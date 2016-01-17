@@ -11,10 +11,14 @@ define([
 				title: "Last Battles"
 			});
 
-			BattleService.list()
-				.then(function (battles) {
-					$scope.battles = battles;
-				});
+			$scope.pageChanged = function () {
+				BattleService.list({page: $scope.page})
+					.then(function (battles) {
+						$scope.battles = battles;
+					});
+
+			};
+			$scope.pageChanged();
 		}]);
 	}
 )

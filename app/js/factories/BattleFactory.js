@@ -8,7 +8,6 @@ define([
 				list: {
 					url: Config.host + 'battle/',
 					method: 'GET',
-					isArray: true
 				},
 				get: {
 					url: Config.host + 'battle/:id',

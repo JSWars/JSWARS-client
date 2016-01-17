@@ -12,15 +12,17 @@
 							<th>Name</th>
 							<th class="text-right">Run date</th>
 							<th class="text-right">Duration</th>
+							<th class="text-right">Map</th>
 							<th class="text-center"></th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr ng-repeat="battle in battles">
-							<td>baattle!!!</td>
+						<tr ng-repeat="battle in battles.docs">
+							<td>{{battle.agents[0].name}} vs {{battle.agents[0].name}}</td>
 							<td><span am-time-ago="battle.moment"
 										 tooltip="{{battle.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 							<td>{{battle.duration.toFixed(0) || 0}} seconds</td>
+							<td>{{battle.map.name}}</td>
 							<td class="text-center"><a ng-href="#/battle/{{battle._id}}" class="btn btn-primary btn-xs">View
 								Battle</a></td>
 						</tr>
@@ -29,6 +31,9 @@
 						</tr>
 						</tbody>
 					</table>
+
+					<pagination total-items="battles.total" ng-model="page" num-pages="battles.pages"  ng-change="pageChanged()"></pagination>
+
 
 				</div>
 			</div>
