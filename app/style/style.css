@@ -2356,4 +2356,43 @@ footer {
 }
 
 
+.group {
+	background: yellow;
+	width: 200px;
+	height: 500px;
+}
+.group .subgroup {
+	background: orange;
+	width: 150px;
+	height: 200px;
+}
+.fixed {
+	position: fixed;
+}
 
+
+
+.group {
+	background: yellow;
+	width: 200px;
+	height: 500px;
+}
+.group .subgroup {
+	background: orange;
+	width: 150px;
+	height: 200px;
+}
+.fixed {
+	position: fixed;
+}
+
+
+
+#menu.affix-top {
+	position: static;
+}
+
+#menu.affix {
+	position: fixed;
+	top:30px;
+}
