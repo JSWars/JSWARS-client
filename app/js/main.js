@@ -18,6 +18,7 @@ require.config({
 		'angular-file-upload': 'components/angular-file-upload/angular-file-upload',
 		'angular-prograss': 'components/ngprogress/build/ngprogress',
 		'angular-local-storage': 'components/angular-local-storage/dist/angular-local-storage',
+		'angular-bootstrap-colorpicker': 'components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module',
 		'appbootstrap': 'appbootstrap'
 	},
 	'shim': {
@@ -54,6 +55,9 @@ require.config({
 		'angular-local-storage': {
 			'deps': ['angular']
 		},
+		'angular-bootstrap-colorpicker': {
+			'deps': ['angular']
+		},
 		'approuter': {
 			'deps': ['app']
 		},
@@ -78,6 +82,7 @@ require([
 	'approuter',
 	'appbootstrap',
 	'bootstrap',
+	'lib/icheck',
 
 	'directives/GameDirective',
 

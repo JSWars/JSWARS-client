@@ -47,7 +47,7 @@
 			</thead>
 			<tbody>
 			<tr ng-repeat="agent in agents">
-				<td>
+				<td style="border-left: 2px solid black  !important" ng-style="{'border-left-color':agent.color}">
 					<a ng-if="session._id == agent.user" ng-href="#/user/{{user.username}}/agents/{{agent._id}}">{{agent.name}}</a>
 					<span ng-if="session._id != agent.user">{{agent.name}}</span>
 				</td>

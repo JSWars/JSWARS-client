@@ -9,20 +9,39 @@
 					<table class="table table-bordered tile">
 						<thead>
 						<tr>
-							<th>Name</th>
-							<th class="text-right">Run date</th>
-							<th class="text-right">Duration</th>
-							<th class="text-center"></th>
+							<th></th>
+							<th>Time ago</th>
+							<th>Duration</th>
+							<!--<th class="text-right">Map</th>-->
 						</tr>
 						</thead>
 						<tbody>
-						<tr ng-repeat="battle in battles">
-							<td>baattle!!!</td>
+						<tr ng-repeat="battle in battles.docs">
+							<td>
+								<a ng-href="#/battle/{{battle._id}}">
+									<table style="width:100%">
+										<tbody>
+										<tr>
+											<td class="text-center" style="border-bottom: 2px solid black; padding-bottom: 5px"
+												 ng-style="{'border-bottom-color': battle.agents[0].color}">
+												<strong
+													tooltip="By: {{battle.agents[0].user.username}}">{{battle.agents[0].name}}</strong>
+											</td>
+											<td class="text-center">vs</td>
+											<td class="text-center" style="border-bottom: 2px solid black; padding-bottom: 5px"
+												 ng-style="{'border-bottom-color': battle.agents[1].color}">
+												<strong
+													tooltip="By: {{battle.agents[1].user.username}}">{{battle.agents[0].name}}</strong>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</a>
+							</td>
 							<td><span am-time-ago="battle.moment"
 										 tooltip="{{battle.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 							<td>{{battle.duration.toFixed(0) || 0}} seconds</td>
-							<td class="text-center"><a ng-href="#/battle/{{battle._id}}" class="btn btn-primary btn-xs">View
-								Battle</a></td>
+							<!--<td>{{battle.map.name}}</td>-->
 						</tr>
 						<tr ng-if="battles === undefined || battles.length === 0">
 							<td colspan="4" class="text-center">No battles registered</td>
@@ -31,6 +50,11 @@
 					</table>
 
 				</div>
+				<p class="text-center">
+					<pagination total-items="battles.total" ng-model="page" num-pages="battles.pages"
+									ng-change="pageChanged()"></pagination>
+
+				</p>
 			</div>
 		</div>
 	</div>

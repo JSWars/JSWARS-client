@@ -33,6 +33,16 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="newAgentColor" class="col-md-2 control-label">Color</label>
+
+				<div class="col-md-10">
+					<div class="input-group">
+						<input class="form-control input-sm" colorpicker="hex" type="text" id="newAgentColor" ng-model="agent.color"/>
+						<span class="input-group-addon" ng-style="{'background-color':agent.color}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="newAgentCode" class="col-md-2 control-label">Javascript Code</label>
 
 				<div class="col-md-10">
@@ -42,6 +52,7 @@
 
 				<div class="alert alert-danger" ng-if="error">
 					<strong>{{error}}</strong>
+
 					<div ng-if="exceptionMessage">
 						{{exceptionMessage}}
 					</div>

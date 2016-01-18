@@ -13,6 +13,7 @@
 	<link href="js/components/codemirror/lib/codemirror.css" rel="stylesheet"/>
 	<link href="js/components/codemirror/theme/ambiance.css" rel="stylesheet"/>
 	<link href="js/components/ngprogress/ngProgress.css" rel="stylesheet">
+	<link href="js/components/angular-bootstrap-colorpicker/css/colorpicker.css" rel="stylesheet">
 	<link href="style/style.css" rel="stylesheet"/>
 	<link href="style/form.css" rel="stylesheet"/>
 	<link href="style/font-awesome.css" rel="stylesheet"/>
@@ -40,7 +41,7 @@
 <body id="skin-blur-violate" ng-controller="RootController">
 
 <header id="header" class="media">
-	<a href="" id="menu-toggle"></a>
+	<a id="menu-toggle" data-toggle="collapse" data-target=".navbar-collapse"></a>
 	<a class="logo pull-left" href="#">JS WARS</a>
 	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 		<ul class="nav navbar-nav">
@@ -52,9 +53,6 @@
 			</li>
 			<li>
 				<a href="#/tournaments">Tournaments</a>
-			</li>
-			<li class="active">
-				<a href="#/training">Training</a>
 			</li>
 			<li>
 				<a href="#/rankings">Rankings</a>
@@ -94,7 +92,7 @@
 <footer class="tile-dark ng-cloak" ng-if="online === true">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-2 col-xs-offset-3">
+			<div class="col-sm-2 col-sm-offset-3">
 				<h4>Developers</h4>
 				<ul>
 					<li><a href="">API</a></li>
@@ -109,8 +107,10 @@
 				</ul>
 			</div>
 			<div class="col-sm-2">
-				<h4>Courtesy of</h4>
+				<h4>Powered by</h4>
 				<ul>
+					<li>Marcos Pérez Ferro (@djwmarcx)</li>
+					<li>Luis Sebastian Huerta (@lordokami)</li>
 				</ul>
 			</div>
 		</div>

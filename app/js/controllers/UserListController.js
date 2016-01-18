@@ -9,13 +9,18 @@ define([
 			title: "Users"
 		});
 
+		$scope.page = 1;
 
-		UserService.query({})
-			.then(function (users) {
-				$scope.users = users;
-			}, function () {
-				$log.error('Error loading agent list');
-			});
+		$scope.pageChanged = function () {
+			UserService.query({page: $scope.page})
+				.then(function (users) {
+					$scope.users = users;
+				}, function () {
+					$log.error('Error loading agent list');
+				});
+		};
+
+		$scope.pageChanged();
 
 	}]);
 });

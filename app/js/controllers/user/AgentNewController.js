@@ -17,6 +17,7 @@ define([
 			AgentService.create({
 				name: $scope.agent.name,
 				code: $scope.agent.code,
+				color: $scope.agent.color,
 				username: $stateParams.username
 			})
 				.then(function () {
