@@ -154,19 +154,16 @@ output.unit(unitId).addAction("moveTo", positionAttack);
 
 			<div class="col-md-3">
 
-				<nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
+				<nav id="menu" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
 					<div class="tile">
 						<h2 class="tile-title">Index</h2>
 						<ul class="nav panel-body">
-							<li class="media">
-								<a href="#documentation">Software Developer at Google
-								</a>
-							</li>
+
 
 							<li class="media">
 								<i class="icon pull-left"></i>
 
-								<div class="media-body">Studied at Oxford University</div>
+								<div class="media-body"><a href="#documentation">Studied at Oxford University</a></div>
 							</li>
 
 							<li class="media">
@@ -188,3 +185,11 @@ output.unit(unitId).addAction("moveTo", positionAttack);
 		</div>
 	</div>
 </section>
+
+<script type="application/javascript">
+	$('#menu').affix({
+		offset: {
+			top: 245
+		}
+	});
+</script>
