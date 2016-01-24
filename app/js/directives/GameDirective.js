@@ -332,7 +332,7 @@ define([
 							_self.kinetic.layers.players.add(teamKineticGroup);
 						}
 
-						//Iterate over units in team
+						//Iterate over units.jsonsample in team
 						angular.forEach(team.units, function (unit, index) {
 							var unitKineticNode = teamKineticGroup.children[index];
 							if (unit.alive === false) {
