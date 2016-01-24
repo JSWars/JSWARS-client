@@ -9,14 +9,30 @@
 
 					<div class="panel-body">
 						<p>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+							In this section you can learn how to create an agent for JSWars, in your profile page you can add
+							new agent codes
+							writes on Javascript. Just type a name for your agent and the code with the following structure, it
+							must have a function
+							init with the code that you want to execute before the battle start, in this point you have all the
+							battle information about
+							map units, and all of his attributes. You have a longer timeout for compute that info and use it to
+							prepare whatever you want for
+							the battle.
 						</p>
 
+						<p>
 
+							After that, the battle begins and in every thick of the game the game will execute your function
+							tick(), it will have a shorter time
+							out to execute this. This function must return a list of actions for your units, you can move,
+							shoot or both actions with any of your units.
+							If you exceed the timeout for return an action your units will not move or shoot.
+						</p>
+
+						<p>
+							In the following sections you can see the structure about the variables and functions that you can
+							use:
+						</p>
 
 
 					</div>
@@ -24,18 +40,74 @@
 
 				</div>
 
-				<div id="documentation" class="panel panel-default tile">
+				<!-- AGENT -->
+
+				<div id="agent" class="panel panel-default tile">
 					<div class="panel-heading">
-						<h2 class="panel-title">MAP</h2>
+						<h2 class="panel-title">AGENT</h2>
 					</div>
 
 					<div class="panel-body">
 						<p>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+							The agent code must be writen on javascript, and uploaded in the user page by the option "Create
+							new Agent",
+							the estructure of the agent will be the following:
+						</p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeAgent" name="code">
+						</div>
+					</div>
+
+				</div>
+
+
+				<div id="gameState" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">GAME STATE</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							The agent will have access to the next gobal variables:
+						</p>
+
+
+						<div ui-codemirror="editorOptions" ng-model="codeGameState" name="code">
+						</div>
+
+					</div>
+
+
+				</div>
+
+
+				<!-- COLMAP-->
+
+
+				<div id="map" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">Utils.colMap</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+
+
+						</p>
+
+						<p>
+							EXAMPLE:
+						</p>
+
+						<p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeMap" name="code">
+						</div>
+						</p>
+
+
+						<p>
+							<img src="/img/documentation/map.png" alt=""/>
 						</p>
 
 					</div>
@@ -43,7 +115,108 @@
 
 				</div>
 
-				<div id="documentation" class="panel panel-default tile">
+				<!-- getPath-->
+				<div id="map" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">GET PATH</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							You can use the function getPath from the map object to get a path point o point using a*, anyways you can implement
+							your own methods.
+
+						</p>
+
+						<p>
+							EXAMPLE:
+						</p>
+
+						<p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeGetPath" name="code">
+						</div>
+						</p>
+
+
+
+
+					</div>
+
+
+				</div>
+
+
+				<!-- VECTOR2D -->
+
+				<div id="vector2d" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">Utils.Vector2D</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Under construction
+
+						</p>
+
+						<p>
+							Code:
+						</p>
+
+						<p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeVector2D" name="code">
+						</div>
+						</p>
+
+
+					</div>
+
+
+				</div>
+
+
+				<!-- LOG -->
+				<div id="log" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">Utils.log</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Under construction...
+
+						</p>
+
+					</div>
+
+				</div>
+
+
+				<!-- TEAMS -->
+				<div id="TEAMS" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">TEAMS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Under construction..
+						</p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeTeams" name="code">
+						</div>
+
+					</div>
+
+
+				</div>
+
+
+				<!-- UNITS -->
+
+				<div id="units" class="panel panel-default tile">
 					<div class="panel-heading">
 						<h2 class="panel-title">UNITS</h2>
 					</div>
@@ -56,24 +229,32 @@
 							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
 							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
 						</p>
-						<div ui-codemirror="editorOptions" name="code">
-{
-	"health": 100,
-	"alive": true,
-	"position": {
-	"x": 15.453490842124259,
-	"y": 12.265955445494608
-	},
-	"radius": 0.2
-},
-						</div>
 
+						<p>
+
+
+						</p>
+
+
+							<div class="row">
+								<div class="col-md-6">
+
+									<img src="/img/documentation/unit.png" alt=""/></div>
+								<div class="col-md-6">
+
+									<p><H3>EXAMPLE:</H3></p>
+									<div ui-codemirror="editorOptions" ng-model="codeUnits" name="code"></div>
+								</div>
+
+
+
+							</div>
 					</div>
-
-
 				</div>
 
-				<div id="documentation" class="panel panel-default tile">
+				<!-- BULLETS-->
+
+				<div id="bullets" class="panel panel-default tile">
 					<div class="panel-heading">
 						<h2 class="panel-title">BULLETS</h2>
 					</div>
@@ -86,24 +267,32 @@
 							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
 							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
 						</p>
-						<div ui-codemirror="editorOptions" name="code">
-{
-	"id": 187,
-	"teamId": 1,
-	"position": {
-		"x": 15.585620880794716,
-		"y": 20.66491619387774
-	},
-	"radius": 0.25
-}
+
+
+						<div class="row">
+							<div class="col-md-6">
+								<img src="/img/documentation/bullet.png" alt=""/>
+							</div>
+							<div class="col-md-6">
+								<p>
+									<h3>EXAMPLE:</h3>
+								</p>
+								<div ui-codemirror="editorOptions" ng-model="codeBullet" name="code"></div>
+							</div>
 						</div>
 
-					</div>
 
 
 				</div>
 
-				<div id="documentation" class="panel panel-default tile">
+
+
+			</div>
+
+
+				<!--ACTIONS-->
+
+				<div id="actions" class="panel panel-default tile">
 					<div class="panel-heading">
 						<h2 class="panel-title">ACTIONS</h2>
 					</div>
@@ -116,14 +305,9 @@
 							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
 							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
 						</p>
-						<div ui-codemirror="editorOptions" name="code">
-var unitId=0;
 
-var positionMove= new Utils.Vector2D(0,0);
-output.unit(unitId).addAction("moveTo", positionMove);
+						<div ui-codemirror="editorOptions" ng-model="codeAction" name="code">
 
-var positionAttack= new Utils.Vector2D(0,0);
-output.unit(unitId).addAction("moveTo", positionAttack);
 						</div>
 
 
@@ -132,56 +316,37 @@ output.unit(unitId).addAction("moveTo", positionAttack);
 
 				</div>
 
-				<div id="documentation" class="panel panel-default tile">
-					<div class="panel-heading">
-						<h2 class="panel-title">AGENT</h2>
-					</div>
-
-					<div class="panel-body">
-						<p>
-							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
-						</p>
-
-					</div>
-
-
-				</div>
-			</div>
-
-			<div class="col-md-3">
-
-				<nav id="menu" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
-					<div class="tile">
-						<h2 class="tile-title">Index</h2>
-						<ul class="nav panel-body">
-
-
-							<li class="media">
-								<i class="icon pull-left"></i>
-
-								<div class="media-body"><a href="#documentation">Studied at Oxford University</a></div>
-							</li>
-
-							<li class="media">
-								<i class="icon pull-left"></i>
-
-								<div class="media-body">Lives in Saturn, Milkyway</div>
-							</li>
-
-							<li class="media">
-								<i class="icon pull-left"></i>
-
-								<div class="media-body">From Titan, Jupitor</div>
-							</li>
-						</ul>
-					</div>
-				</nav>
 
 			</div>
+	<div class="col-md-3">
+
+		<nav id="menu" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
+			<div class="tile">
+				<h2 class="tile-title">Index</h2>
+				<ul class="nav panel-body">
+
+
+					<li class="media">
+						<i class="icon pull-left"></i>
+
+						<div class="media-body"><a href="#documentation">Studied at Oxford University</a></div>
+					</li>
+
+					<li class="media">
+						<i class="icon pull-left"></i>
+
+						<div class="media-body">Lives in Saturn, Milkyway</div>
+					</li>
+
+					<li class="media">
+						<i class="icon pull-left"></i>
+
+						<div class="media-body">From Titan, Jupitor</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
 		</div>
 	</div>
 </section>

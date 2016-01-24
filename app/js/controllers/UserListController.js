@@ -16,7 +16,6 @@ define([
 				.then(function (users) {
 					$scope.users = users;
 				}, function () {
-					$log.error('Error loading agent list');
 				});
 		};
 

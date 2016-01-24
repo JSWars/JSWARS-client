@@ -1,0 +1,24 @@
+//Global variables here
+
+var pathfinding;
+var lastMoves;
+
+/**
+ * Init functions will execute before the battle begin
+ *
+ * TimeOut: 1000 millis
+ */
+function init(){
+	//do stuffs here
+}
+
+
+/**
+ * Tick function will execute in every tick in the game
+ */
+function tick(){
+	//Calculate things here
+
+	//Give actions to the units here
+
+}

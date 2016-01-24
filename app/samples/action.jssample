@@ -1,0 +1,7 @@
+var unitId=0;
+
+var positionMove= new Utils.Vector2D(0,0);
+output.unit(unitId).addAction("moveTo", positionMove);
+
+var positionAttack= new Utils.Vector2D(0,0);
+output.unit(unitId).addAction("moveTo", positionAttack);

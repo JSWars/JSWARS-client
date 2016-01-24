@@ -1,0 +1,6 @@
+{
+	"id":0,
+  	"name":"AgentName",
+  	"color":"#ff0000",
+  	"units":[unit1,unit2,...]//Units array
+}
