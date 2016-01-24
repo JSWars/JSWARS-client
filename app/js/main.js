@@ -86,8 +86,7 @@ require([
 
 	'directives/GameDirective',
 
-	'controllers/SigninController',
-	'controllers/SignupController',
+	'controllers/TournamentsController',
 	'controllers/LastBattlesController',
 	'controllers/RankingsController',
 	'controllers/DocumentationController',
@@ -101,6 +100,7 @@ require([
 	'controllers/user/ActivityWidgetController',
 	'controllers/user/AgentNewController',
 	'controllers/user/AgentDetailController',
+
 
 	'directives/BattleCreatorDrtv',
 	'directives/BattleCreatorButtonDrtv',

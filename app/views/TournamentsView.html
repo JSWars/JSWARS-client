@@ -1,0 +1,100 @@
+<div class="container">
+	<div class="block-area">
+		<div class="row">
+			<div class="col-md-6 ">
+				<h3 class="block-title">Available tournaments</h3>
+				<table class="table table-responsive tile">
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Created</th>
+						<th>Starts</th>
+						<th class="text-right">Reg.</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="tournament in availableTournaments.docs">
+						<td>
+							<a ng-href="#/tournaments/{{tournament._id}}/">
+								{{tournament.name}}
+							</a>
+						</td>
+						<td>
+								<span ng-if="tournament.moment" am-time-ago="tournament.moment"
+										tooltip="{{tournament.moment| amDateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+						</td>
+						<td>
+					<span ng-if="tournament.start" am-time-ago="tournament.start"
+							tooltip="{{tournament.start | amDateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+							<span ng-if="!tournament.start">Once full</span>
+						</td>
+						<td class="text-right">{{tournament.registrations}} / {{tournament.max}}</td>
+						<td class="text-right">
+							<button ng-disabled="session._id == undefined" type="button" class="btn btn-primary btn-xs">
+								Register
+							</button>
+						</td>
+					</tr>
+					<tr ng-if="availableTournaments === undefined || availableTournaments.docs.length === 0">
+						<td colspan="7" class="text-center">No available tournaments</td>
+					</tr>
+					</tbody>
+				</table>
+
+
+				<p class="text-center">
+					<pagination total-items="availableTournaments.total" ng-model="availableTournamentsPage"
+									num-pages="availableTournaments.pages"
+									ng-change="availableTournamentsPageChanged()" max-size="5"></pagination>
+
+				</p>
+			</div>
+
+			<div class="col-md-6 ">
+				<h3 class="block-title">Past tournaments</h3>
+				<table class="table table-responsive tile">
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Started</th>
+						<th>Ended</th>
+						<th>Winner</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="tournament in pastTournaments.docs">
+						<td>
+							<a ng-href="#/tournaments/{{tournament._id}}/">
+								{{tournament.name}} <sup><span class="icon"></span></sup>
+							</a>
+						</td>
+						<td>
+					<span ng-if="tournament.start" am-time-ago="tournament.start"
+							tooltip="{{tournament.start | amDateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+							<span ng-if="!tournament.start">Once full</span>
+						</td>
+						<td class="text-right">{{tournament.registrations}} / {{tournament.max}}</td>
+						<td class="text-right">
+							<button ng-disabled="session._id == undefined" type="button" class="btn btn-primary btn-xs">
+								Join now
+							</button>
+						</td>
+					</tr>
+					<tr ng-if="pastTournaments === undefined || pastTournaments.docs.length === 0">
+						<td colspan="7" class="text-center">No available tournaments</td>
+					</tr>
+					</tbody>
+				</table>
+
+
+				<p class="text-center">
+					<pagination total-items="pastTournaments.total" ng-model="pastTournamentsPage"
+									num-pages="pastTournaments.pages"
+									ng-change="pastTournamentsPageChanged()" max-size="5"></pagination>
+
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

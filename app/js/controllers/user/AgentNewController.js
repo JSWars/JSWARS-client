@@ -24,8 +24,8 @@ define([
 					$state.transitionTo('user.overall', {
 						username: $stateParams.username
 					});
-				}, function () {
-					alert("Agent can't be created");
+				}, function (e) {
+					alert(e.errorId);
 				});
 		};
 
