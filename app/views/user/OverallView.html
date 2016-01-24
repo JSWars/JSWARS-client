@@ -22,18 +22,24 @@
 		<div class="clearfix"></div>
 
 
-		<div class="panel panel-default tile">
-			<div class="panel-heading">
-				<h3 class="panel-title">Panel title</h3>
-			</div>
-			<div class="panel-body">
-				Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-				Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-				vulputate fringilla. Donec lacinia congue felis in faucibus.
-			</div>
-		</div>
+		<!--<div class="panel panel-default tile">-->
+		<!--<div class="panel-heading">-->
+		<!--<h3 class="panel-title">Panel title</h3>-->
+		<!--</div>-->
+		<!--<div class="panel-body">-->
+		<!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.-->
+		<!--Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi-->
+		<!--vulputate fringilla. Donec lacinia congue felis in faucibus.-->
+		<!--</div>-->
+		<!--</div>-->
 
-		<h3 class="block-title">Last agents</h3>
+
+		<div class="pull-right">
+			<button class="btn btn-primary" ng-if="session.username == user.username" ui-sref="user.agents.new"> Create new
+				agent
+			</button>
+		</div>
+		<h3 class="block-title">Agents</h3>
 		<table class="table table-responsive tile">
 			<thead>
 			<tr>
@@ -41,12 +47,12 @@
 				<th>Created</th>
 				<th class="text-right">Victories</th>
 				<th class="text-right">Losses</th>
-				<th class="text-right">Rank</th>
+				<!--<th class="text-right">Rank</th>-->
 				<th style="width: 75px"></th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="agent in agents">
+			<tr ng-repeat="agent in agents.docs">
 				<td style="border-left: 2px solid black  !important" ng-style="{'border-left-color':agent.color}">
 					<a ng-if="session._id == agent.user" ng-href="#/user/{{user.username}}/agents/{{agent._id}}">{{agent.name}}</a>
 					<span ng-if="session._id != agent.user">{{agent.name}}</span>
@@ -55,7 +61,7 @@
 							 tooltip="{{agent.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 				<td class="text-right">{{agent.wins}}</td>
 				<td class="text-right">{{agent.losses}}</td>
-				<td class="text-right">{{agent.rank}}</td>
+				<!--<td class="text-right">{{agent.rank}}</td>-->
 				<td class="text-center">
 					<button ng-disabled="session._id == undefined" type="button" class="btn btn-primary btn-xs"
 							  battle-creator-button="{id: agent._id, username: user.username}">Add to Battle
@@ -67,12 +73,11 @@
 			</tr>
 			</tbody>
 		</table>
+		<p class="text-center">
+			<pagination total-items="agents.total" ng-model="page" num-pages="agents.pages"
+							ng-change="pageChanged()" max-size="5"></pagination>
+		</p>
 
-		<div class="text-right">
-			<button class="btn btn-primary" ng-if="session.username == user.username" ui-sref="user.agents.new"> Create new
-				agent
-			</button>
-		</div>
 
 		<h3 class="block-title">Last tournaments</h3>
 		<table class="table table-responsive tile">
