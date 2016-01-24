@@ -9,15 +9,15 @@
 					<table class="table table-bordered tile">
 						<thead>
 						<tr>
-							<th></th>
-							<th>Time ago</th>
-							<th>Duration</th>
+							<th style="width:60%"></th>
+							<th style="width:20%">Time ago</th>
+							<th style="width:20%">Duration</th>
 							<!--<th class="text-right">Map</th>-->
 						</tr>
 						</thead>
 						<tbody>
 						<tr ng-repeat="battle in battles.docs">
-							<td>
+							<td style="width:60%">
 								<a ng-href="#/battle/{{battle._id}}">
 									<table style="width:100%">
 										<tbody>
@@ -38,9 +38,9 @@
 									</table>
 								</a>
 							</td>
-							<td><span am-time-ago="battle.moment"
+							<td style="width:20%"><span am-time-ago="battle.moment"
 										 tooltip="{{battle.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
-							<td>{{battle.duration.toFixed(0) || 0}} seconds</td>
+							<td style="width:20%">{{battle.duration.toFixed(0) || 0}} seconds</td>
 							<!--<td>{{battle.map.name}}</td>-->
 						</tr>
 						<tr ng-if="battles === undefined || battles.length === 0">
@@ -52,7 +52,7 @@
 				</div>
 				<p class="text-center">
 					<pagination total-items="battles.total" ng-model="page" num-pages="battles.pages"
-									ng-change="pageChanged()"></pagination>
+									ng-change="pageChanged()" max-size="5"></pagination>
 
 				</p>
 			</div>

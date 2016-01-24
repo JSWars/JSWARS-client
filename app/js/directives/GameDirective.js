@@ -8,6 +8,7 @@ define([
 		return {
 			restrict: 'A',
 			scope: {
+				restart: '=',
 				start: '=',
 				continue: '=',
 				pause: '=',
@@ -133,22 +134,6 @@ define([
 
 				/**
 				 *
-				 * Generates a random color to be used on any object
-				 *
-				 * @method
-				 * @returns {String} Hexadecimal color #000000
-				 */
-				Game.prototype.getColor = function () {
-					var letters = '0123456789ABCDEF'.split('');
-					var color = '#';
-					for (var i = 0; i < 6; i = i + 1) {
-						color += letters[Math.round(Math.random() * 15)];
-					}
-					return color;
-				};
-
-				/**
-				 *
 				 * Draw a map on a Kinetic.Layer
 				 *
 				 * @param {Kinetic.Layer} Kinetic layer where map must be drawed
@@ -217,6 +202,24 @@ define([
 						.then(function (chunkFrames) {
 							$scope.onStart(_self.frameCount, _self.fps);
 							_self.requestAnimationId = AnimationFrame.request(angular.bind(_self, _self.frame));
+						}, function () {
+							alert("Error ocurred loading game chunks");
+						});
+				};
+
+				Game.prototype.restart = function () {
+					var _self = this;
+					this.state = $scope.state = this.STATES.PAUSED;
+					this.play.frame = -1;
+					this.play.last = 0;
+					this.play.currentTime = 0;
+					this.play.lastTime = new Date().getTime();
+					this.chunks = [];
+					var chunkId = 0;
+					this.getChunk(chunkId)
+						.then(function (chunkFrames) {
+							$scope.onStart(_self.frameCount, _self.fps);
+							_self.frame(true, 1);
 						}, function () {
 							alert("Error ocurred loading game chunks");
 						});
@@ -386,6 +389,14 @@ define([
 					}
 
 					gameInstance.start();
+				};
+
+				$scope.restart = function () {
+					if (gameInstance.state === gameInstance.STATES.PLAYING) {
+						gameInstance.pause();
+					}
+
+					gameInstance.restart();
 				};
 
 				$scope.pause = function () {
