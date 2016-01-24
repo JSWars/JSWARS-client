@@ -110,6 +110,8 @@ require([
 	'filters/CountryFilter'
 
 ], function (app) {
+
+
 	app.config(['$logProvider', function ($logProvider) {
 		$logProvider.debugEnabled(true);
 	}]);

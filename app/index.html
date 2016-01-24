@@ -79,7 +79,8 @@
 <hr class="whiter ng-cloak" ng-if="title">
 
 <section ui-view ng-if="online === true" class="ng-cloak"></section>
-<div class="text-center" style="margin-top: 300px"  ng-if="online === undefined"><img src="img/spinner.gif" width="30" alt="Loading..."></div>
+<div class="text-center" style="margin-top: 300px" ng-if="online === undefined"><img src="img/spinner.gif" width="30"
+																												 alt="Loading..."></div>
 
 <section id="error-page" ng-if="online === false" class="tile ng-cloak">
 	<h1 class="m-b-10">ERROR 500</h1>
@@ -119,8 +120,27 @@
 
 <battle-creator></battle-creator>
 
+
 <!--Le scripts-->
 <script type="text/javascript" data-main="/js/main.js" src="js/components/requirejs/require.js"></script>
-
+<script type="text/ng-template" id="template/pagination/pagination.html" style="displayn:none">
+	<div class="btn-group">
+		<button class="btn btn-sm btn-alt" ng-if="boundaryLinks" ng-class="{disabled: noPrevious()}"
+				  ng-click="selectPage(1)">{{getText('first')}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-if="directionLinks" ng-class="{disabled: noPrevious()}"
+				  ng-click="selectPage(page - 1)">{{getText('previous')}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-repeat="page in pages track by $index" ng-class="{active: page.active}"
+				  ng-click="selectPage(page.number)">{{page.text}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-if="directionLinks" ng-class="{disabled: noNext()}"
+				  ng-click="selectPage(page + 1)">{{getText('next')}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-if="boundaryLinks" ng-class="{disabled: noNext()}"
+				  ng-click="selectPage(totalPages)">{{getText('last')}}
+		</button>
+	</div>
+</script>
 </body>
 </html>
