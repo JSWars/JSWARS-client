@@ -8,6 +8,9 @@ define([
 					username: '@username',
 					id: '@id'
 				}, {
+					query: {
+						isArray: false
+					},
 					create: {
 						method: 'POST'
 
