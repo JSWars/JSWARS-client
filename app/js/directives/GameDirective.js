@@ -23,6 +23,7 @@ define([
 
 
 				var domElement = element[0];
+				var bulletAudio = new Audio('/sounds/35684_35187-lq.mp3');
 
 				/**
 				 *
@@ -286,6 +287,9 @@ define([
 						angular.forEach(frame.bullets, function (bullet, key) {
 							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
 							if (angular.isUndefined(bulletKineticNode)) {
+								bulletAudio.pause();
+								bulletAudio.currentTime = 0;
+								bulletAudio.play();
 								bulletKineticNode = new Kinetic.Circle({
 									name: 'bllt_' + key,
 									x: bullet.position.x * _self.map.tiles.tilewidth,
