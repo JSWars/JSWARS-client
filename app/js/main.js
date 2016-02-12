@@ -1,6 +1,7 @@
 "use strict";
 require.config({
 	'baseUrl': './js/',
+	waitSeconds: 60,
 	'paths': {
 		'domReady': 'components/domReady/domReady',
 		'jquery': 'components/jquery/dist/jquery',
@@ -112,8 +113,9 @@ require([
 ], function (app) {
 
 
-	app.config(['$logProvider', function ($logProvider) {
+	app.config(['$logProvider', '$locationProvider', function ($logProvider, $locationProvider) {
 		$logProvider.debugEnabled(true);
+		$locationProvider.html5Mode(true).hashPrefix('!');
 	}]);
 
 	app.run(['$rootScope', '$http', 'ngProgressFactory', function ($rootScope, $http, ngProgressFactory) {

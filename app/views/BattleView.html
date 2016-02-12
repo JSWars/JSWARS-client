@@ -2,7 +2,8 @@
 <div class="container">
 	<div class="row" ng-if="battle">
 		<div class="col-md-8 p-0">
-			<div game battle="battle" restart="restart" start="start" continue="continue" next="next" pause="pause" on-start="onStart" on-frame="onFrame"
+			<div game battle="battle" restart="restart" start="start" continue="continue" next="next" pause="pause"
+				  on-start="onStart" on-frame="onFrame"
 				  state="state"></div>
 		</div>
 		<div class="col-md-4" style="padding-right: 0px">
@@ -11,7 +12,7 @@
 
 				<div class="p-10">
 					<button class="btn btn-primary" ng-click="restart()"><i class="fa fa-stop"></i></button>
-					&nbsp;&nbsp;{{currentTime | date : 'mm:ss:sss'}} / <strong>{{totalTime | date : 'mm:ss:sss'}}</strong>&nbsp;&nbsp;
+					&nbsp;&nbsp;<span id="battleTime"></span> &nbsp;&nbsp;
 					<button class="btn btn-warning" ng-click="pause()" ng-if="state == 'playing'"><i class="fa fa-pause"></i>
 					</button>
 					<button class="btn btn-primary" ng-click="continue()" ng-if="state != 'playing'"><i

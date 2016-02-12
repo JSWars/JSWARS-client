@@ -4,7 +4,7 @@ define([
 	'services/AnimationFrameService',
 	'factories/BattleFactory'
 ], function (Directives, Kinetic) {
-	Directives.directive("game", ['$log', '$q', '$timeout', '$interval', 'Countries', 'AnimationFrame', 'BattleFactory', function GameDirective($log, $q, $timeout, $interval, Countries, AnimationFrame, BattleFactory) {
+	Directives.directive("game", ['$log', '$q', '$timeout', '$interval', '$parse', 'Countries', 'AnimationFrame', 'BattleFactory', function GameDirective($log, $q, $timeout, $interval, $parse, Countries, AnimationFrame, BattleFactory) {
 		return {
 			restrict: 'A',
 			scope: {
@@ -23,7 +23,10 @@ define([
 
 
 				var domElement = element[0];
-				var bulletAudio = new Audio('/sounds/35684_35187-lq.mp3');
+				var battleTimeElement = $('#battleTime');
+				var shootAudio = new Audio('/sounds/shoot-lq.mp3');
+				var dieAudio = new Audio('/sounds/die-lq.mp3');
+
 
 				/**
 				 *
@@ -287,9 +290,9 @@ define([
 						angular.forEach(frame.bullets, function (bullet, key) {
 							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
 							if (angular.isUndefined(bulletKineticNode)) {
-								bulletAudio.pause();
-								bulletAudio.currentTime = 0;
-								bulletAudio.play();
+								shootAudio.pause();
+								shootAudio.currentTime = 0;
+								shootAudio.play();
 								bulletKineticNode = new Kinetic.Circle({
 									name: 'bllt_' + key,
 									x: bullet.position.x * _self.map.tiles.tilewidth,
@@ -336,12 +339,14 @@ define([
 							_self.kinetic.layers.players.add(teamKineticGroup);
 						}
 
-						//Iterate over units.jsonsample in team
 						angular.forEach(team.units, function (unit, index) {
 							var unitKineticNode = teamKineticGroup.children[index];
 							if (unit.alive === false) {
 								if (!angular.isUndefined(unitKineticNode)) {
 									unitKineticNode.destroy();
+									dieAudio.pause();
+									dieAudio.currentTime = 0;
+									dieAudio.play();
 								}
 							} else {
 								if (angular.isUndefined(unitKineticNode)) {
@@ -370,7 +375,11 @@ define([
 					this.play.last = now;
 
 					$timeout(function () {
-						$scope.onFrame(_self.play.currentTime, frame);
+						battleTimeElement.html($parse("(currentTime | date:'mm:ss:sss') + '/' + (totalTime | date : 'mm:ss:sss')")({
+							currentTime: _self.play.currentTime,
+							totalTime: $scope.battle.frameCount * (1000 / $scope.battle.fps)
+						}));
+						//$scope.onFrame(_self.play.currentTime, frame);
 					}, 0);
 				};
 

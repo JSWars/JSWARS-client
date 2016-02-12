@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<h3 class="modal-title">Modificar perfil</h3>
+	<h3 class="modal-title">Modify profile</h3>
 </div>
 <div class="modal-body">
 	<script type="text/ng-template" id="countryTemplate.html">
@@ -11,7 +11,7 @@
 
 	<form class="form-horizontal" name="updateProfileForm" autocomplete="false" novalidate>
 		<div class="form-group">
-			<label for="profileName" class="col-lg-3 control-label">Nombre</label>
+			<label for="profileName" class="col-lg-3 control-label">Name</label>
 
 			<div class="col-lg-9">
 				<div class="formError" ng-messages="updateProfileForm.name.$error"
@@ -131,7 +131,6 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<button class="btn btn-primary btn-lg" ng-disabled="updateProfileForm.$invalid" ng-click="update()">Actualizar
-	</button>
-	<button class="btn btn-warning btn-lg" ng-click="cancel()">Cancelar</button>
+	<button class="btn btn-primary btn-lg" ng-disabled="updateProfileForm.$invalid" ng-click="update()">Update</button>
+	<button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
 </div>

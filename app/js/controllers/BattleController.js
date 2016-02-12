@@ -12,10 +12,6 @@ define([
 				$scope.totalTime = moment($scope.battle.frameCount * (1000 / $scope.battle.fps)).toDate();
 			};
 
-			$scope.onFrame = function (currentTime, frame) {
-				$scope.currentTime = currentTime;
-			};
-
 			$scope.battleId = $stateParams.id;
 
 			BattleService.get({id: $stateParams.id})
