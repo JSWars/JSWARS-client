@@ -1,19 +1,21 @@
 define([
 	'app'
 ], function (app) {
-
-	app.run(
-		['$rootScope', '$state', '$stateParams',
-			function ($rootScope, $state, $stateParams) {
-				$rootScope.$state = $state;
-				$rootScope.$stateParams = $stateParams;
-			}
-		]
-	);
-
+	/*
+	 app.run(
+	 ['$rootScope', '$state', '$stateParams',
+	 function ($rootScope, $state, $stateParams) {
+	 $rootScope.$state = $state;
+	 $rootScope.$stateParams = $stateParams;
+	 }
+	 ]
+	 );
+	 */
 	app.config(
-		['$stateProvider', '$urlRouterProvider',
-			function ($stateProvider, $urlRouterProvider) {
+		['$stateProvider', '$locationProvider', '$urlRouterProvider',
+			function ($stateProvider, $locationProvider, $urlRouterProvider) {
+
+				$locationProvider.html5Mode(true);
 
 				/////////////////////////////
 				// Redirects and Otherwise //

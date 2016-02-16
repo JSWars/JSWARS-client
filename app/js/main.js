@@ -83,7 +83,7 @@ require([
 	'approuter',
 	'appbootstrap',
 	'bootstrap',
-	'lib/icheck',
+	//'lib/icheck',
 
 	'directives/GameDirective',
 
@@ -112,8 +112,9 @@ require([
 
 ], function (app) {
 
+
 	app.config(['$logProvider', '$locationProvider', function ($logProvider, $locationProvider) {
-		$locationProvider.html5Mode(true).hashPrefix("!");
+		$logProvider.debugEnabled(true);
 	}]);
 
 	app.run(['$rootScope', '$http', 'ngProgressFactory', function ($rootScope, $http, ngProgressFactory) {
