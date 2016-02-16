@@ -419,7 +419,7 @@ define([
 				};
 
 				$scope.$watch('battle', function (battle) {
-					if (!angular.isUndefined(battle)) {
+					if (!angular.isUndefined(battle) && !angular.isUndefined(battle.map)) {
 						//Initial instances
 						mapInstance = new Map($scope.battle.map.data);
 						var fps = $scope.battle.fps;

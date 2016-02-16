@@ -3,7 +3,7 @@ define([
 	],
 	function (Directives) {
 		Directives
-			.directive('battleCreator', ['$q', '$rootScope', 'localStorageService', 'AgentService', 'UserService', 'BattleService', function BattleCreator($q, $rootScope, LocalStorage, AgentService, UserService, BattleService) {
+			.directive('battleCreator', ['$q', '$rootScope', '$state', 'localStorageService', 'AgentService', 'UserService', 'BattleService', function BattleCreator($q, $rootScope, $state, LocalStorage, AgentService, UserService, BattleService) {
 				return {
 					restrict: 'E',
 					templateUrl: '/views/directives/battle-creator.html',
@@ -34,7 +34,9 @@ define([
 											$scope.waiting = false;
 											$scope.battle.agents = [];
 											//LocalStorage.remove("battle.creator.agents");
-											document.location.hash = '#battle/' + queueItem.battle;
+											$state.go('battle', {
+												battle: queueItem.battle
+											});
 										}, function (error) {
 											$scope.waiting = false;
 											$scope.error = "UNKNOWN_ERROR";
