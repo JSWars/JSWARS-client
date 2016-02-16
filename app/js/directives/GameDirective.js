@@ -425,13 +425,14 @@ define([
 						var fps = $scope.battle.fps;
 						var frameCount = $scope.battle.frameCount;
 						gameInstance = new Game(domElement, mapInstance, fps, frameCount);
+						$scope.$on('$destroy', function() {
+							AnimationFrame.cancel(gameInstance.requestAnimationId);
+						});
 						element
 							.css('background-image', 'url("img/map/background.jpg")');
 						gameInstance.start();
 					}
 				});
-
-
 			}
 		};
 	}
