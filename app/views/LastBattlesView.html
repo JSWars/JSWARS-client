@@ -18,7 +18,7 @@
 						<tbody>
 						<tr ng-repeat="battle in battles.docs">
 							<td style="width:60%">
-								<a ng-href="#/battle/{{battle._id}}">
+								<a ui-sref="battle({battle: battle._id})">
 									<table style="width:100%">
 										<tbody>
 										<tr>

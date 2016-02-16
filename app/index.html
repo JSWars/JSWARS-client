@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
-
+	<base href="/">
 	<meta name="fragment" content="!">
 
 	<link href="js/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
@@ -49,22 +49,22 @@
 	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 		<ul class="nav navbar-nav">
 			<li>
-				<a href="#/howworks">How it works</a>
+				<a ui-sref="howworks">How it works</a>
 			</li>
 			<li>
-				<a href="#/last-battles">Last Battles</a>
+				<a ui-sref="last-battles">Last Battles</a>
 			</li>
 			<li>
-				<a href="#/tournaments">Tournaments</a>
+				<a ui-sref="tournaments">Tournaments</a>
 			</li>
 			<!--<li>-->
-				<!--<a href="#/rankings">Rankings</a>-->
+				<!--<a ui-sref="rankings">Rankings</a>-->
 			<!--</li>-->
 			<li>
-				<a href="#/users">Users</a>
+				<a ui-sref="users">Users</a>
 			</li>
 			<li>
-				<a href="#/documentation">Documentation</a>
+				<a ui-sref="documentation">Documentation</a>
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" ng-cloak>
@@ -72,7 +72,7 @@
 
 			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)"><i
 				class="fa fa-github"></i> Sign in with GitHub</a></li>
-			<li ng-if="session.username"><a class="btn btn-register" ng-href="#/user/{{session.username}}/">Welcome
+			<li ng-if="session.username"><a class="btn btn-register" ui-sref="user({username: session.username})">Welcome
 				{{session.username}}</a></li>
 		</ul>
 	</nav>

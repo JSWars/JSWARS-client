@@ -54,7 +54,7 @@
 			<tbody>
 			<tr ng-repeat="agent in agents.docs">
 				<td style="border-left: 2px solid black  !important" ng-style="{'border-left-color':agent.color}">
-					<a ng-if="session._id == agent.user" ng-href="#/user/{{user.username}}/agents/{{agent._id}}">{{agent.name}}</a>
+					<a ng-if="session._id == agent.user" ui-sref="user.agents.detail({username:user.username, agent: agent._id})">{{agent.name}}</a>
 					<span ng-if="session._id != agent.user">{{agent.name}}</span>
 				</td>
 				<td><span am-time-ago="agent.moment"
@@ -96,7 +96,7 @@
 			<tbody>
 			<tr ng-repeat="tournament in tournaments">
 				<td>
-					<a ng-href="#/tournaments/{{tournament.id}}/">
+					<a ui-sref="tournaments({tournament = tournament._id})">
 						{{tournament.name}} <sup><span class="icon"></span></sup>
 					</a>
 				</td>
@@ -112,7 +112,7 @@
 				<td class="text-right">{{tournament.wins}}</td>
 				<td class="text-right">{{tournament.losses}}</td>
 				<td class="text-right">
-					<a ng-href="#/tournaments/{{tournament.id}}/">
+					<a ui-sref="tournaments({tournament = tournament._id})">
 						{{tournament.rank}} <sup><span class="icon"></span></sup>
 					</a>
 				</td>
@@ -155,7 +155,7 @@
 					<span class="icon pull-left"></span>
 
 					<div class="media-body"><strong>Lives in </strong>
-						<a ng-href="#/country/{{user.country}}">
+						<a ui-sref="country({country: user.country})">
 							<img ng-src="/img/flags/16/{{user.country}}.png"
 								  alt="{{user.country | CountryFilter}}"/> {{user.country | CountryFilter}}</a>
 					</div>

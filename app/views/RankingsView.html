@@ -33,11 +33,10 @@
 								<strong>{{$index+1}}</strong>
 							</td>
 							<td>
-								<a ng-href="#/country/{{rankingItem.country}}"
-									tooltip="{{rankingItem.country | CountryFilter}}"
+								<a tooltip="{{rankingItem.country | CountryFilter}}"
 									tooltip-append-to-body="true"><img ng-src="/img/flags/16/{{rankingItem.country}}.png"
 																				  alt=""/> </a><a
-								ng-href="#/user/{{rankingItem.username}}"><span class="icon"></span>
+								ui-sref="user({username:rankingItem.username})"><span class="icon"></span>
 								{{rankingItem.username}}</a>
 							</td>
 							<td class="text-right">

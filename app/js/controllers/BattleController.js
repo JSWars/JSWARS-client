@@ -12,9 +12,8 @@ define([
 				$scope.totalTime = moment($scope.battle.frameCount * (1000 / $scope.battle.fps)).toDate();
 			};
 
-			$scope.battleId = $stateParams.id;
 
-			BattleService.get({id: $stateParams.id})
+			BattleService.get({id: $stateParams.battle})
 				.then(function (battle) {
 					$scope.battle = battle;
 

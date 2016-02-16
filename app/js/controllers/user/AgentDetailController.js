@@ -15,7 +15,7 @@ define([
 		};
 
 		AgentService.get({
-			id: $stateParams.id,
+			id: $stateParams.agent,
 			username: $stateParams.username
 		})
 			.then(function (agent) {
@@ -26,7 +26,7 @@ define([
 
 		var agentVersionsQuery = function () {
 			AgentVersionService.query({
-				id: $stateParams.id,
+				id: $stateParams.agent,
 				username: $stateParams.username
 			})
 				.then(function (versions) {
@@ -49,7 +49,7 @@ define([
 			e.preventDefault();
 			AgentService.update({
 				username: $stateParams.username,
-				id: $stateParams.id,
+				id: $stateParams.agent,
 				code: $scope.editVersion.code
 			})
 				.then(function (response) {

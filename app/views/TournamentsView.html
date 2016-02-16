@@ -16,7 +16,7 @@
 					<tbody>
 					<tr ng-repeat="tournament in availableTournaments.docs">
 						<td>
-							<a ng-href="#/tournaments/{{tournament._id}}/">
+							<a ui-sref="tournaments({tournament: tournament._id})">
 								{{tournament.name}}
 							</a>
 						</td>
@@ -65,7 +65,7 @@
 					<tbody>
 					<tr ng-repeat="tournament in pastTournaments.docs">
 						<td>
-							<a ng-href="#/tournaments/{{tournament._id}}/">
+							<a ui-sref="tournaments({tournament: tournament._id})">
 								{{tournament.name}} <sup><span class="icon"></span></sup>
 							</a>
 						</td>

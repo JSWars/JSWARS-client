@@ -115,7 +115,7 @@ require([
 
 	app.config(['$logProvider', '$locationProvider', function ($logProvider, $locationProvider) {
 		$logProvider.debugEnabled(true);
-		$locationProvider.html5Mode(true).hashPrefix('!');
+		$locationProvider.html5Mode(true);
 	}]);
 
 	app.run(['$rootScope', '$http', 'ngProgressFactory', function ($rootScope, $http, ngProgressFactory) {
