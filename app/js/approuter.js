@@ -51,6 +51,10 @@ define([
 
 				// Use $stateProvider to configure your states.
 				$stateProvider
+					/*.state("howWorks", {
+						url: "/",
+						templateUrl: 'views/HowWorksView.html',
+					})*/
 					.state("rankings", {
 						url: "/rankings",
 						templateUrl: 'views/RankingsView.html',
