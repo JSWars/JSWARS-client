@@ -5,10 +5,9 @@ define([
 		'services/TournamentService'
 	], function (Controllers) {
 		Controllers.controller("TournamentsController", ['$scope', '$timeout', '$stateParams', 'State', 'TournamentService', function ($scope, $timeout, $stateParams, State, TournamentService) {
-            //
-			//State.setState({
-			//	title: "Last Battles"
-			//});
+			State.setState({
+				title: "Tournaments"
+			});
 
 			$scope.availableTournamentsPageChanged = function () {
 				TournamentService.query({page: $scope.availableTournamentsPage})
