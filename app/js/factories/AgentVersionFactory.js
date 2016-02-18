@@ -8,6 +8,10 @@ define([
 					username: '@username',
 					id: '@id',
 					versionId: '@versionId'
+				}, {
+					query: {
+						isArray: false
+					}
 				}
 			);
 		}]);

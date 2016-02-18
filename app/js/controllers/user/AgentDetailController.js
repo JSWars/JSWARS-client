@@ -24,20 +24,21 @@ define([
 				$scope.error = "Can't get agent";
 			});
 
-		var agentVersionsQuery = function () {
+		$scope.versionsPageChanged = function () {
 			AgentVersionService.query({
 				id: $stateParams.agent,
-				username: $stateParams.username
+				username: $stateParams.username,
+				page: $scope.page || 1
 			})
 				.then(function (versions) {
 					$scope.versions = versions;
-					$scope.editVersion = versions[0];
+					$scope.editVersion = versions.docs[0];
 				}, function () {
 					$scope.error = "Can't get agent versions";
 				});
 
 		};
-		agentVersionsQuery();
+		$scope.versionsPageChanged();
 
 		$scope.loadVersion = function (e, version) {
 			e.preventDefault();
@@ -57,7 +58,7 @@ define([
 					$timeout(function () {
 						$scope.message = false;
 					}, 4000);
-					agentVersionsQuery();
+					versionsPageChanged();
 				}, function (errorResponse) {
 					if (errorResponse.errorId = "INVALID_JAVASCRIPT") {
 						$scope.error = "Invalid agent syntax";

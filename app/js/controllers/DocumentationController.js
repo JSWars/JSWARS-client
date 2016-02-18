@@ -4,7 +4,7 @@
 define([
 	'controllers/Controllers'
 ], function (Controllers) {
-	Controllers.controller("DocumentationController", ['$http','$scope','State', function ($http, $scope, State) {
+	Controllers.controller("DocumentationController", ['$http', '$scope', 'State', function ($http, $scope, State) {
 
 		$scope.editorOptions = {
 			lineWrapping: true,
@@ -17,73 +17,46 @@ define([
 		State.setState({
 			title: "Documentation"
 		});
-		$http({method:'GET',url:'/samples/units.jsonsample',
-		transformResponse: function (data) {
-			return data;
-		}}).then(function (resource){
-				$scope['codeUnits']=resource.data;
-			}
-		);
-		$http.get('/samples/agent.jssample').then(function (resource){
-				$scope['codeAgent']=resource.data;
-			}
-		);
 
-		$http({method:'GET',url:'/samples/map.jsonsample',
-			transformResponse: function (data) {
-				return data;
-			}}).then(function (resource){
-				$scope['codeMap']=resource.data;
-			}
-		);
+		var codes = [
+			"json-units",
+			"js-agent",
+			"json-map",
+			"json-gameState",
+			"json-teams",
+			"js-getPath",
+			"js-action",
+			"js-vector2D",
+			"json-bullet"
+		];
 
-		$http({method:'GET',url:'/samples/game.jsonsample',
-			transformResponse: function (data) {
-				return data;
-			}}).then(function (resource){
-				$scope['codeGameState']=resource.data;
-			}
-		);
+		for (var i in codes) {
+			var type = codes[i].split("-")[0];
+			var code = codes[i].split("-")[1];
+			var scopeName = "code" + code.charAt(0).toUpperCase() + code.slice(1);
+			var json = "/samples/" + code + "." + type + "sample";
 
-		$http({method:'GET',url:'/samples/teams.jsonsample',
-			transformResponse: function (data) {
-				return data;
-			}}).then(function (resource){
-				$scope['codeTeams']=resource.data;
-			}
-		);
+			(function (_scopeName) {
+				$http({
+					method: 'GET', url: json,
+					transformResponse: function (data) {
+						return data;
+					}
+				}).then(function (resource) {
+						$scope[_scopeName] = resource.data;
+					}
+				);
+			})(scopeName)
 
-		$http({method:'GET',url:'/samples/action.jssample',
-			transformResponse: function (data) {
-				return data;
-			}}).then(function (resource){
-				$scope['codeAction']=resource.data;
-			}
-		);
+		}
 
-		$http({method:'GET',url:'/samples/vector2d.jssample',
-			transformResponse: function (data) {
-				return data;
-			}}).then(function (resource){
-				$scope['codeVector2D']=resource.data;
-			}
-		);
+		$(window).scroll(function () {
+			$("#docmenu").css("top", Math.max(0, 250 - $(this).scrollTop()));
+		});
 
-		$http({method:'GET',url:'/samples/bullet.jsonsample',
-			transformResponse: function (data) {
-				return data;
-			}}).then(function (resource){
-				$scope['codeBullet']=resource.data;
-			}
-		);
-
-		$http({method:'GET',url:'/samples/getpath.jssample',
-			transformResponse: function (data) {
-				return data;
-			}}).then(function (resource){
-				$scope['codeGetPath']=resource.data;
-			}
-		);
+		$scope.$on('$destroy', function () {
+			$(window).unbind("scroll");
+		});
 
 	}]);
 });

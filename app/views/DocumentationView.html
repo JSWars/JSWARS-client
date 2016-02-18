@@ -91,13 +91,17 @@
 
 					<div class="panel-body">
 						<p>
-							In this section you have access to all Map information, width and height of the map, the colMap consist in a grid with the collision information,
-							and there is a function with a pathfinding using A* accesible for the agents, if you wanna implements yours you're able to do so.
+							In this section you have access to all Map information, width and height of the map, the colMap
+							consist in a grid with the collision information,
+							and there is a function with a pathfinding using A* accesible for the agents, if you wanna
+							implements yours you're able to do so.
 
 
 						</p>
+
 						<p>
-							In the colMap array for check a position collision you must get colMap[x][y], the value 0 means free collision and 1 means collision.
+							In the colMap array for check a position collision you must get colMap[x][y], the value 0 means
+							free collision and 1 means collision.
 							Be sure to apply a floor function with the position to get the info without errors.
 
 						</p>
@@ -130,7 +134,8 @@
 
 					<div class="panel-body">
 						<p>
-							You can use the function getPath from the map object to get a path point o point using a*, anyways you can implement
+							You can use the function getPath from the map object to get a path point o point using a*, anyways
+							you can implement
 							your own methods.
 
 						</p>
@@ -144,8 +149,6 @@
 						<div ui-codemirror="editorOptions" ng-model="codeGetPath" name="code">
 						</div>
 						</p>
-
-
 
 
 					</div>
@@ -243,19 +246,20 @@
 						</p>
 
 
-							<div class="row">
-								<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-6">
 
-									<img src="/img/documentation/unit.png" alt=""/></div>
-								<div class="col-md-6">
+								<img src="/img/documentation/unit.png" alt=""/></div>
+							<div class="col-md-6">
 
-									<p><H3>EXAMPLE:</H3></p>
-									<div ui-codemirror="editorOptions" ng-model="codeUnits" name="code"></div>
-								</div>
+								<p>
 
-
-
+								<H3>EXAMPLE:</H3></p>
+								<div ui-codemirror="editorOptions" ng-model="codeUnits" name="code"></div>
 							</div>
+
+
+						</div>
 					</div>
 				</div>
 
@@ -282,19 +286,18 @@
 							</div>
 							<div class="col-md-6">
 								<p>
-									<h3>EXAMPLE:</h3>
+
+								<h3>EXAMPLE:</h3>
 								</p>
 								<div ui-codemirror="editorOptions" ng-model="codeBullet" name="code"></div>
 							</div>
 						</div>
 
 
+					</div>
+
 
 				</div>
-
-
-
-			</div>
 
 
 				<!--ACTIONS-->
@@ -306,7 +309,8 @@
 
 					<div class="panel-body">
 						<p>
-							For each unit of your team, you can asign them 2 types of action. Move, shooting or both. See the code example:
+							For each unit of your team, you can asign them 2 types of action. Move, shooting or both. See the
+							code example:
 						</p>
 
 						<div ui-codemirror="editorOptions" ng-model="codeAction" name="code">
@@ -319,45 +323,33 @@
 
 				</div>
 
-
 			</div>
-	<div class="col-md-3">
+			<div class="col-md-3">
+				<nav id="docmenu" class=" hidden-xs hidden-sm">
+					<div class="tile">
+						<h2 class="tile-title">Index</h2>
+						<ul class="nav panel-body">
+							<li class="media">
+								<i class="icon pull-left"></i>
 
-		<nav id="menu" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
-			<div class="tile">
-				<h2 class="tile-title">Index</h2>
-				<ul class="nav panel-body">
+								<div class="media-body"><a href="#documentation">Studied at Oxford University</a></div>
+							</li>
 
+							<li class="media">
+								<i class="icon pull-left"></i>
 
-					<li class="media">
-						<i class="icon pull-left"></i>
+								<div class="media-body">Lives in Saturn, Milkyway</div>
+							</li>
 
-						<div class="media-body"><a href="#documentation">Studied at Oxford University</a></div>
-					</li>
+							<li class="media">
+								<i class="icon pull-left"></i>
 
-					<li class="media">
-						<i class="icon pull-left"></i>
-
-						<div class="media-body">Lives in Saturn, Milkyway</div>
-					</li>
-
-					<li class="media">
-						<i class="icon pull-left"></i>
-
-						<div class="media-body">From Titan, Jupitor</div>
-					</li>
-				</ul>
+								<div class="media-body">From Titan, Jupitor</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
 			</div>
-		</nav>
-	</div>
 		</div>
 	</div>
 </section>
-
-<script type="application/javascript">
-	$('#menu').affix({
-		offset: {
-			top: 245
-		}
-	});
-</script>

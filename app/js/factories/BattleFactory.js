@@ -7,7 +7,7 @@ define([
 			return $resource(Config.host + 'battle/:id', {}, {
 				list: {
 					url: Config.host + 'battle/',
-					method: 'GET',
+					method: 'GET'
 				},
 				get: {
 					url: Config.host + 'battle/:id',
@@ -17,17 +17,17 @@ define([
 				chunk: {
 					url:  Config.host + 'battle/:id/chunk/:chunkId',
 					method: 'GET',
-					isArray: true //todo: probably object
+					isArray: true
 				},
 				queue:{
 					url:  Config.host + 'battle/',
 					method: 'POST',
-					isArray: false //todo: probably object
+					isArray: false
 				},
 				queueGet:{
 					url:  Config.host + 'battle/queue/:id/',
 					method: 'GET',
-					isArray: false //todo: probably object
+					isArray: false
 				}
 			});
 		}]);

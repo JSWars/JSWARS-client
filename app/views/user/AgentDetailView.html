@@ -77,7 +77,7 @@
 			</div>
 		</div>
 
-		<h3 class="block-title m-t-0">Last 10 versions</h3>
+		<h3 class="block-title m-t-0">Versions</h3>
 
 		<div class="tile ng-scope">
 			<table class="table table-bordered">
@@ -91,14 +91,14 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr ng-repeat="version in versions track by $index">
+				<tr ng-repeat="version in versions.docs track by $index">
 					<td class="text-center"><span class="icon" ng-if="version._id == editVersion._id"
 															tooltip="You are seeing this"></span></td>
 					<td class="text-center"><span class="icon" ng-if="$first" title="Used in battles"
 															tooltip="Used in battles"></span></td>
 					<td><span am-time-ago="version.moment"
 								 tooltip="{{version.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
-					<td class="text-right">0</td>
+					<td class="text-right">{{version.battles}}</td>
 					<td class="text-right">
 						<button ng-click="loadVersion($event,version)" class="btn btn-default btn-xs">View</button>
 					</td>
@@ -106,9 +106,14 @@
 				</tbody>
 			</table>
 		</div>
+		<p class="text-center">
+			<pagination total-items="versions.total" ng-model="page" num-pages="versions.pages"
+							ng-change="versionsPageChanged()" max-size="5"></pagination>
+		</p>
 		<div class="tile p-5">
 			<i class="icon"></i> Remember that the version used is latest.
 		</div>
+
 	</div>
 </div>
 
