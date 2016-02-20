@@ -31,8 +31,8 @@
 						</td>
 						<td class="text-right">{{tournament.registrations}} / {{tournament.max}}</td>
 						<td class="text-right">
-							<button ng-disabled="session._id == undefined" type="button" class="btn btn-primary btn-xs">
-								Register
+							<button tournament-join="tournament._id" type="button" class="btn btn-primary btn-xs">
+								Join now
 							</button>
 						</td>
 					</tr>
@@ -75,11 +75,6 @@
 							<span ng-if="!tournament.start">Once full</span>
 						</td>
 						<td class="text-right">{{tournament.registrations}} / {{tournament.max}}</td>
-						<td class="text-right">
-							<button ng-disabled="session._id == undefined" type="button" class="btn btn-primary btn-xs">
-								Join now
-							</button>
-						</td>
 					</tr>
 					<tr ><!--ng-if="pastTournaments === undefined || pastTournaments.docs.length === 0"-->
 						<td colspan="7" class="text-center">No available tournaments</td>

@@ -12,7 +12,6 @@ define([
 				join: {
 					url: Config.host + 'tournaments/:id',
 					method: 'POST'
-
 				}
 			});
 		}]);
