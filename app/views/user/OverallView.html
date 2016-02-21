@@ -54,7 +54,8 @@
 			<tbody>
 			<tr ng-repeat="agent in agents.docs">
 				<td style="border-left: 2px solid black  !important" ng-style="{'border-left-color':agent.color}">
-					<a ng-if="session._id == agent.user" ui-sref="user.agents.detail({username:user.username, agent: agent._id})">{{agent.name}}</a>
+					<a ng-if="session._id == agent.user"
+						ui-sref="user.agents.detail({username:user.username, agent: agent._id})">{{agent.name}}</a>
 					<span ng-if="session._id != agent.user">{{agent.name}}</span>
 				</td>
 				<td><span am-time-ago="agent.moment"
@@ -128,18 +129,20 @@
 	<div class="col-md-3 p-15">
 
 		<div class="tile">
-			<h2 class="tile-title">About</h2>
+			<h2 class="tile-title">About <a class="pull-right" profile-update on-complete="profileUpdated()" href="javascript:void(0)"
+													  ng-if="session.username == user.username"><i
+				class="fa fa-pencil-square"></i></a></h2>
 
 			<div class="listview icon-list">
 
-				<div class="media" ng-if="user.ranking">
-					<i class="icon pull-left"></i>
+				<!--<div class="media" ng-if="user.ranking">-->
+				<!-- -->
 
-					<div class="media-body">
-						<strong>Ranking</strong>
-						<span>{{user.ranking}}</span>
-					</div>
-				</div>
+				<!--<div class="media-body">-->
+				<!--<strong>Ranking</strong>-->
+				<!--<span>{{user.ranking}}</span>-->
+				<!--</div>-->
+				<!--</div>-->
 
 
 				<div class="media" ng-if="user.country">

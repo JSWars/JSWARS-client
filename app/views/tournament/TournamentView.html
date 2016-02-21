@@ -1,0 +1,117 @@
+<div class="container">
+	<div class="block-area">
+
+		<div class="row">
+			<div class="col-md-4 ">
+				<div class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">Tournament information</h2>
+					</div>
+
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tbody>
+							<tr>
+								<td><strong>Status</strong></td>
+								<td>{{tournament.status}}</td>
+							</tr>
+
+							<tr>
+								<td><strong>Number of rounds</strong></td>
+								<td>{{tournament.rounds}}</td>
+							</tr>
+							<tr>
+								<td><strong>Participants</strong></td>
+								<td>{{tournament.inscriptions.length}} / {{tournament.max}}</td>
+							</tr>
+							<tr>
+								<td><strong>Start trigger</strong></td>
+								<td>{{((tournament.start === undefined)?'Once
+									full':tournament.start)}}
+								</td>
+							</tr>
+							<tr>
+								<td><strong>Created</strong></td>
+								<td><span am-time-ago="tournament.moment"
+											 tooltip="{{tournament.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+								</td>
+							</tr>
+							<tr>
+								<td><strong>Map</strong></td>
+								<td>Default map</td>
+							</tr>
+							<tr>
+								<td><strong>FPS</strong></td>
+								<td>{{tournament.fps}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-8 ">
+				<div class="alert alert-info alert-icon">
+					Tournament waiting for participants.
+					<i class="icon"></i>
+				</div>
+
+				<h3 class="block-title">Round configuration</h3>
+				<table class="table table-responsive tile">
+					<thead>
+					<tr>
+						<th>Round</th>
+						<th>Battles</th>
+						<th>Agents</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="round in tournament.roundDetails | orderBy:'round'">
+						<td>
+							<strong>Round {{round.round}}</strong>
+						</td>
+						<td>
+							{{round.battles}}
+						</td>
+						<td>
+							{{round.agents}}
+						</td>
+					</tr>
+					</tbody>
+				</table>
+
+				<p class="pull-right">
+					<button ng-if="tournament.joined == false" tournament-join="tournament._id" on-complete="refresh()"
+							  type="button" class="btn btn-primary btn-md">
+						Join now
+					</button>
+					<button ng-if="tournament.joined == true" type="button" disabled="disabled"
+							  class="btn btn-primary btn-md">
+						Joined
+					</button>
+				</p>
+				<h3 class="block-title">Participant list</h3>
+				<table class="table table-responsive tile">
+					<thead>
+					<tr>
+						<th>Agent name</th>
+						<th>Registration date</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="inscription in tournament.inscriptions">
+						<td>
+							{{inscription.agent.name}}
+						</td>
+						<td>
+							<span am-time-ago="inscription.moment"
+									tooltip="{{inscription.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>

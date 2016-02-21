@@ -41,7 +41,7 @@
 							ng-src="{{team.user.avatar || '/img/avatars/default.png'}}"></a>
 					</div>
 					<div class="col-xs-8">
-						<h3>{{team.user.username}} </h3>
+						<h3><a ui-sref="user.overall({username:team.user.username})">{{team.user.username}}</a></h3>
 						<h4>{{team.name}}</h4>
 
 						<div class="progress active" style="height: 20px;">

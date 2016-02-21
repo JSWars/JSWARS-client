@@ -87,7 +87,8 @@ require([
 
 	'directives/GameDirective',
 
-	'controllers/TournamentsController',
+	'controllers/tournament/TournamentListController',
+	'controllers/tournament/TournamentController',
 	'controllers/LastBattlesController',
 	'controllers/RankingsController',
 	'controllers/DocumentationController',

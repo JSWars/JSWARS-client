@@ -70,12 +70,16 @@ define([
 						templateUrl: 'views/LastBattlesView.html',
 						controller: "LastBattlesController"
 					})
-					.state("tournaments", {
+					.state("tournament-list", {
 						url: "/tournaments",
-						templateUrl: 'views/TournamentsView.html',
-						controller: "TournamentsController"
+						templateUrl: 'views/tournament/TournamentListView.html',
+						controller: "TournamentListController"
 					})
-
+					.state("tournament", {
+						url: "/tournament/:id",
+						templateUrl: 'views/tournament/TournamentView.html',
+						controller: "TournamentController"
+					})
 					.state("users", {
 						url: "/users",
 						templateUrl: 'views/UserListView.html',

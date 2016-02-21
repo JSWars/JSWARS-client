@@ -4,7 +4,7 @@
 <div class="modal-body">
 	<script type="text/ng-template" id="agentTemplate.html">
 		<a>
-			<span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
+			<span bind-html-unsafe="match.model.name"></span>
 		</a>
 	</script>
 
@@ -14,40 +14,23 @@
 			<label for="agent" class="col-lg-3 control-label">Agent</label>
 
 			<div class="col-lg-9">
-				<div class="formError" ng-messages="updateProfileForm.country.$error"
-					  ng-if="updateProfileForm.country.$error.required">
-					<div class="formErrorContent">
-						<div ng-message="required">Agent is required</div>
-					</div>
-					<div class="formErrorArrow">
-						<div class="line10"><!-- --></div>
-						<div class="line9"><!-- --></div>
-						<div class="line8"><!-- --></div>
-						<div class="line7"><!-- --></div>
-						<div class="line6"><!-- --></div>
-						<div class="line5"><!-- --></div>
-						<div class="line4"><!-- --></div>
-						<div class="line3"><!-- --></div>
-						<div class="line2"><!-- --></div>
-						<div class="line1"><!-- --></div>
-					</div>
-				</div>
 				<div class="input-group">
 					<input type="text" id="agent" name="country"
-							 typeahead="agent._id as agent.name for agent in searchAgent($viewValue)"
+							 typeahead="agent as agent.name for agent in searchAgent($viewValue)"
 							 typeahead-editable="false"
 							 typeahead-template-url="agentTemplate.html"
-							 ng-model="agentId"
+							 ng-model="selectedAgent"
 							 required
+							 autocomplete="off"
 							 class="form-control">
 
-					<span class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span class="input-group-addon" ng-style="{'background-color': selectedAgent.color}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</div>
-
 			</div>
 		</div>
 	</form>
 </div>
-<div class="modal-footer text-right">
-	<button class="btn btn-primary btn-lg" ng-disabled="tournamentJoinForm.$invalid" ng-click="update()">Join</button>
+<div class="modal-footer" style="text-align: right">
+	<button class="btn btn-sm " ng-click="cancel($event)"  style="color: #C3BCBC;">Cancel</button>
+	<button class="btn btn-sm " ng-disabled="tournamentJoinForm.$invalid" ng-click="join($event)" style="border: 1px solid #353B6F;">Join</button>
 </div>

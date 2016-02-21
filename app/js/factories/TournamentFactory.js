@@ -4,7 +4,9 @@ define([
 	],
 	function (Factories) {
 		Factories.factory('TournamentFactory', ['$resource', 'Config', function TournamentFactory($resource, Config) {
-			return $resource(Config.host + 'tournaments/:id', {}, {
+			return $resource(Config.host + 'tournaments/:id', {
+				id: '@id'
+			}, {
 				query: {
 					method: 'GET',
 					isArray: false

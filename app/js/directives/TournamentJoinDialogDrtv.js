@@ -5,37 +5,31 @@ define([
 	],
 	function (Directives) {
 		Directives
-			.directive('tournamentJoin', ['$rootScope', '$modal', '$compile', 'SessionService', function TournamentJoinDirective($rootScope, $modal, $compile, SessionService) {
+			.directive('tournamentJoin', ['$rootScope', '$q', '$modal', '$compile', 'SessionService', function TournamentJoinDirective($rootScope, $q, $modal, $compile, SessionService) {
 				return {
 					restrict: 'A',
 					scope: {
-						'onComplete': '=',
-						'tournamentRegister': '=tournamentId'
+						'onComplete': '&',
+						'tournamentJoin': '='
 					},
 					link: function ($scope, element, attrs) {
-						function TournamentJoinModalController($modalScope, $modalInstance, TournamentService) {
 
+						function TournamentJoinModalController($modalScope, $modalInstance, AgentService, TournamentService) {
 
-							var searchAgent = function (search) {
-								return TournamentService.query({search: search});
+							$modalScope.searchAgent = function (search) {
+								return AgentService.query({username: $scope.username, search: search})
+									.then(function (results) {
+										return results.docs
+									});
 							};
 
-							$modalScope.update = function () {
-								//Here we need to update profile
-								//UserService.update({
-								//	username: $modalScope.profile.username,
-								//	name: $modalScope.profile.name,
-								//	email: $modalScope.profile.email,
-								//	//avatar: $modalScope.profile.avatar,
-								//	country: $modalScope.profile.country.code
-								//})
-								//	.then(function () {
-								//		$modalInstance.close();
-								//	},
-								//	function () {
-								//		$modalInstance.dismiss({errorId: 'UPDATE_ERROR'});
-								//	});
-
+							$modalScope.join = function () {
+								TournamentService.join({agent: $modalScope.selectedAgent._id, id: $scope.tournamentJoin})
+									.then(function () {
+										$modalInstance.close();
+									}, function () {
+										$modalInstance.dismiss({errorId: 'ERROR'});
+									});
 							};
 
 							$modalScope.cancel = function () {
@@ -45,10 +39,11 @@ define([
 
 						$scope.open = function () {
 							SessionService.get()
-								.then(function () {
+								.then(function (session) {
+									$scope.username = session.username;
 									$modal.open({
 										templateUrl: '/views/directives/TournamentJoinDialogView.html',
-										controller: ['$scope', '$modalInstance', 'TournamentService', TournamentJoinModalController]
+										controller: ['$scope', '$modalInstance', 'AgentService', 'TournamentService', TournamentJoinModalController]
 									})
 										.result.then(function (result) {
 											($scope.onComplete || angular.noop)(false);
@@ -58,7 +53,6 @@ define([
 								}, function () {
 									$rootScope.$broadcast("general.login.required");
 								});
-
 						};
 
 						$compile(element.contents())($scope);

@@ -9,7 +9,7 @@ define([
 				return {
 					restrict: 'A',
 					scope: {
-						'onComplete': '='
+						'onComplete': '&'
 					},
 					link: function ($scope, element, attrs) {
 						function ProfileUpdateModalController($modalScope, $modalInstance, SessionService, UserService, Countries) {
