@@ -1,9 +1,10 @@
 define([
-		'directives/Directives'
+		'directives/Directives',
+		'services/SessionService'
 	],
 	function (Directives) {
 		Directives
-			.directive('battleCreatorButton', ['$rootScope', function BattleCreatorButton($rootScope) {
+			.directive('battleCreatorButton', ['$rootScope', 'SessionService', function BattleCreatorButton($rootScope, SessionService) {
 				return {
 					restrict: 'A',
 					scope: {
@@ -12,11 +13,17 @@ define([
 					link: function ($scope, element, attrs) {
 
 						element.click(function (event) {
-							event.preventDefault();
-							$rootScope.$emit("addToBattle", {
-								agentId: $scope.battleCreatorButton.id,
-								username: $scope.battleCreatorButton.username
-							})
+							SessionService.get()
+								.then(function () {
+									event.preventDefault();
+									$rootScope.$emit("addToBattle", {
+										agentId: $scope.battleCreatorButton.id,
+										username: $scope.battleCreatorButton.username
+									})
+								}, function () {
+									$rootScope.$broadcast("general.login.required");
+								});
+
 						});
 					}
 				};

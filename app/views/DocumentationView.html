@@ -1,6 +1,44 @@
 <section class="container">
 	<div class="block-area">
 		<div class="row">
+			<div class="col-md-3">
+				<div class="tile">
+					<h2 class="tile-title">Index</h2>
+					<ul class="p-20 lists-mark">
+						<li>
+							<a href="#agent">Agent</a>
+						</li>
+						<li>
+							<a href="#gameState">Game State</a>
+						</li>
+						<li>
+							<a href="#teams">Teams</a>
+						</li>
+						<li>
+							<a href="#units">Units</a>
+						</li>
+						<li>
+							<a href="#bullets">Bullets</a>
+						</li>
+						<li>
+							<a href="#actions">Actions</a>
+						</li>
+						<li>
+							<a href="#getPath">Get Path</a>
+						</li>
+						<li>
+							<a href="#vector2d">Utils: Vector2D</a>
+						</li>
+						<li>
+							<a href="#colMap">Utils: Colision Map</a>
+						</li>
+						<li>
+							<a href="#log">Utils: Log</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
 			<div class="col-md-9">
 				<div id="documentation" class="panel panel-default tile">
 					<div class="panel-heading">
@@ -81,10 +119,9 @@
 				</div>
 
 
-				<!-- COLMAP-->
+				<!-- COLMAP -->
 
-
-				<div id="map" class="panel panel-default tile">
+				<div id="colMap" class="panel panel-default tile">
 					<div class="panel-heading">
 						<h2 class="panel-title">Utils.colMap</h2>
 					</div>
@@ -110,11 +147,8 @@
 							EXAMPLE:
 						</p>
 
-						<p>
-
 						<div ui-codemirror="editorOptions" ng-model="codeMap" name="code">
 						</div>
-						</p>
 
 
 						<p>
@@ -127,7 +161,7 @@
 				</div>
 
 				<!-- getPath-->
-				<div id="map" class="panel panel-default tile">
+				<div id="getPath" class="panel panel-default tile">
 					<div class="panel-heading">
 						<h2 class="panel-title">GET PATH</h2>
 					</div>
@@ -144,11 +178,9 @@
 							EXAMPLE:
 						</p>
 
-						<p>
 
 						<div ui-codemirror="editorOptions" ng-model="codeGetPath" name="code">
 						</div>
-						</p>
 
 
 					</div>
@@ -174,11 +206,9 @@
 							Code:
 						</p>
 
-						<p>
 
 						<div ui-codemirror="editorOptions" ng-model="codeVector2D" name="code">
 						</div>
-						</p>
 
 
 					</div>
@@ -196,16 +226,14 @@
 					<div class="panel-body">
 						<p>
 							Under construction...
-
 						</p>
-
 					</div>
 
 				</div>
 
 
 				<!-- TEAMS -->
-				<div id="TEAMS" class="panel panel-default tile">
+				<div id="teams" class="panel panel-default tile">
 					<div class="panel-heading">
 						<h2 class="panel-title">TEAMS</h2>
 					</div>
@@ -217,7 +245,6 @@
 
 						<div ui-codemirror="editorOptions" ng-model="codeTeams" name="code">
 						</div>
-
 					</div>
 
 
@@ -323,57 +350,6 @@
 
 				</div>
 
-			</div>
-			<div class="col-md-3">
-				<nav id="docmenu" class=" hidden-xs hidden-sm">
-					<div class="tile">
-						<h2 class="tile-title">Index</h2>
-						<ul class="nav panel-body">
-
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Agent</div>
-							</li>
-
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Game State</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Teams</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Units</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Bullets</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Action</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Get Path</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Utils: Vector2D</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Utils: Colission Map</div>
-							</li>
-							<li class="media">
-								<i class="icon pull-left"></i>
-								<div class="media-body">Utils: Log</div>
-							</li>
-						</ul>
-					</div>
-				</nav>
 			</div>
 		</div>
 	</div>

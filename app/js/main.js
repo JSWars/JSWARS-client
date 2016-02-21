@@ -91,6 +91,7 @@ require([
 	'controllers/LastBattlesController',
 	'controllers/RankingsController',
 	'controllers/DocumentationController',
+	'controllers/CookiesController',
 	'controllers/BattleController',
 	'controllers/UserController',
 	'controllers/UserListController',

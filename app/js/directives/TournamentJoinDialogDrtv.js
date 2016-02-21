@@ -5,7 +5,7 @@ define([
 	],
 	function (Directives) {
 		Directives
-			.directive('tournamentJoin', ['$modal', '$compile', function TournamentJoinDirective($modal, $compile) {
+			.directive('tournamentJoin', ['$rootScope', '$modal', '$compile', 'SessionService', function TournamentJoinDirective($rootScope, $modal, $compile, SessionService) {
 				return {
 					restrict: 'A',
 					scope: {
@@ -13,7 +13,7 @@ define([
 						'tournamentRegister': '=tournamentId'
 					},
 					link: function ($scope, element, attrs) {
-						function TournamentJoinModalController($modalScope, $modalInstance, TournamentService, UserService) {
+						function TournamentJoinModalController($modalScope, $modalInstance, TournamentService) {
 
 
 							var searchAgent = function (search) {
@@ -44,15 +44,21 @@ define([
 						}
 
 						$scope.open = function () {
-							$modal.open({
-								templateUrl: '/views/directives/TournamentJoinDialogView.html',
-								controller: ['$scope', '$modalInstance', 'TournamentService', 'UserService', TournamentJoinModalController]
-							})
-								.result.then(function (result) {
-									($scope.onComplete || angular.noop)(false);
-								}, function (err) {
-									($scope.onComplete || angular.noop)(true, err);
+							SessionService.get()
+								.then(function () {
+									$modal.open({
+										templateUrl: '/views/directives/TournamentJoinDialogView.html',
+										controller: ['$scope', '$modalInstance', 'TournamentService', TournamentJoinModalController]
+									})
+										.result.then(function (result) {
+											($scope.onComplete || angular.noop)(false);
+										}, function (err) {
+											($scope.onComplete || angular.noop)(true, err);
+										});
+								}, function () {
+									$rootScope.$broadcast("general.login.required");
 								});
+
 						};
 
 						$compile(element.contents())($scope);

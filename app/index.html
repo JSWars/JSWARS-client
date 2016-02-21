@@ -72,8 +72,8 @@
 		<ul class="nav navbar-nav navbar-right ng-cloak">
 
 
-			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)"><i
-				class="fa fa-github"></i> Sign in with GitHub</a></li>
+			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)">Sign in with GitHub <i
+				class="fa fa-github"></i></a></li>
 			<li ng-if="session.username"><a class="btn btn-register" ui-sref="user.overall({username: session.username})">Welcome
 				{{session.username}}</a></li>
 		</ul>
@@ -107,9 +107,7 @@
 			<div class="col-sm-2">
 				<h4>Legal information</h4>
 				<ul>
-					<li><a href="">Terms</a></li>
-					<li><a href="">Privacy</a></li>
-					<li><a href="">Cookies</a></li>
+					<li><a ui-sref="cookies">Cookies</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-2">
@@ -123,7 +121,7 @@
 	</div>
 </footer>
 
-<battle-creator></battle-creator>
+<battle-creator ng-if="session.username"></battle-creator>
 
 <!--Le scripts-->
 <script type="text/javascript" data-main="/js/main.js" src="js/components/requirejs/require.js"></script>

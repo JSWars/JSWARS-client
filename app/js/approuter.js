@@ -52,13 +52,18 @@ define([
 				// Use $stateProvider to configure your states.
 				$stateProvider
 					/*.state("howWorks", {
-						url: "/",
-						templateUrl: 'views/HowWorksView.html',
-					})*/
+					 url: "/",
+					 templateUrl: 'views/HowWorksView.html',
+					 })*/
 					.state("rankings", {
 						url: "/rankings",
 						templateUrl: 'views/RankingsView.html',
 						controller: "RankingsController"
+					})
+					.state("cookies", {
+						url: "/cookies",
+						templateUrl: 'views/CookiesView.html',
+						controller: "CookiesController"
 					})
 					.state("last-battles", {
 						url: "/last-battles",

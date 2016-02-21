@@ -1,6 +1,6 @@
 <div class="tile battle-creator" ng-if="battle.agents.length>0">
-	<h2 class="tile-title text-center" ng-click="hidden = !hidden">Create Battle <span class="icon"
-																												  ng-if="hidden == false"></span>
+	<h2 class="tile-title text-center" ng-click="hidden = !hidden" style="cursor:pointer">Create Battle <span
+		class="icon" ng-if="hidden == false"></span>
 		<span class="icon" ng-if="hidden == true"></span></h2>
 
 	<div class="row" ng-if="!hidden">
@@ -21,24 +21,18 @@
 			</div>
 		</div>
 		<div class="col-sm-2 text-center ">
-			<div class="p-10" ng-if="!waiting && !error">
+			<div class="p-10" ng-if="waiting != true && error === false">
 				<button class="btn btn-lg fight-button" ng-disabled="!battle.agents.length>=2"
 						  ng-click="putInQueue($event)">FIGHT
 				</button>
-				<!--<div class="checkbox m-b-5">-->
-					<!--<label>-->
-						<!--<input type="checkbox" checked ng-model="remember">-->
-						<!--Remember-->
-					<!--</label>-->
-				<!--</div>-->
 				<button class="btn btn-lg " ng-disabled="!battle.agents.length>=2" ng-click="clearQueue($event)">CLEAR
 				</button>
 			</div>
-			<div class="p-10" ng-if="waiting">
+			<div class="p-10" ng-if="waiting == true">
 				<img src="img/gamerunning.gif" alt="Running battle" width="40"/><br>
 			</div>
-			<div class="p-10" ng-if="error">
-				{{error}}. <a href="#" ng-click="waiting=false;error=false;">Click to try Again.</a>
+			<div class="p-10" ng-if="error != false">
+				{{error}}. <a href="#" ng-click="cleanError()">Click to try Again.</a>
 			</div>
 
 		</div>
@@ -48,7 +42,7 @@
 					<img width="40" height="40" src="/img/avatars/default.png" alt="">
 				</div>
 				<div class="media-body">
-					<a class="t-overflow">Please choose another agent</a>
+					<a class="t-overflow" ui-sref="users">Please choose another agent</a>
 				</div>
 			</div>
 			<div class="media p-10" ng-if="battle.agents[1]">
