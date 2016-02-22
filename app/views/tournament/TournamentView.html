@@ -123,7 +123,7 @@
 						</thead>
 						<tbody>
 						<tr ng-if="(tournament.battles | filter:{tournamentRound: round.round}).length < round.battles">
-							<td colspan="3" class="text-center"><i class="fa fa-bolt blink" style="font-size: 20px"></i>
+							<td colspan="4" class="text-center"><i class="fa fa-bolt blink" style="font-size: 20px"></i>
 							</td>
 						</tr>
 						<tr ng-repeat="battle in tournament.battles | filter: {tournamentRound: round.round}">
