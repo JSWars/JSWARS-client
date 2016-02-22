@@ -5,7 +5,7 @@ define([
 	],
 	function (Directives) {
 		Directives
-			.directive('tournamentJoin', ['$rootScope', '$q', '$modal', '$compile', 'SessionService', function TournamentJoinDirective($rootScope, $q, $modal, $compile, SessionService) {
+			.directive('tournamentJoin', ['$rootScope', '$q', '$modal', '$timeout', '$compile', 'SessionService', function TournamentJoinDirective($rootScope, $q, $modal, $timeout, $compile, SessionService) {
 				return {
 					restrict: 'A',
 					scope: {
@@ -14,6 +14,9 @@ define([
 					},
 					link: function ($scope, element, attrs) {
 
+						$timeout(function () {
+							element[0].focus()
+						});
 						function TournamentJoinModalController($modalScope, $modalInstance, AgentService, TournamentService) {
 
 							$modalScope.searchAgent = function (search) {

@@ -116,6 +116,7 @@
 						<thead>
 						<tr>
 							<th>Agent name</th>
+							<th class="hidden-xs"><span class="icon"></span> Duration</th>
 							<th>Status</th>
 							<th>Winner</th>
 						</tr>
@@ -149,6 +150,7 @@
 									</table>
 								</a>
 							</td>
+							<td class="hidden-xs">{{battle.duration.toFixed(0) || 0}} seconds</td>
 							<td style="vertical-align:middle;">
 								{{battle.status}}
 							</td>

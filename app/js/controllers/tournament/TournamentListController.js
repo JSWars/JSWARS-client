@@ -11,16 +11,26 @@ define([
 			});
 
 			$scope.availableTournamentsPageChanged = function () {
-				TournamentService.query({page: $scope.availableTournamentsPage})
+				TournamentService.query({page: $scope.availableTournamentsPage, joinable: true})
 					.then(function (availableTournaments) {
 						$scope.availableTournaments = availableTournaments;
+					});
+			};
+
+			$scope.pastTournamentsPageChanged = function () {
+				TournamentService.query({page: $scope.pastTournamentsPage, joinable: false})
+					.then(function (pastTournaments) {
+						$scope.pastTournaments = pastTournaments;
 					});
 			};
 
 			$scope.refresh = function () {
 				$state.reload();
 			};
+
+
 			$scope.availableTournamentsPageChanged();
+			$scope.pastTournamentsPageChanged();
 		}]);
 	}
 )

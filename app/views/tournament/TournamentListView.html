@@ -2,7 +2,7 @@
 	<div class="block-area">
 		<div class="row">
 			<div class="col-md-6 ">
-				<h3 class="block-title">Available tournaments</h3>
+				<h3 class="block-title">Joinable tournaments</h3>
 				<table class="table table-responsive tile">
 					<thead>
 					<tr>
@@ -31,10 +31,12 @@
 						</td>
 						<td class="text-right">{{tournament.registrations}} / {{tournament.max}}</td>
 						<td class="text-right">
-							<button ng-if="tournament.joined == false" tournament-join="tournament._id" on-complete="refresh()" type="button" class="btn btn-primary btn-xs">
+							<button ng-if="tournament.joined == false" tournament-join="tournament._id" on-complete="refresh"
+									  type="button" class="btn btn-primary btn-xs">
 								Join now
 							</button>
-							<button ng-if="tournament.joined == true"type="button" disabled="disabled" class="btn btn-primary btn-xs">
+							<button ng-if="tournament.joined == true" type="button" disabled="disabled"
+									  class="btn btn-primary btn-xs">
 								Joined
 							</button>
 						</td>
@@ -60,26 +62,25 @@
 					<thead>
 					<tr>
 						<th>Name</th>
-						<th>Started</th>
-						<th>Ended</th>
+						<th>Status</th>
 						<th>Winner</th>
+						<th class="text-right">Participants</th>
 					</tr>
 					</thead>
 					<tbody>
 					<tr ng-repeat="tournament in pastTournaments.docs">
 						<td>
-							<a ui-sref="tournaments({tournament: tournament._id})">
-								{{tournament.name}} <sup><span class="icon"></span></sup>
+							<a ui-sref="tournament({id: tournament._id})">
+								{{tournament.name}}
 							</a>
 						</td>
 						<td>
-					<span ng-if="tournament.start" am-time-ago="tournament.start"
-							tooltip="{{tournament.start | amDateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
-							<span ng-if="!tournament.start">Once full</span>
+							{{tournament.status}}
 						</td>
-						<td class="text-right">{{tournament.registrations}} / {{tournament.max}}</td>
+						<td>{{tournament.winner.name}}</td>
+						<td class="text-right">{{tournament.registrations}}</td>
 					</tr>
-					<tr ><!--ng-if="pastTournaments === undefined || pastTournaments.docs.length === 0"-->
+					<tr ng-if="pastTournaments === undefined || pastTournaments.docs.length === 0">
 						<td colspan="7" class="text-center">No available tournaments</td>
 					</tr>
 					</tbody>
