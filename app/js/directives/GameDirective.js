@@ -10,23 +10,20 @@ define([
 			scope: {
 				restart: '=',
 				start: '=',
-				continue: '=',
+				resume: '=',
 				pause: '=',
 				next: '=',
 				battle: '=',
 				onFrame: '=',
 				onStart: '=',
 				state: '='
-
 			},
 			link: function ($scope, element, attrs) {
 
-
-				var domElement = element[0];
+				var battleContainer = element[0];
 				var battleTimeElement = $('#battleTime');
 				var shootAudio = new Audio('/sounds/shoot-lq.mp3');
 				var dieAudio = new Audio('/sounds/die-lq.mp3');
-
 
 				/**
 				 *
@@ -70,12 +67,13 @@ define([
 				 * @constructor
 				 */
 				function Game(container, map, fps, frameCount) {
-
+					var _self = this;
 					this.STATES = {
 						'STOPPED': 'stopped',
 						'PLAYING': 'playing',
 						'PAUSED': 'paused',
-						'ENDED': 'ended'
+						'ENDED': 'ended',
+						'LOADING': 'loading'
 					};
 					this.state = $scope.state = this.STATES.STOPPED;
 					this.fps = fps;
@@ -98,43 +96,80 @@ define([
 
 					this.stage = new Kinetic.Stage({
 						container: container,
-						width: element.width(),//map.width * this.SQUARE_WIDTH_PX,
-						height: map.tileWidth / map.tileHeight * element.width()//map.height * this.SQUARE_HEIGHT_PX
+						width: this._getStageWidth(),
+						height: this._getStageHeight(),
+						scaleX: this._getStageScaleX(),
+						scaleY: this._getStageScaleY()
 					});
+
+					//Resize when window does
+					$(window).resize(function () {
+						_self.stage.setWidth(_self._getStageWidth());
+						_self.stage.setHeight(_self._getStageHeight());
+						_self.stage.setScaleX(_self._getStageScaleX());
+						_self.stage.setScaleY(_self._getStageScaleY());
+						_self.stage.draw();
+					});
+
 
 					//Add bullets default group
 					this.kinetic.bulletGroup = new Kinetic.Group({
 						id: 'bulletGroup',
 						x: 0,
-						y: 0,
-						scaleX: this.stage.getWidth() / ((this.map.tileWidth - 2) * this.map.tiles.tilewidth),
-						scaleY: this.stage.getHeight() / ((this.map.tileHeight - 2) * this.map.tiles.tileheight)
+						y: 0
 					});
 
 					this.kinetic.layers.bullets.add(this.kinetic.bulletGroup);
 
-
-					//Todo: update width on resize
-
-					this.frames = frames;
 					this.play = {
 						frame: 0,
 						last: 0
 					};
 
-
 					//Draw each map layer
-					this.map.tilesResource.onload = angular.bind(this, function () {
-						angular.forEach(map.layers, angular.bind(this, function (layer) {
-							this.drawMap(this.kinetic.layers.map, layer.data);
-							this.stage.add(this.kinetic.layers.map);
-							this.stage.add(this.kinetic.layers.players);
-							this.stage.add(this.kinetic.layers.bullets);
-						}));
-					});
-
-
+					this.map.tilesResource.onload = function () {
+						angular.forEach(map.layers, function (layer) {
+							_self.drawMap(_self.kinetic.layers.map, layer.data);
+							_self.stage.add(_self.kinetic.layers.map);
+							_self.stage.add(_self.kinetic.layers.players);
+							_self.stage.add(_self.kinetic.layers.bullets);
+						});
+					};
 				}
+
+				/**
+				 * Get current X stage scale
+				 * @returns {number}
+				 */
+				Game.prototype._getStageScaleX = function () {
+					return this._getStageWidth() / ((this.map.tileWidth - 2) * this.map.tiles.tilewidth);
+				};
+
+				/**
+				 * Get current Y stage scale
+				 * @returns {number}
+				 */
+				Game.prototype._getStageScaleY = function () {
+					return this._getStageHeight() / ((this.map.tileHeight - 2) * this.map.tiles.tileheight);
+				};
+
+				/**
+				 * Get stage width
+				 * @returns {*}
+				 * @private
+				 */
+				Game.prototype._getStageWidth = function () {
+					return element.width();
+				};
+
+				/**
+				 * Get stage heoght
+				 * @returns {number}
+				 * @private
+				 */
+				Game.prototype._getStageHeight = function () {
+					return this.map.tileWidth / this.map.tileHeight * element.width();
+				};
 
 				/**
 				 *
@@ -149,9 +184,7 @@ define([
 					var group = new Kinetic.Group({
 						id: 'map',
 						x: 0,
-						y: 0,
-						scaleX: this.stage.getWidth() / ((this.map.tileWidth - 2) * this.map.tiles.tilewidth),
-						scaleY: this.stage.getHeight() / ((this.map.tileHeight - 2) * this.map.tiles.tileheight)
+						y: 0
 					});
 
 					this.kinetic.mapGroups.push(group);
@@ -182,60 +215,69 @@ define([
 					}
 
 					layer.add(group);
-					layer.draw();
-
 				};
 
 
 				/**
-				 *
-				 * This method get first game chunk, reads it and program the first frame draw to the next AnimationFrameRequest
-				 *
-				 * @method
+				 * Starts the game play
 				 */
 				Game.prototype.start = function () {
 					var _self = this;
-					this.state = $scope.state = this.STATES.PLAYING;
-					this.play.frame = -1;
+					this.state = $scope.state = this.STATES.LOADING;
+					this.play.frameIndex = -1;
 					this.play.last = 0;
 					this.play.currentTime = 0;
-					this.play.lastTime = new Date().getTime();
 					this.chunks = [];
-					var chunkId = 0;
-					this.getChunk(chunkId)
-						.then(function (chunkFrames) {
+					this._getChunk(0)
+						.then(function () {
 							$scope.onStart(_self.frameCount, _self.fps);
-							_self.requestAnimationId = AnimationFrame.request(angular.bind(_self, _self.frame));
+							_self.resume();
 						}, function () {
 							alert("Error ocurred loading game chunks");
 						});
 				};
 
-				Game.prototype.restart = function () {
-					var _self = this;
+				/**
+				 * Set game play time yo 0
+				 */
+				Game.prototype.rewind = function () {
 					this.state = $scope.state = this.STATES.PAUSED;
-					this.play.frame = -1;
+					this.play.frameIndex = -1;
 					this.play.last = 0;
 					this.play.currentTime = 0;
 					this.play.lastTime = new Date().getTime();
-					this.chunks = [];
-					var chunkId = 0;
-					this.getChunk(chunkId)
-						.then(function (chunkFrames) {
-							$scope.onStart(_self.frameCount, _self.fps);
-							_self.frame(true, 1);
-						}, function () {
-							alert("Error ocurred loading game chunks");
-						});
+					this.frame(true, 1);
 				};
 
+				/**
+				 * Resume the game
+				 */
+				Game.prototype.resume = function () {
+					this.play.lastTime = new Date().getTime();
+					this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
+					this.state = $scope.state = this.STATES.PLAYING;
+				};
 
-				Game.prototype.getChunk = function (chunkId) {
+				/**
+				 * Pauses the game
+				 */
+				Game.prototype.pause = function () {
+					AnimationFrame.cancel(this.requestAnimationId);
+					this.state = $scope.state = this.STATES.PAUSED;
+				};
+
+				/**
+				 * Loads a chunk from the server
+				 * @param chunkId
+				 * @returns {*}
+				 * @private
+				 */
+				Game.prototype._getChunk = function (chunkId) {
 					var _self = this;
-					_self.chunks[chunkId] = null;
 					var deferred = $q.defer();
-					console.log("Getting chunk " + chunkId);
-					BattleFactory.chunk({id: $scope.battle._id, chunkId: chunkId}) //todo: get parameters from state
+					_self.chunks[chunkId] = deferred.promise;
+					console.log("Getting battle chunk " + chunkId);
+					BattleFactory.chunk({id: $scope.battle._id, chunkId: chunkId})
 						.$promise
 						.then(function (chunk) {
 							_self.chunks[chunkId] = chunk;
@@ -246,133 +288,150 @@ define([
 					return deferred.promise;
 				};
 
-				Game.prototype.continue = function () {
-					this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
-					this.state = $scope.state = this.STATES.PLAYING;
+				Game.prototype._getFrameChunkIndex = function (frame) {
+					return Math.floor((frame) / $scope.battle.chunkSize);
 				};
-
-				Game.prototype.pause = function () {
-					AnimationFrame.cancel(this.requestAnimationId);
-					this.state = $scope.state = this.STATES.PAUSED;
+				Game.prototype._getPartialFrameIndex = function (frame) {
+					return frame - (this._getFrameChunkIndex(frame) * $scope.battle.chunkSize);
 				};
 
 				Game.prototype.frame = function (_single, _offset) {
 					var _self = this;
-
 					var now = new Date().getTime();
-
+					//Detect if offset or next. Set currenttime
 					if (typeof _offset === 'number') {
-						this.play.currentTime += (_offset * this.frameDuration)
+						this.play.currentTime = Math.max(this.play.currentTime + (_offset * this.frameDuration), 0)
 					} else {
 						this.play.currentTime += now - this.play.lastTime;
 					}
-
 					this.play.lastTime = now;
+					this.play.frameIndex = Math.floor(this.play.currentTime / this.frameDuration);
+					var chunkId = this._getFrameChunkIndex(this.play.frameIndex);
+					var partialFrameId = this._getPartialFrameIndex(this.play.frameIndex);
 
-					this.play.frame = Math.floor(this.play.currentTime / this.frameDuration);
-					var chunkId = Math.floor((this.play.frame) / $scope.battle.chunkSize);
-					var partialFrameId = this.play.frame - (chunkId * $scope.battle.chunkSize);
+					//If we have overpassed the middle of the current chunk, get next chunk
 					if (angular.isUndefined(_self.chunks[chunkId + 1]) && partialFrameId > ($scope.battle.chunkSize / 2)) {
-						_self.getChunk(chunkId + 1);
+						_self._getChunk(chunkId + 1);
 					}
-					try {
-						var frame = this.chunks[chunkId][partialFrameId].data;
+
+					//Funciton to render a frame
+					var renderFrame = function () {
+						var frame = _self.chunks[chunkId][partialFrameId];
+						if (angular.isUndefined(frame)) {
+							_self.state = $scope.state = _self.STATES.ENDED;
+							return;
+						}
+
+						var frameData = frame.data;
 						if (!(typeof _single === 'boolean' && _single === true)) {
 							this.requestAnimationId = AnimationFrame.request(angular.bind(this, this.frame));
 						}
-					} catch (e) {
-						_self.state = _self.STATES.ENDED;
-						return;
-					}
-
-					//Iterate over bullets
-					if (!angular.isUndefined(frame.bullets) && Object.keys(frame.bullets).length > 0) {
-						angular.forEach(frame.bullets, function (bullet, key) {
-							var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
-							if (angular.isUndefined(bulletKineticNode)) {
-								shootAudio.pause();
-								shootAudio.currentTime = 0;
-								shootAudio.play();
-								bulletKineticNode = new Kinetic.Circle({
-									name: 'bllt_' + key,
-									x: bullet.position.x * _self.map.tiles.tilewidth,
-									y: bullet.position.y * _self.map.tiles.tileheight,
-									fill: 'yellow',
-									radius: _self.SQUARE_HEIGHT_PX * (0.1),
-									stroke: 'black',
-									strokeWidth: 1
-								});
-								_self.kinetic.bulletGroup.add(bulletKineticNode);
-							} else {
-								bulletKineticNode.setPosition({
-									x: bullet.position.x * _self.map.tiles.tilewidth,
-									y: bullet.position.y * _self.map.tiles.tileheight
-								});
-							}
-
-							bulletKineticNode.exist = true;
-						});
-					}
-
-					angular.forEach(_self.kinetic.bulletGroup.children, function (bulletKineticNode, index) {
-						if (angular.isUndefined(bulletKineticNode.exist)) {
-							bulletKineticNode.remove();
-						} else {
-							bulletKineticNode.exist = undefined;
-						}
-					});
-					_self.kinetic.layers.bullets.draw();
-
-
-					//Iterate over teams
-					angular.forEach(frame.teams, function (team) {
-						var teamKineticGroup = _self.kinetic.layers.players.children[team.id];
-						//Create team kinetic group if doesnt exists
-						if (angular.isUndefined(teamKineticGroup)) {
-							teamKineticGroup = new Kinetic.Group({
-								id: "team_" + team.id,
-								x: 0,
-								y: 0,
-								scaleX: _self.stage.getWidth() / ((_self.map.tileWidth - 2) * _self.map.tiles.tilewidth),
-								scaleY: _self.stage.getHeight() / ((_self.map.tileHeight - 2) * _self.map.tiles.tileheight)
-							});
-							_self.kinetic.layers.players.add(teamKineticGroup);
-						}
-
-						angular.forEach(team.units, function (unit, index) {
-							var unitKineticNode = teamKineticGroup.children[index];
-							if (unit.alive === false) {
-								if (!angular.isUndefined(unitKineticNode)) {
-									unitKineticNode.destroy();
-									dieAudio.pause();
-									dieAudio.currentTime = 0;
-									dieAudio.play();
-								}
-							} else {
-								if (angular.isUndefined(unitKineticNode)) {
-									var newUnitKineticNode = new Kinetic.Circle({
-										x: unit.position.x * _self.map.tiles.tilewidth,
-										y: unit.position.y * _self.map.tiles.tileheight,
-										fill: team.color,
-										radius: _self.SQUARE_HEIGHT_PX * unit.radius,
-										stroke: 'white',
+						//Iterate over bullets
+						if (!angular.isUndefined(frameData.bullets) && Object.keys(frameData.bullets).length > 0) {
+							angular.forEach(frameData.bullets, function (bullet, key) {
+								var bulletKineticNode = _self.kinetic.bulletGroup.find('.bllt_' + key)[0];
+								if (angular.isUndefined(bulletKineticNode)) {
+									//Play sounds onky while playing
+									if (_self.state == _self.STATES.PLAYING) {
+										shootAudio.pause();
+										shootAudio.currentTime = 0;
+										shootAudio.play();
+									}
+									bulletKineticNode = new Kinetic.Circle({
+										name: 'bllt_' + key,
+										x: bullet.position.x * _self.map.tiles.tilewidth,
+										y: bullet.position.y * _self.map.tiles.tileheight,
+										fill: 'yellow',
+										radius: _self.SQUARE_HEIGHT_PX * (0.1),
+										stroke: 'black',
 										strokeWidth: 1
 									});
-									teamKineticGroup.add(newUnitKineticNode);
+									_self.kinetic.bulletGroup.add(bulletKineticNode);
 								} else {
-
-									unitKineticNode.setPosition({
-										x: unit.position.x * _self.map.tiles.tilewidth,
-										y: unit.position.y * _self.map.tiles.tileheight
+									bulletKineticNode.setPosition({
+										x: bullet.position.x * _self.map.tiles.tilewidth,
+										y: bullet.position.y * _self.map.tiles.tileheight
 									});
 								}
+
+								bulletKineticNode.exist = true;
+							});
+						}
+
+						angular.forEach(_self.kinetic.bulletGroup.children, function (bulletKineticNode, index) {
+							if (angular.isUndefined(bulletKineticNode.exist)) {
+								bulletKineticNode.remove();
+							} else {
+								bulletKineticNode.exist = undefined;
 							}
 						});
-						_self.kinetic.layers.players.draw();
-						$scope.battle.teams[team.id].units = team.units;
-						$scope.battle.teams[team.id].health = team.health;
-					});
-					this.play.last = now;
+						_self.kinetic.layers.bullets.draw();
+
+
+						//Iterate over teams
+						angular.forEach(frameData.teams, function (team, _teamIndex) {
+							var teamKineticGroup = _self.kinetic.layers.players.children[team.id];
+							//Create team kinetic group if doesnt exists
+							if (angular.isUndefined(teamKineticGroup)) {
+								console.log("Create group");
+								teamKineticGroup = new Kinetic.Group({
+									id: "team_" + team.id,
+									x: 0,
+									y: 0
+								});
+								_self.kinetic.layers.players.add(teamKineticGroup);
+							}
+
+							angular.forEach(team.units, function (unit, _unitIndex) {
+								var unitKineticNode = teamKineticGroup.children[_unitIndex];
+								if (unit.alive === false && _self.chunks[_self._getFrameChunkIndex(_self.play.frameIndex - 1)][_self._getPartialFrameIndex(_self.play.frameIndex - 1)].data.teams[_teamIndex].units[_unitIndex].alive === true) {
+									if (!angular.isUndefined(unitKineticNode)) {
+										unitKineticNode.destroy();
+										if (_self.state == _self.STATES.PLAYING) {
+											dieAudio.pause();
+											dieAudio.currentTime = 0;
+											dieAudio.play();
+										}
+									}
+								} else {
+									if (angular.isUndefined(unitKineticNode)) {
+										var newUnitKineticNode = new Kinetic.Circle({
+											x: unit.position.x * _self.map.tiles.tilewidth,
+											y: unit.position.y * _self.map.tiles.tileheight,
+											fill: team.color,
+											radius: _self.SQUARE_HEIGHT_PX * unit.radius,
+											stroke: 'white',
+											strokeWidth: 1
+										});
+										teamKineticGroup.add(newUnitKineticNode);
+									} else {
+										unitKineticNode.setPosition({
+											x: unit.position.x * _self.map.tiles.tilewidth,
+											y: unit.position.y * _self.map.tiles.tileheight
+										});
+									}
+								}
+							});
+							_self.kinetic.layers.players.draw();
+							$scope.battle.teams[team.id].units = team.units;
+							$scope.battle.teams[team.id].health = team.health;
+						});
+						_self.play.last = now;
+					};
+
+
+					if (typeof  this.chunks[chunkId].then == "function") {
+						_self.state = $scope.state = _self.STATES.LOADING;
+						console.log("Waiting for promise");
+						_self.chunks[chunkId].then(function () {
+							_self.play.lastTime = new Date().getTime();
+							_self.state = $scope.state = _self.STATES.PLAYING;
+							angular.bind(_self, renderFrame)();
+						});
+					} else {
+						angular.bind(this, renderFrame)();
+					}
+
 
 					$timeout(function () {
 						battleTimeElement.html($parse("(currentTime | date:'mm:ss:sss') + '/' + (totalTime | date : 'mm:ss:sss')")({
@@ -386,32 +445,32 @@ define([
 				var mapInstance;
 				var gameInstance;
 
+				//SCOPE FUNCTIONS
+
 
 				$scope.next = function (offset) {
 					gameInstance.frame(true, offset);
 				};
 
-				$scope.continue = function () {
-					gameInstance.play.lastTime = new Date().getTime();
-					gameInstance.continue();
+				//Resumen
+				$scope.resume = function () {
+					gameInstance.resume();
 				};
 
+				//Starts the game
 				$scope.start = function () {
-					if (gameInstance.state === gameInstance.STATES.PLAYING) {
-						gameInstance.pause();
-					}
-
 					gameInstance.start();
 				};
 
+				//Set game to moment 0
 				$scope.restart = function () {
 					if (gameInstance.state === gameInstance.STATES.PLAYING) {
 						gameInstance.pause();
 					}
-
-					gameInstance.restart();
+					gameInstance.rewind();
 				};
 
+				//Pauses the game
 				$scope.pause = function () {
 					if (gameInstance.state !== gameInstance.STATES.PAUSED) {
 						gameInstance.pause();
@@ -420,16 +479,19 @@ define([
 
 				$scope.$watch('battle', function (battle) {
 					if (!angular.isUndefined(battle) && !angular.isUndefined(battle.map)) {
-						//Initial instances
-						mapInstance = new Map($scope.battle.map.data);
+
 						var fps = $scope.battle.fps;
 						var frameCount = $scope.battle.frameCount;
-						gameInstance = new Game(domElement, mapInstance, fps, frameCount);
-						$scope.$on('$destroy', function() {
+
+						//Initial instances
+						mapInstance = new Map($scope.battle.map.data);
+						gameInstance = new Game(battleContainer, mapInstance, fps, frameCount);
+
+						// Stop on controller destroy...
+						$scope.$on('$destroy', function () {
 							AnimationFrame.cancel(gameInstance.requestAnimationId);
 						});
-						element
-							.css('background-image', 'url("img/map/background.jpg")');
+						//And now start the game
 						gameInstance.start();
 					}
 				});

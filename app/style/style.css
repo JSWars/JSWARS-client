@@ -2341,6 +2341,22 @@ footer {
 
 [game] {
 	text-align: center;
+	background-image: url("/img/map/background.jpg")
+}
+
+.ended[game] {
+	opacity: 0.5;
+}
+
+.score {
+	font-size: 2em;
+	padding: 20px;
+	position: absolute;
+	top: 40%;
+	width: 100%;
+	background-color: black;
+	z-index: 1000;
+	text-align: center;
 }
 
 .group {

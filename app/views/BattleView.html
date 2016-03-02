@@ -2,9 +2,12 @@
 <div class="container">
 	<div class="row" ng-if="battle">
 		<div class="col-md-8 p-0">
-			<div game battle="battle" restart="restart" start="start" continue="continue" next="next" pause="pause"
-				  on-start="onStart" on-frame="onFrame"
-				  state="state"></div>
+			<div game battle="battle" restart="restart" start="start" resume="resume" next="next" pause="pause"
+				  on-start="onStart" on-frame="onFrame" state="state" ng-class="{ended: state == 'ended'}"></div>
+			<div class="score" ng-if="state == 'ended'">
+				Winner is <a
+				ui-sref="user.overall({username:winner.user.username})"><strong>{{winner.user.username}}</strong></a> with <i>{{winner.name}}</i>
+			</div>
 		</div>
 		<div class="col-md-4" style="padding-right: 0px">
 			<div class=" tile text-center">
@@ -15,7 +18,7 @@
 					&nbsp;&nbsp;<span id="battleTime"></span> &nbsp;&nbsp;
 					<button class="btn btn-warning" ng-click="pause()" ng-if="state == 'playing'"><i class="fa fa-pause"></i>
 					</button>
-					<button class="btn btn-primary" ng-click="continue()" ng-if="state != 'playing'"><i
+					<button class="btn btn-primary" ng-click="resume()" ng-if="state != 'playing'"><i
 						class="fa fa-play"></i></button>
 				</div>
 			</div>
@@ -53,6 +56,10 @@
 					</div>
 				</div>
 				<div class="units">
+					<div class="text-center" style="padding:10px" ng-if="team.units == undefined">
+						<img src="img/spinner.gif" width="30" alt="Loading...">
+					</div>
+
 					<span class="unit" ng-class="{die:!unit.alive}" ng-repeat="unit in team.units"
 							ng-style="{'padding-top': 45-(45/100*unit.health) + 'px'}">
 					</span>

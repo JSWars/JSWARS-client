@@ -14,10 +14,17 @@ define([
 
 			$scope.battleId = $stateParams.battle;
 
-
 			BattleService.get({id: $stateParams.battle})
 				.then(function (battle) {
 					$scope.battle = battle;
+
+					//Get winner
+					for (var idx in $scope.battle.teams) {
+						if ($scope.battle.teams[idx].agent === $scope.battle.winner) {
+							$scope.winner = $scope.battle.teams[idx];
+							break;
+						}
+					}
 
 					State.setState({
 						title: battle.teams[0].name + " vs " + battle.teams[1].name
