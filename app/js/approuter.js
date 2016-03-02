@@ -51,10 +51,11 @@ define([
 
 				// Use $stateProvider to configure your states.
 				$stateProvider
-					/*.state("howWorks", {
+					.state("start", {
 					 url: "/",
-					 templateUrl: 'views/HowWorksView.html',
-					 })*/
+					 templateUrl: 'views/startView.html',
+						controller: "StartController"
+					 })
 					.state("rankings", {
 						url: "/rankings",
 						templateUrl: 'views/RankingsView.html',

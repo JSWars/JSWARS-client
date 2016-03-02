@@ -98,6 +98,7 @@ require([
 	'controllers/UserListController',
 	'controllers/OverallController',
 	'controllers/RootController',
+	'controllers/StartController',
 	'controllers/common/NavbarController',
 
 	'controllers/user/ActivityWidgetController',
