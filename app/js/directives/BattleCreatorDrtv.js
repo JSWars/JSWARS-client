@@ -47,13 +47,13 @@ define([
 											$state.go('battle', {
 												battle: queueItem.battle
 											});
-										}, function (error) {
+										}, function (errorResponse) {
 											$scope.waiting = false;
-											$scope.error = "Se ha producido un error";
+											$scope.error = errorResponse.errorId;
 										});
 
 								}, function () {
-									alert("Error");
+									$scope.error = "ERROR_CONFIGURING_BATTLE"
 								})
 						};
 

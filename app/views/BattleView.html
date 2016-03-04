@@ -3,13 +3,18 @@
 	<div class="row" ng-if="battle">
 		<div class="col-md-8 p-0">
 			<div game battle="battle" restart="restart" start="start" resume="resume" next="next" pause="pause"
-				  on-start="onStart" on-frame="onFrame" state="state" ng-class="{ended: state == 'ended'}"></div>
+				  on-start="onStart" on-frame="onFrame" state="state" error="error" ng-class="{ended: state == 'ended'}"></div>
 			<div class="score" ng-if="state == 'ended'">
 				Winner is <a
 				ui-sref="user.overall({username:winner.user.username})"><strong>{{winner.user.username}}</strong></a> with <i>{{winner.name}}</i>
 			</div>
 		</div>
 		<div class="col-md-4" style="padding-right: 0px">
+
+			<div class="alert alert-danger" ng-if="error">
+				<strong>{{error | errorFilter}}</strong>
+			</div>
+
 			<div class=" tile text-center">
 				<h2 class="tile-title">Replay controls</h2>
 

@@ -32,7 +32,7 @@
 				<img src="img/gamerunning.gif" alt="Running battle" width="40"/><br>
 			</div>
 			<div class="p-10" ng-if="error != false">
-				{{error}}. <a href="#" ng-click="cleanError()">Click to try Again.</a>
+				{{error | errorFilter}}. <a href="#" ng-click="cleanError()">Click to try Again.</a>
 			</div>
 
 		</div>

@@ -21,18 +21,9 @@ define([
 	'controllers/user/AgentNewController',
 	'controllers/user/AgentDetailController',
 
-	'filters/CountryFilter'
+	'filters/CountryFilter',
+	'filters/ErrorFilter'
 ], function (app) {
-	/*
-	 app.run(
-	 ['$rootScope', '$state', '$stateParams',
-	 function ($rootScope, $state, $stateParams) {
-	 $rootScope.$state = $state;
-	 $rootScope.$stateParams = $stateParams;
-	 }
-	 ]
-	 );
-	 */
 	app.config(
 		['$stateProvider', '$locationProvider', '$urlRouterProvider',
 			function ($stateProvider, $locationProvider, $urlRouterProvider) {
@@ -74,10 +65,10 @@ define([
 				// Use $stateProvider to configure your states.
 				$stateProvider
 					.state("start", {
-					 url: "/",
-					 templateUrl: 'views/StartView.html',
+						url: "/",
+						templateUrl: 'views/StartView.html',
 						controller: "StartController"
-					 })
+					})
 					.state("rankings", {
 						url: "/rankings",
 						templateUrl: 'views/RankingsView.html',

@@ -1,68 +1,80 @@
-<div class="block-area">
-	<h3 class="block-title">Create new agent</h3>
+<div class="row p-15">
+	<div class="col-md-12">
+		<div class="panel panel-default tile">
+			<div class="panel-heading">
+				<h3 class="panel-title">Create agent</h3>
+			</div>
 
-	<div class="tile p-15">
-		<form class="form-horizontal" name="NewAgentForm" role="form" ng-submit="create($event)" novalidate>
-			<div class="form-group">
-				<label for="newAgentName" class="col-md-2 control-label">Name</label>
+			<div class="p-15">
+				<form name="NewAgentForm" ng-submit="create($event)" novalidate>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="newAgentName" class="col-md-2">Name</label>
 
-				<div class="col-md-10">
-					<div class="formError" ng-messages="NewAgentForm.name.$error"
-						  ng-if="NewAgentForm.name.$dirty && !NewAgentForm.name.$valid">
-						<div class="formErrorContent">
-							<div ng-message="required">Name is required</div>
-							<div ng-message="minlength">Name need at least 5 characters</div>
+
+								<div class="formError" ng-messages="NewAgentForm.name.$error"
+									  ng-if="NewAgentForm.name.$dirty && !NewAgentForm.name.$valid">
+									<div class="formErrorContent">
+										<div ng-message="required">Name is required</div>
+										<div ng-message="minlength">Name need at least 5 characters</div>
+									</div>
+
+									<div class="formErrorArrow">
+										<div class="line10"><!-- --></div>
+										<div class="line9"><!-- --></div>
+										<div class="line8"><!-- --></div>
+										<div class="line7"><!-- --></div>
+										<div class="line6"><!-- --></div>
+										<div class="line5"><!-- --></div>
+										<div class="line4"><!-- --></div>
+										<div class="line3"><!-- --></div>
+										<div class="line2"><!-- --></div>
+										<div class="line1"><!-- --></div>
+									</div>
+								</div>
+								<input type="text" name="name" class="form-control input-sm" id="newAgentName"
+										 ng-model="agent.name"
+										 required minlength="5">
+
+
+							</div>
 						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="newAgentColor">Color</label>
 
-						<div class="formErrorArrow">
-							<div class="line10"><!-- --></div>
-							<div class="line9"><!-- --></div>
-							<div class="line8"><!-- --></div>
-							<div class="line7"><!-- --></div>
-							<div class="line6"><!-- --></div>
-							<div class="line5"><!-- --></div>
-							<div class="line4"><!-- --></div>
-							<div class="line3"><!-- --></div>
-							<div class="line2"><!-- --></div>
-							<div class="line1"><!-- --></div>
+
+								<div class="input-group">
+									<input class="form-control input-sm" colorpicker="hex" type="text" id="newAgentColor"
+											 ng-model="agent.color"/>
+									<span class="input-group-addon" ng-style="{'background-color':agent.color}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								</div>
+
+							</div>
 						</div>
 					</div>
-					<input type="text" name="name" class="form-control input-sm" id="newAgentName" ng-model="agent.name"
-							 required minlength="5">
+					<div class="form-group">
+						<label for="newAgentCode">Javascript Code</label>
 
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="newAgentColor" class="col-md-2 control-label">Color</label>
-
-				<div class="col-md-10">
-					<div class="input-group">
-						<input class="form-control input-sm" colorpicker="hex" type="text" id="newAgentColor" ng-model="agent.color"/>
-						<span class="input-group-addon" ng-style="{'background-color':agent.color}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="newAgentCode" class="col-md-2 control-label">Javascript Code</label>
-
-				<div class="col-md-10">
 					<textarea ui-codemirror ui-codemirror-opts="editorOptions" ng-model="agent.code"
 								 class="form-control auto-size input-sm" id="newAgentCode" name="code"></textarea>
-				</div>
 
-				<div class="alert alert-danger" ng-if="error">
-					<strong>{{error}}</strong>
+						<div class="alert alert-danger m-t-20" ng-if="error">
+							<strong>{{error | errorFilter}}</strong>
 
-					<div ng-if="exceptionMessage">
-						{{exceptionMessage}}
+							<div ng-if="exceptionMessage">
+								{{exceptionMessage}}
+							</div>
+						</div>
 					</div>
-				</div>
+					<div class="text-right">
+
+						<button type="submit" class="btn btn-primary">Save agent</button>
+
+					</div>
+				</form>
 			</div>
-			<div class="form-group text-right">
-				<div class="col-md-offset-2 col-md-10">
-					<button type="submit" class="btn btn-info btn-sm m-t-10">Save</button>
-				</div>
-			</div>
-		</form>
+		</div>
 	</div>
 </div>

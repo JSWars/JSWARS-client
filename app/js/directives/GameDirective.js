@@ -16,7 +16,8 @@ define([
 				battle: '=',
 				onFrame: '=',
 				onStart: '=',
-				state: '='
+				state: '=',
+				error: '='
 			},
 			link: function ($scope, element, attrs) {
 
@@ -233,7 +234,7 @@ define([
 							$scope.onStart(_self.frameCount, _self.fps);
 							_self.resume();
 						}, function () {
-							alert("Error ocurred loading game chunks");
+							$scope.error = "ERROR_LOADING_CHUNKS";
 						});
 				};
 
@@ -427,6 +428,9 @@ define([
 							_self.play.lastTime = new Date().getTime();
 							_self.state = $scope.state = _self.STATES.PLAYING;
 							angular.bind(_self, renderFrame)();
+						}, function () {
+							_self.state = $scope.state = _self.STATES.PAUSED;
+							$scope.error = "ERROR_LOADING_CHUNKS";
 						});
 					} else {
 						angular.bind(this, renderFrame)();

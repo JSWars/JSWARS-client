@@ -26,7 +26,11 @@ define([
 						username: $stateParams.username
 					});
 				}, function (e) {
-					alert(e.errorId);
+					$scope.error = e.errorId;
+					$scope.exceptionMessage = e.exceptionMessage;
+					$timeout(function () {
+						$scope.error = false;
+					}, 4000);
 				});
 		};
 

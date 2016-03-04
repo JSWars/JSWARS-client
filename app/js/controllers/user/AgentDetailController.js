@@ -59,14 +59,10 @@ define([
 					$timeout(function () {
 						$scope.message = false;
 					}, 4000);
-					versionsPageChanged();
+					$scope.versionsPageChanged();
 				}, function (errorResponse) {
-					if (errorResponse.errorId = "INVALID_JAVASCRIPT") {
-						$scope.error = "Invalid agent syntax";
-						$scope.exceptionMessage = errorResponse.exceptionMessage;
-					} else {
-						$scope.error = "Can't create agent due to unknown error";
-					}
+					$scope.error = errorResponse.errorId;
+					$scope.exceptionMessage = errorResponse.exceptionMessage;
 					$timeout(function () {
 						$scope.error = false;
 					}, 4000);
@@ -76,4 +72,4 @@ define([
 		}
 	}
 	])
-})
+});
