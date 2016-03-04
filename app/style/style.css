@@ -95,6 +95,10 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 	color: rgba(255, 255, 255, 0.5);
 }
 
+a{
+	font-weight: bold;
+}
+
 a:hover, a:focus {
 	color: #FFD600;
 	text-decoration: none;

@@ -9,7 +9,7 @@
 						<th>Name</th>
 						<th>Created</th>
 						<th>Starts</th>
-						<th class="text-right">Participants</th>
+						<th class="text-right hidden-xs">Participants</th>
 						<th></th>
 					</tr>
 					</thead>
@@ -29,7 +29,7 @@
 							tooltip="{{tournament.start | amDateFormat: 'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>
 							<span ng-if="!tournament.start">Once full</span>
 						</td>
-						<td class="text-right">{{tournament.registrations}} / {{tournament.max}}</td>
+						<td class="text-right hidden-xs">{{tournament.registrations}} / {{tournament.max}}</td>
 						<td class="text-right">
 							<button ng-if="tournament.joined == false" tournament-join="tournament._id" on-complete="refresh"
 									  type="button" class="btn btn-primary btn-xs">

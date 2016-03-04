@@ -46,7 +46,7 @@
 				<th>Name</th>
 				<th>Created</th>
 				<th class="text-right">Victories</th>
-				<th class="text-right">Losses</th>
+				<th class="text-right hidden-xs">Losses</th>
 				<!--<th class="text-right">Rank</th>-->
 				<th style="width: 75px"></th>
 			</tr>
@@ -61,7 +61,7 @@
 				<td><span am-time-ago="agent.moment"
 							 tooltip="{{agent.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
 				<td class="text-right">{{agent.wins}}</td>
-				<td class="text-right">{{agent.losses}}</td>
+				<td class="text-right hidden-xs">{{agent.losses}}</td>
 				<!--<td class="text-right">{{agent.rank}}</td>-->
 				<td class="text-center">
 					<button type="button" class="btn btn-xs"
