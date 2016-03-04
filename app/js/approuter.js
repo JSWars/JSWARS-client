@@ -53,7 +53,7 @@ define([
 				$stateProvider
 					.state("start", {
 					 url: "/",
-					 templateUrl: 'views/startView.html',
+					 templateUrl: 'views/StartView.html',
 						controller: "StartController"
 					 })
 					.state("rankings", {
