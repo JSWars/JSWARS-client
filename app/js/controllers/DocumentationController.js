@@ -22,9 +22,9 @@ define([
 			"json-map",
 			"json-gameState",
 			"json-teams",
-			"js-getPath",
+			"js-getpath",
 			"js-action",
-			"js-vector2D",
+			"js-vector2d",
 			"json-bullet"
 		];
 
