@@ -1,4 +1,5 @@
 define([
+	"jquery",
 	'angular',
 	'angular-ui-router',
 	'angular-resource',

@@ -74,7 +74,8 @@ require.config({
 	},
 	'priority': [
 		"jquery",
-		"angular"
+		"angular",
+		"app"
 	]
 });
 

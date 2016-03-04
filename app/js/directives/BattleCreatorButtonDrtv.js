@@ -12,7 +12,7 @@ define([
 					},
 					link: function ($scope, element, attrs) {
 
-						$(element).click(function (event) {
+						element.click(function (event) {
 							SessionService.get()
 								.then(function () {
 									event.preventDefault();
