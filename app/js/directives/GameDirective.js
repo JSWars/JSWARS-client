@@ -384,10 +384,10 @@ define([
 
 							angular.forEach(team.units, function (unit, _unitIndex) {
 								var unitKineticNode = teamKineticGroup.children[_unitIndex];
-								if (unit.alive === false && _self.chunks[_self._getFrameChunkIndex(_self.play.frameIndex - 1)][_self._getPartialFrameIndex(_self.play.frameIndex - 1)].data.teams[_teamIndex].units[_unitIndex].alive === true) {
+								if (unit.alive === false) {
 									if (!angular.isUndefined(unitKineticNode)) {
 										unitKineticNode.destroy();
-										if (_self.state == _self.STATES.PLAYING) {
+										if (_self.state == _self.STATES.PLAYING && _self.chunks[_self._getFrameChunkIndex(_self.play.frameIndex - 1)][_self._getPartialFrameIndex(_self.play.frameIndex - 1)].data.teams[_teamIndex].units[_unitIndex].alive === true) {
 											dieAudio.pause();
 											dieAudio.currentTime = 0;
 											dieAudio.play();
