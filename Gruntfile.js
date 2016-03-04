@@ -26,7 +26,7 @@ module.exports = function (grunt) {
 				files: [
 					{expand: true, src: ['{fonts,img,samples,sounds,video,views}/**'], cwd: 'app/', dest: 'build/pro/'},
 					{expand: true, src: ['*.html'], cwd: 'app/', dest: 'build/pro/'},
-					{src: ['app/js/components/requirejs/require.js'], dest: 'build/pro/js/require.js'}
+					{src: ['app/js/components/requirejs/require.js'], dest: 'build/pro/js/components/requirejs/require.js'}
 				]
 			}
 		},
