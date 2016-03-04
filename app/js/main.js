@@ -83,31 +83,7 @@ require([
 	'constants',
 	'approuter',
 	'appbootstrap',
-	'bootstrap',
-
-	'directives/GameDirective',
-	'directives/BattleCreatorDrtv',
-	'directives/BattleCreatorButtonDrtv',
-
-	'controllers/common/NavbarController',
-	'controllers/tournament/TournamentListController',
-	'controllers/tournament/TournamentController',
-	'controllers/LastBattlesController',
-	'controllers/RankingsController',
-	'controllers/DocumentationController',
-	'controllers/CookiesController',
-	'controllers/BattleController',
-	'controllers/UserController',
-	'controllers/UserListController',
-	'controllers/OverallController',
-	'controllers/RootController',
-	'controllers/StartController',
-
-	'controllers/user/AgentNewController',
-	'controllers/user/AgentDetailController',
-
-	'filters/CountryFilter'
-
+	'bootstrap'
 ], function (app) {
 
 	(function (i, s, o, g, r, a, m) {

@@ -1,5 +1,27 @@
 define([
-	'app'
+	'app',
+	'directives/GameDirective',
+	'directives/BattleCreatorDrtv',
+	'directives/BattleCreatorButtonDrtv',
+
+	'controllers/RootController',
+	'controllers/common/NavbarController',
+	'controllers/tournament/TournamentListController',
+	'controllers/tournament/TournamentController',
+	'controllers/LastBattlesController',
+	'controllers/RankingsController',
+	'controllers/DocumentationController',
+	'controllers/CookiesController',
+	'controllers/BattleController',
+	'controllers/UserController',
+	'controllers/UserListController',
+	'controllers/OverallController',
+	'controllers/StartController',
+
+	'controllers/user/AgentNewController',
+	'controllers/user/AgentDetailController',
+
+	'filters/CountryFilter'
 ], function (app) {
 	/*
 	 app.run(
