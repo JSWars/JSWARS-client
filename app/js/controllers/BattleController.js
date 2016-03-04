@@ -1,9 +1,9 @@
 define([
 		'controllers/Controllers',
 		'moment',
-		'factories/UserFactory',
 		'services/BattleService',
-		'directives/GameDirective'
+		'directives/GameDirective',
+		'services/StateService'
 	], function (Controllers, moment) {
 		Controllers.controller("BattleController", ['$scope', '$timeout', '$stateParams', 'State', 'BattleService', function ($scope, $timeout, $stateParams, State, BattleService) {
 

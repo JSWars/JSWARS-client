@@ -1,6 +1,7 @@
 define([
 		'directives/Directives',
 		'services/SessionService',
+		'services/UserService',
 		'services/TournamentService'
 	],
 	function (Directives) {

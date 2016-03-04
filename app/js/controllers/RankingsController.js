@@ -1,6 +1,7 @@
 define([
 	'controllers/Controllers',
-	'factories/RankingsFactory'
+	'factories/RankingsFactory',
+	'services/StateService'
 ], function (Controllers) {
 	Controllers.controller("RankingsController", ['$scope', 'Rankings', 'State', function ($scope, Rankings, State) {
 		$scope.rankingRange = 24;

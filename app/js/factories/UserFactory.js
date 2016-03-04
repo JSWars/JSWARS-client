@@ -1,5 +1,6 @@
 define([
-		'factories/Factories'
+		'factories/Factories',
+		'factories/ConfigFactory'
 	],
 	function (Factories) {
 		Factories.factory('UserFactory', ['$resource', 'Config', function UserFactory($resource, Config) {

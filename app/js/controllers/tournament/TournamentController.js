@@ -1,8 +1,7 @@
 define([
 		'controllers/Controllers',
-		'moment',
 		'services/TournamentService',
-		'directives/TournamentJoinDialogDrtv'
+		'services/StateService'
 	], function (Controllers) {
 		Controllers.controller("TournamentController", ['$scope', '$state', '$timeout', '$stateParams', 'State', 'TournamentService', function ($scope, $state, $timeout, $stateParams, State, TournamentService) {
 

@@ -1,7 +1,8 @@
 define([
 	'controllers/Controllers',
 	'services/AgentService',
-	'services/AgentVersionService'
+	'services/AgentVersionService',
+	'services/StateService'
 ], function (Controllers) {
 	Controllers.controller('AgentDetailController', ['$scope', '$state', '$stateParams', '$timeout', 'AgentService', 'AgentVersionService', 'State', function ($scope, $state, $stateParams, $timeout, AgentService, AgentVersionService, State) {
 

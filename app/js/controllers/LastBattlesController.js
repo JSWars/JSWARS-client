@@ -1,6 +1,7 @@
 define([
 		'controllers/Controllers',
-		'services/BattleService'
+		'services/BattleService',
+		'services/StateService'
 	], function (Controllers) {
 		Controllers.controller("LastBattlesController", ['$scope', '$timeout', '$stateParams', 'State', 'BattleService', function ($scope, $timeout, $stateParams, State, BattleService) {
 

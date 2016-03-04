@@ -1,5 +1,8 @@
 define([
-		'directives/Directives'
+		'directives/Directives',
+		'services/AgentService',
+		'services/UserService',
+		'services/BattleService'
 	],
 	function (Directives) {
 		Directives

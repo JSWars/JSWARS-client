@@ -1,9 +1,10 @@
 define([
 	'controllers/Controllers',
-	'factories/ConfigFactory'
+	'factories/ConfigFactory',
+	'services/UserService',
+	'services/StateService'
 ], function (Controllers) {
 	Controllers.controller("UserListController", ['$scope', 'UserService', 'State', function UserListController($scope, UserService, State) {
-
 
 		State.setState({
 			title: "Users"

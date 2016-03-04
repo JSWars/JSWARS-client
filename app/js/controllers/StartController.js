@@ -1,5 +1,6 @@
 define([
-	'controllers/Controllers'
+	'controllers/Controllers',
+	'services/StateService'
 ], function (Controllers) {
 	Controllers.controller("StartController", ['$scope', 'State', function ($scope, State) {
 

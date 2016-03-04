@@ -3,8 +3,6 @@ define([
 	'services/AgentService'
 ], function (Controllers) {
 	Controllers.controller("OverallController", ['$scope', '$log', '$stateParams', 'AgentService', function OverallController($scope, $log, $stateParams, AgentService) {
-
-
 		$scope.userPageChanged = function () {
 			AgentService.query({
 				username: $stateParams.username,

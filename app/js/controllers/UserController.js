@@ -2,9 +2,9 @@ define([
 	'controllers/Controllers',
 	'services/SessionService',
 	'services/AgentService',
-	'factories/ConfigFactory',
-	'directives/ProfileUpdateDialogDrtv',
-	'controllers/user/ActivityWidgetController'
+	'services/UserService',
+	'services/StateService',
+	'directives/ProfileUpdateDialogDrtv'
 ], function (Controllers) {
 	Controllers.controller("UserController", ['$scope', '$log', '$stateParams', '$modal', 'SessionService', 'UserService', 'AgentService', 'State', function UserController($scope, $log, $stateParams, $modal, SessionService, UserService, AgentService, State) {
 

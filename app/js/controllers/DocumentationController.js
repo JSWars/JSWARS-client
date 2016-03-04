@@ -1,8 +1,6 @@
-/**
- * Created by Luiss_000 on 11/12/2015.
- */
 define([
-	'controllers/Controllers'
+	'controllers/Controllers',
+	'services/StateService'
 ], function (Controllers) {
 	Controllers.controller("DocumentationController", ['$http', '$scope', 'State', function ($http, $scope, State) {
 

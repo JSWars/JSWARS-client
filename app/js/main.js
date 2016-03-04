@@ -1,6 +1,7 @@
 "use strict";
 require.config({
 	'baseUrl': './js/',
+	'urlArgs': "bust=0.0.0",
 	waitSeconds: 60,
 	'paths': {
 		'domReady': 'components/domReady/domReady',
@@ -83,10 +84,12 @@ require([
 	'approuter',
 	'appbootstrap',
 	'bootstrap',
-	//'lib/icheck',
 
 	'directives/GameDirective',
+	'directives/BattleCreatorDrtv',
+	'directives/BattleCreatorButtonDrtv',
 
+	'controllers/common/NavbarController',
 	'controllers/tournament/TournamentListController',
 	'controllers/tournament/TournamentController',
 	'controllers/LastBattlesController',
@@ -99,26 +102,25 @@ require([
 	'controllers/OverallController',
 	'controllers/RootController',
 	'controllers/StartController',
-	'controllers/common/NavbarController',
 
-	'controllers/user/ActivityWidgetController',
 	'controllers/user/AgentNewController',
 	'controllers/user/AgentDetailController',
-
-
-	'directives/BattleCreatorDrtv',
-	'directives/BattleCreatorButtonDrtv',
-
-	'services/StateService',
 
 	'filters/CountryFilter'
 
 ], function (app) {
 
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+		a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 	ga('create', 'UA-1018881-6', 'auto');
 	ga('send', 'pageview');
