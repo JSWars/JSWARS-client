@@ -31,7 +31,7 @@
 						</td>
 						<td class="text-right hidden-xs">{{tournament.registrations}} / {{tournament.max}}</td>
 						<td class="text-right">
-							<button ng-if="tournament.joined == false" tournament-join="tournament._id" on-complete="refresh"
+							<button ng-if="tournament.joined == false" tournament-join="tournament._id" on-complete="refresh()"
 									  type="button" class="btn btn-primary btn-xs">
 								Join now
 							</button>

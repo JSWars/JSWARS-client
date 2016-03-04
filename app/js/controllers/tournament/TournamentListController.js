@@ -2,7 +2,8 @@ define([
 		'controllers/Controllers',
 		'factories/UserFactory',
 		'services/TournamentService',
-		'services/StateService'
+		'services/StateService',
+		'directives/TournamentJoinDialogDrtv'
 	], function (Controllers) {
 		Controllers.controller("TournamentListController", ['$scope', '$state', '$timeout', '$stateParams', 'State', 'TournamentService', function ($scope, $state, $timeout, $stateParams, State, TournamentService) {
 			State.setState({

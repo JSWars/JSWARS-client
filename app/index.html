@@ -32,7 +32,7 @@
 <header id="header" class="media">
 	<a id="menu-toggle" data-toggle="collapse" data-target=".navbar-collapse"></a>
 	<a class="logo pull-left" href="#">JS WARS</a>
-	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation"  data-toggle="collapse" data-target=".navbar-collapse">
+	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation" >
 		<ul class="nav navbar-nav">
 			<li>
 				<a ui-sref="start">Start</a>
@@ -54,8 +54,6 @@
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right ng-cloak">
-
-
 			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)">Sign in with GitHub <i
 				class="fa fa-github"></i></a></li>
 			<li ng-if="session.username"><a class="btn btn-register" ui-sref="user.overall({username: session.username})">Welcome
