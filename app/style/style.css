@@ -98,7 +98,6 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
 a{
 	font-weight: bold;
 }
-
 a:hover, a:focus {
 	color: #FFD600;
 	text-decoration: none;
@@ -2411,3 +2410,10 @@ footer {
 	z-index: 250;
 }
 
+.blink {
+	animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+	50% { opacity: 0.0; }
+}
