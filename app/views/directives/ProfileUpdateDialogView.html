@@ -1,0 +1,136 @@
+<div class="modal-header">
+	<h3 class="modal-title">Modify profile</h3>
+</div>
+<div class="modal-body">
+	<script type="text/ng-template" id="countryTemplate.html">
+		<a>
+			<img ng-src="img/flags/16/{{match.model.code}}.png" width="16">
+			<span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
+		</a>
+	</script>
+
+	<form class="form-horizontal" name="updateProfileForm" autocomplete="false" novalidate>
+		<div class="form-group">
+			<label for="profileName" class="col-lg-3 control-label">Name</label>
+
+			<div class="col-lg-9">
+				<div class="formError" ng-messages="updateProfileForm.name.$error"
+					  ng-if="updateProfileForm.name.$dirty && !updateProfileForm.name.$valid">
+					<div class="formErrorContent">
+						<div ng-message="required">Name is required</div>
+					</div>
+
+					<div class="formErrorArrow">
+						<div class="line10"><!-- --></div>
+						<div class="line9"><!-- --></div>
+						<div class="line8"><!-- --></div>
+						<div class="line7"><!-- --></div>
+						<div class="line6"><!-- --></div>
+						<div class="line5"><!-- --></div>
+						<div class="line4"><!-- --></div>
+						<div class="line3"><!-- --></div>
+						<div class="line2"><!-- --></div>
+						<div class="line1"><!-- --></div>
+					</div>
+				</div>
+				<input class="form-control"
+						 type="text"
+						 id="profileName"
+						 name="name"
+						 ng-model="profile.name" required/>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="profileEmail" class="col-lg-3 control-label">Email</label>
+
+			<div class="col-lg-9">
+				<div class="formError" ng-messages="updateProfileForm.email.$error"
+					  ng-if="updateProfileForm.email.$dirty && !updateProfileForm.email.$valid">
+					<div class="formErrorContent">
+						<div ng-message="required">Email is required</div>
+						<div ng-message="email">Email must be valid</div>
+
+					</div>
+
+					<div class="formErrorArrow">
+						<div class="line10"><!-- --></div>
+						<div class="line9"><!-- --></div>
+						<div class="line8"><!-- --></div>
+						<div class="line7"><!-- --></div>
+						<div class="line6"><!-- --></div>
+						<div class="line5"><!-- --></div>
+						<div class="line4"><!-- --></div>
+						<div class="line3"><!-- --></div>
+						<div class="line2"><!-- --></div>
+						<div class="line1"><!-- --></div>
+					</div>
+				</div>
+				<input class="form-control"
+						 type="email"
+						 id="profileEmail"
+						 name="email"
+						 ng-model="profile.email" required/>
+			</div>
+		</div>
+
+		<!--<div class="form-group">-->
+		<!--<label for="profileAvatar" class="col-lg-3 control-label">Imagen</label>-->
+
+		<!--<div class="col-lg-9">-->
+		<!--<div ng-file-drop ng-model="files" class="drop-box"-->
+		<!--drag-over-class="dragover" multiple="false"-->
+		<!--allow-dir="true" accept="image/*,application/pdf" id="profileAvatar">-->
+		<!--Arrastra tu avatar aquí-->
+		<!--</div>-->
+		<!--<div ng-messages="updateProfileForm.avatar.$error">-->
+		<!--<label for="profileAvatar" ng-message="required" class="error">Obligatorio</label>-->
+		<!--</div>-->
+
+		<!--</div>-->
+		<!--</div>-->
+
+		<div class="form-group">
+			<label for="profileCountry" class="col-lg-3 control-label">Country</label>
+
+			<div class="col-lg-9">
+				<div class="formError" ng-messages="updateProfileForm.country.$error"
+					  ng-if="updateProfileForm.country.$error.required">
+					<div class="formErrorContent">
+						<div ng-message="required">Country is required</div>
+					</div>
+					<div class="formErrorArrow">
+						<div class="line10"><!-- --></div>
+						<div class="line9"><!-- --></div>
+						<div class="line8"><!-- --></div>
+						<div class="line7"><!-- --></div>
+						<div class="line6"><!-- --></div>
+						<div class="line5"><!-- --></div>
+						<div class="line4"><!-- --></div>
+						<div class="line3"><!-- --></div>
+						<div class="line2"><!-- --></div>
+						<div class="line1"><!-- --></div>
+					</div>
+				</div>
+				<div class="input-group">
+					<input type="text" id="profileCountry" name="country"
+							 typeahead="country as country.name for country in countries | filter:{name:$viewValue} | limitTo: 10"
+							 typeahead-editable="false"
+							 typeahead-template-url="countryTemplate.html"
+							 ng-model="profile.country"
+							 required
+							 class="form-control">
+
+					<span class="input-group-addon"><img ng-src="/img/flags/16/{{profile.country.code}}.png" width="16"
+																	 height="16" ng-if="profile.country.code"
+																	 alt="{{profile.country.name}}"/>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</div>
+
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary btn-lg" ng-disabled="updateProfileForm.$invalid" ng-click="update()">Update</button>
+	<button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+</div>

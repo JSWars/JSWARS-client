@@ -1,0 +1,33 @@
+<div class="tile">
+	<h2 class="tile-title">Recent Activities</h2>
+
+	<div class="tile-config dropdown">
+		<a data-toggle="dropdown" href="" class="tooltips tile-menu" title=""
+			data-original-title="Options"></a>
+		<ul class="dropdown-menu pull-right text-right">
+			<li><a href="">Edit</a></li>
+			<li><a href="">Delete</a></li>
+		</ul>
+	</div>
+
+	<div class="listview narrow">
+		<div class="media" ng-repeat="activityItem in activity">
+			<!--<div class="pull-right">
+             <img width="37" src="img/profile-pics/1.jpg" alt="">
+         </div>-->
+			<div class="media-body">
+				{{activityItem.object}} {{activityItem.action}} over {{activityItem.id}}
+
+				<div class="clearfix"></div>
+				<small class="muted">
+					<span am-time-ago="activityItem.moment"></span>
+				</small>
+			</div>
+		</div>
+		<div class="media p-5 text-center l-100">
+			<a href="">
+				<small>VIEW ALL</small>
+			</a>
+		</div>
+	</div>
+</div>

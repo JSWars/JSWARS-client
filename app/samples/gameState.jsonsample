@@ -1,0 +1,16 @@
+{
+  "Utils":{
+	"Vector2D":Object,
+	"colMap":Object,
+	"log":Object
+  }
+
+  "game":{
+	"teams":Object,
+	"bullets":Objects Array
+  }
+
+  //shortcuts
+  "me":Object, //My team
+  "enemy":Object //enemy team
+}

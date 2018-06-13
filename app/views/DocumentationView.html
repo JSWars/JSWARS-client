@@ -1,0 +1,356 @@
+<section class="container">
+	<div class="block-area">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="tile">
+					<h2 class="tile-title">Index</h2>
+					<ul class="p-20 lists-mark">
+						<li>
+							<a href="#agent">Agent</a>
+						</li>
+						<li>
+							<a href="#gameState">Game State</a>
+						</li>
+						<li>
+							<a href="#teams">Teams</a>
+						</li>
+						<li>
+							<a href="#units">Units</a>
+						</li>
+						<li>
+							<a href="#bullets">Bullets</a>
+						</li>
+						<li>
+							<a href="#actions">Actions</a>
+						</li>
+						<li>
+							<a href="#getPath">Get Path</a>
+						</li>
+						<li>
+							<a href="#vector2d">Utils: Vector2D</a>
+						</li>
+						<li>
+							<a href="#colMap">Utils: Colision Map</a>
+						</li>
+						<li>
+							<a href="#log">Utils: Log</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div id="documentation" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">DOCUMENTATION</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							In this section you can learn how to create an agent for JSWars, in your profile page you can add
+							new agent codes
+							writes on Javascript. Just type a name for your agent and the code with the following structure, it
+							must have a function
+							init with the code that you want to execute before the battle start, in this point you have all the
+							battle information about
+							map units, and all of his attributes. You have a longer timeout for compute that info and use it to
+							prepare whatever you want for
+							the battle.
+						</p>
+
+						<p>
+
+							After that, the battle begins and in every thick of the game the game will execute your function
+							tick(), it will have a shorter time
+							out to execute this. This function must return a list of actions for your units, you can move,
+							shoot or both actions with any of your units.
+							If you exceed the timeout for return an action your units will not move or shoot.
+						</p>
+
+						<p>
+							In the following sections you can see the structure about the variables and functions that you can
+							use:
+						</p>
+
+
+					</div>
+
+
+				</div>
+
+				<!-- AGENT -->
+
+				<div id="agent" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">AGENT</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							The agent code must be writen on javascript, and uploaded in the user page by the option "Create
+							new Agent",
+							the estructure of the agent will be the following:
+						</p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeAgent" name="code">
+						</div>
+					</div>
+
+				</div>
+
+
+				<div id="gameState" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">GAME STATE</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							The agent will have access to the next gobal variables:
+						</p>
+
+
+						<div ui-codemirror="editorOptions" ng-model="codeGameState" name="code">
+						</div>
+
+					</div>
+
+
+				</div>
+
+
+				<!-- COLMAP -->
+
+				<div id="colMap" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">Utils.colMap</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							In this section you have access to all Map information, width and height of the map, the colMap
+							consist in a grid with the collision information,
+							and there is a function with a pathfinding using A* accesible for the agents, if you wanna
+							implements yours you're able to do so.
+
+
+						</p>
+
+						<p>
+							In the colMap array for check a position collision you must get colMap[x][y], the value 0 means
+							free collision and 1 means collision.
+							Be sure to apply a floor function with the position to get the info without errors.
+
+						</p>
+
+						<p>
+							EXAMPLE:
+						</p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeMap" name="code">
+						</div>
+
+
+						<p>
+							<img src="/img/documentation/map.png" alt=""/>
+						</p>
+
+					</div>
+
+
+				</div>
+
+				<!-- getPath-->
+				<div id="getPath" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">GET PATH</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							You can use the function getPath from the map object to get a path point o point using a*, anyways
+							you can implement
+							your own methods.
+
+						</p>
+
+						<p>
+							EXAMPLE:
+						</p>
+
+
+						<div ui-codemirror="editorOptions" ng-model="codeGetpath" name="code">
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+
+				<!-- VECTOR2D -->
+
+				<div id="vector2d" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">Utils.Vector2D</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Under construction
+
+						</p>
+
+						<p>
+							Code:
+						</p>
+
+
+						<div ui-codemirror="editorOptions" ng-model="codeVector2d" name="code">
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+
+				<!-- LOG -->
+				<div id="log" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">Utils.log</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Under construction...
+						</p>
+					</div>
+
+				</div>
+
+
+				<!-- TEAMS -->
+				<div id="teams" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">TEAMS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Under construction..
+						</p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeTeams" name="code">
+						</div>
+					</div>
+
+
+				</div>
+
+
+				<!-- UNITS -->
+
+				<div id="units" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">UNITS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+						</p>
+
+						<p>
+
+
+						</p>
+
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<img src="/img/documentation/unit.png" alt=""/></div>
+							<div class="col-md-6">
+
+								<p>
+
+								<H3>EXAMPLE:</H3></p>
+								<div ui-codemirror="editorOptions" ng-model="codeUnits" name="code"></div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+
+				<!-- BULLETS-->
+
+				<div id="bullets" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">BULLETS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
+							massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
+							quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+							imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+						</p>
+
+
+						<div class="row">
+							<div class="col-md-6">
+								<img src="/img/documentation/bullet.png" alt=""/>
+							</div>
+							<div class="col-md-6">
+								<p>
+
+								<h3>EXAMPLE:</h3>
+								</p>
+								<div ui-codemirror="editorOptions" ng-model="codeBullet" name="code"></div>
+							</div>
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+
+				<!--ACTIONS-->
+
+				<div id="actions" class="panel panel-default tile">
+					<div class="panel-heading">
+						<h2 class="panel-title">ACTIONS</h2>
+					</div>
+
+					<div class="panel-body">
+						<p>
+							For each unit of your team, you can asign them 2 types of action. Move, shooting or both. See the
+							code example:
+						</p>
+
+						<div ui-codemirror="editorOptions" ng-model="codeAction" name="code">
+
+						</div>
+
+
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>

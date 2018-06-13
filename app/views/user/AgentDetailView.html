@@ -1,0 +1,124 @@
+<div class="row p-15">
+	<div class="col-md-8">
+		<div class="panel panel-default tile">
+			<div class="panel-heading">
+				<h3 class="panel-title">Modify agent</h3>
+			</div>
+			<div class="p-15">
+				<form ng-submit="update($event)" name="AgentForm">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="agentName">Name</label>
+
+								<div class="formError" ng-messages="AgentForm.name.$error"
+									  ng-if="AgentForm.name.$dirty && !AgentForm.name.$valid">
+									<div class="formErrorContent">
+										<div ng-message="required">Name is required</div>
+										<div ng-message="minlength">Name need at least 5 characters</div>
+									</div>
+
+									<div class="formErrorArrow">
+										<div class="line10"><!-- --></div>
+										<div class="line9"><!-- --></div>
+										<div class="line8"><!-- --></div>
+										<div class="line7"><!-- --></div>
+										<div class="line6"><!-- --></div>
+										<div class="line5"><!-- --></div>
+										<div class="line4"><!-- --></div>
+										<div class="line3"><!-- --></div>
+										<div class="line2"><!-- --></div>
+										<div class="line1"><!-- --></div>
+									</div>
+								</div>
+								<input type="text" id="agentName" class="form-control" name="name" disabled
+										 ng-value="agent.name"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="agentVersion">Version</label>
+								<input class="form-control" id="agentVersion" ng-value="(editVersion.moment | date: 'medium')"
+										 readonly/>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="agentName">Code</label>
+					<textarea ui-codemirror ui-codemirror-opts="editorOptions" ng-model="editVersion.code"
+								 class="form-control auto-size input-sm" id="newAgentCode" name="code"></textarea>
+
+								<div ng-messages="NewAgentForm.code.$error">
+									<div ng-message="required">Code is required</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="text-right">
+						<button ng-click="update($event)" class="btn btn-primary"
+								  ng-disabled="!AgentForm.code.$dirty && !AgentForm.name.$dirty ">
+							Update agent
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="alert alert-success" ng-if="message">
+			{{message}}
+		</div>
+		<div class="alert alert-danger" ng-if="error">
+			<strong>{{error | errorFilter}}</strong>
+
+			<div ng-if="exceptionMessage">
+				{{exceptionMessage}}
+			</div>
+		</div>
+
+		<h3 class="block-title m-t-0">Versions</h3>
+
+		<div class="tile ng-scope">
+			<table class="table table-bordered">
+				<thead>
+				<tr class="panel-title">
+					<th></th>
+					<th></th>
+					<th>Version</th>
+					<th class="text-right">Battles</th>
+					<th class="text-right">View</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="version in versions.docs track by $index">
+					<td class="text-center"><span class="icon" ng-if="version._id == editVersion._id"
+															tooltip="You are seeing this"></span></td>
+					<td class="text-center"><span class="icon" ng-if="$first" title="Used in battles"
+															tooltip="Used in battles"></span></td>
+					<td><span am-time-ago="version.moment"
+								 tooltip="{{version.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
+					<td class="text-right">{{version.battles}}</td>
+					<td class="text-right">
+						<button ng-click="loadVersion($event,version)" class="btn btn-default btn-xs">View</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<p class="text-center">
+			<pagination total-items="versions.total" ng-model="page" num-pages="versions.pages"
+							ng-change="versionsPageChanged()" max-size="5"></pagination>
+		</p>
+		<div class="tile p-5">
+			<i class="icon"></i> Remember that the version used is latest.
+		</div>
+
+	</div>
+</div>
+

@@ -1,0 +1,78 @@
+<br/>
+<div class="container">
+	<div class="row" ng-if="battle">
+		<div class="col-md-8 p-0">
+			<div game battle="battle" restart="restart" start="start" resume="resume" next="next" pause="pause"
+				  on-start="onStart" on-frame="onFrame" state="state" error="error" ng-class="{ended: state == 'ended'}"></div>
+			<div class="score" ng-if="state == 'ended'">
+				Winner is <a
+				ui-sref="user.overall({username:winner.user.username})"><strong>{{winner.user.username}}</strong></a> with <i>{{winner.name}}</i>
+			</div>
+		</div>
+		<div class="col-md-4" style="padding-right: 0px">
+
+			<div class="alert alert-danger" ng-if="error">
+				<strong>{{error | errorFilter}}</strong>
+			</div>
+
+			<div class=" tile text-center">
+				<h2 class="tile-title">Replay controls</h2>
+
+				<div class="p-10">
+					<button class="btn btn-primary" ng-click="restart()"><i class="fa fa-stop"></i></button>
+					&nbsp;&nbsp;<span id="battleTime"></span> &nbsp;&nbsp;
+					<button class="btn btn-warning" ng-click="pause()" ng-if="state == 'playing'"><i class="fa fa-pause"></i>
+					</button>
+					<button class="btn btn-primary" ng-click="resume()" ng-if="state != 'playing'"><i
+						class="fa fa-play"></i></button>
+				</div>
+			</div>
+			<div class=" tile text-center">
+				<h2 class="tile-title">Per Frame controls</h2>
+
+				<div class="p-10">
+					<button class="btn btn-primary" ng-click="next(-10)" ng-disabled="state === 'playing'"><i
+						class="fa fa-backward"></i></button>
+					<button class="btn btn-primary" ng-click="next(-1)" ng-disabled="state === 'playing'"><i
+						class="fa fa-step-backward"></i></button>
+					<button class="btn btn-primary" ng-click="next(1)" ng-disabled="state === 'playing'"><i
+						class="fa fa-step-forward"></i></button>
+					<button class="btn btn-primary" ng-click="next(10)" ng-disabled="state === 'playing'"><i
+						class="fa fa-forward"></i></button>
+				</div>
+			</div>
+			<div ng-repeat="team in battle.teams" class="tile">
+				<div class="tile-title row" ng-style="{'border-bottom': '3px solid ' + team.color}">
+					<div class="col-xs-4">
+						<a title="{{user.username}}" ui-sref="user.overall({username:team.user.username})"><img
+							class="profile-pic"
+							ng-src="{{team.user.avatar || '/img/avatars/default.png'}}"></a>
+					</div>
+					<div class="col-xs-8">
+						<h3><a ui-sref="user.overall({username:team.user.username})">{{team.user.username}}</a></h3>
+						<h4>{{team.name}}</h4>
+
+						<div class="progress active" style="height: 20px;">
+							<div class="progress-bar " role="progressbar"
+								  ng-style="{'background-color':team.color,'width': team.health + '%'}">
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="units">
+					<div class="text-center" style="padding:10px" ng-if="team.units == undefined">
+						<img src="img/spinner.gif" width="30" alt="Loading...">
+					</div>
+
+					<span class="unit" ng-class="{die:!unit.alive}" ng-repeat="unit in team.units"
+							ng-style="{'padding-top': 45-(45/100*unit.health) + 'px'}">
+					</span>
+				</div>
+			</div>
+			<a class="btn btn-block " style="background-color:rgb(75, 58, 35)!important;border: 2px solid white !important;
+" ng-href="/api/battle/{{battleId}}/dump/" target="_blank"><span class="icon"></span> Download battle file</a>
+		</div>
+	</div>
+</div>
+<br/>

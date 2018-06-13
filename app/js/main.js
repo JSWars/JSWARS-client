@@ -1,120 +1,135 @@
 "use strict";
 require.config({
-    'baseUrl': 'js/',
-    'paths': {
-        'domReady': 'components/domReady/domReady',
-        'angular': 'components/angular/angular',
-        'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
-        'angular-resource': 'components/angular-resource/angular-resource',
-        'controllers': 'controllers',
-        'factories': 'factories',
-        'directives': 'directives',
-        'filters': 'filters'
-    },
-    'shim': {
-        'angular': {
-            'exports': 'angular'
-        },
-        'angular-ui-router': {
-            'deps': ['angular']
-        },
-        'angular-resource': {
-            'deps': ['angular']
-        },
-        'controllers': {
-            deps: ['angular']
-        },
-        'factories': {
-            deps: ['angular']
-        },
-        'directives': {
-            deps: ['angular']
-        },
-        'filters': {
-            deps: ['angular']
-        }
-    }
+	'baseUrl': './js/',
+	'urlArgs': "bust=0.0.0",
+	waitSeconds: 60,
+	'paths': {
+		'domReady': 'components/domReady/domReady',
+		'jquery': 'components/jquery/dist/jquery',
+		'bootstrap': 'components/bootstrap/dist/js/bootstrap',
+		'moment': 'components/moment/moment',
+		'codemirror': 'components/codemirror/lib/codemirror',
+		'codemirror-wrapper': 'wrappers/CodeMirrorWrapper',
+		'angular': 'components/angular/angular',
+		'angular-ui-router': 'components/angular-ui-router/release/angular-ui-router',
+		'angular-ui-bootstrap': 'components/angular-bootstrap/ui-bootstrap-tpls',
+		'angular-resource': 'components/angular-resource/angular-resource',
+		'angular-messages': 'components/angular-messages/angular-messages',
+		'angular-codemirror': 'components/angular-ui-codemirror/ui-codemirror',
+		'angular-moment': 'components/angular-moment/angular-moment',
+		'angular-file-upload': 'components/angular-file-upload/angular-file-upload',
+		'angular-prograss': 'components/ngprogress/build/ngprogress',
+		'angular-local-storage': 'components/angular-local-storage/dist/angular-local-storage',
+		'angular-bootstrap-colorpicker': 'components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module',
+		'appbootstrap': 'appbootstrap'
+	},
+	'shim': {
+		'bootstrap': {
+			'deps': ['jquery']
+		},
+		'angular': {
+			'exports': 'angular'
+		},
+		'angular-ui-router': {
+			'deps': ['angular']
+		},
+		'angular-ui-bootstrap': {
+			'deps': ['angular']
+		},
+		'angular-resource': {
+			'deps': ['angular']
+		},
+		'angular-messages': {
+			'deps': ['angular']
+		},
+		'angular-moment': {
+			'deps': ['angular']
+		},
+		'angular-codemirror': {
+			'deps': ['angular', 'codemirror-wrapper']
+		},
+		'angular-file-upload': {
+			'deps': ['angular']
+		},
+		'angular-prograss': {
+			'deps': ['angular']
+		},
+		'angular-local-storage': {
+			'deps': ['angular']
+		},
+		'angular-bootstrap-colorpicker': {
+			'deps': ['angular']
+		},
+		'approuter': {
+			'deps': ['app']
+		},
+		'appbootstrap': {
+			'deps': ['approuter']
+		}
+	},
+	config: {
+		moment: {
+			noGlobal: true
+		}
+	},
+	'priority': [
+		"jquery",
+		"angular",
+		"app"
+	]
 });
 
 require([
-    'app',
-    'domReady',
-    'controllers/SigninCrtl',
-    'controllers/SignupCrtl',
-    'controllers/common/NavbarCrtl'
-], function (app, domReady) {
+	'app',
+	'constants',
+	'approuter',
+	'appbootstrap',
+	'bootstrap'
+], function (app) {
 
-    app.run(
-        ['$rootScope', '$state', '$stateParams',
-            function ($rootScope, $state, $stateParams) {
-                $rootScope.$state = $state;
-                $rootScope.$stateParams = $stateParams;
-            }
-        ]
-    );
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+		a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    app.config(
-        ['$stateProvider', '$urlRouterProvider',
-            function ($stateProvider, $urlRouterProvider) {
-
-                /////////////////////////////
-                // Redirects and Otherwise //
-                /////////////////////////////
-
-                // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
-                $urlRouterProvider
-
-                    .rule(function ($injector, $location) {
-
-                        var path = $location.path();
-                        var hasTrailingSlash = path[path.length - 1] === '/';
-
-                        if (hasTrailingSlash) {
-
-                            //if last charcter is a slash, return the same url without the slash
-                            var newPath = path.substr(0, path.length - 1);
-                            return newPath;
-                        }
-
-                    })
-
-                    // The `when` method says if the url is ever the 1st param, then redirect to the 2nd param
-                    // Here we are just setting up some convenience urls.
-                    .when('/c?id', '/contacts/:id')
-                    .when('/user/:id', '/contacts/:id')
-
-                    // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
-                    .otherwise('/');
+	ga('create', 'UA-1018881-6', 'auto');
+	ga('send', 'pageview');
 
 
-                //////////////////////////
-                // State Configurations //
-                //////////////////////////
+	app.config(['$logProvider', '$locationProvider', function ($logProvider, $locationProvider) {
+		$logProvider.debugEnabled(true);
+	}]);
 
-                // Use $stateProvider to configure your states.
-                $stateProvider
-                    .state("signin", {
-                        url: "/signin",
-                        templateUrl: '../views/SigninView.html',
-                        controller: "SigninController as Signin"
-                    })
-                    .state("signup", {
-                        url: "/signup",
-                        templateUrl: '../views/SignupView.html',
-                        controller: "SignupController as Signup"
-                    })
+	app.run(['$rootScope', '$http', 'ngProgressFactory', '$location', '$window', function ($rootScope, $http, ngProgressFactory, $location, $window) {
+		var progressbar = ngProgressFactory.createInstance();
 
-                    .state('about', {
-                        url: '/about'
-                    });
-            }
-        ]
-    );
+		$rootScope.isLoading = function () {
+			return $http.pendingRequests.length > 0;
+		};
 
-    domReady(function () {
-        angular.bootstrap(document.documentElement, [app.name]);
-    });
+		$rootScope.$watch('isLoading', function (loading) {
+			if (loading) {
+				progressbar.start();
+			} else {
+				progressbar.complete();
+			}
+		});
 
+		$rootScope
+			.$on('$stateChangeSuccess',
+			function (event) {
 
-})
-;
+				if (!$window.ga)
+					return;
+
+				$window.ga('send', 'pageview', {page: $location.path()});
+			});
+	}])
+});

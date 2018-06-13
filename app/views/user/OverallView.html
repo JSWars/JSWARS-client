@@ -1,0 +1,172 @@
+<div class="row">
+	<div class="col-md-9 p-15">
+
+		<!--<div class="">
+          <h3 class="block-title">Ratios</h3>
+
+          <div class="tile text-center">
+              <div class="tile-dark p-10">
+                  <div class="pie-chart-tiny" easypiechart percent="86">
+                      <span class="percent">{{86}}</span>
+                      <span class="pie-title">Win/Loose Ratio</span>
+                  </div>
+                  <div class="pie-chart-tiny" easypiechart percent="40">
+                      <span class="percent">{{40}}</span>
+                      <span class="pie-title">Win/Agent Ratio</span>
+                  </div>
+              </div>
+          </div>
+      </div>-->
+
+
+		<div class="clearfix"></div>
+
+
+		<!--<div class="panel panel-default tile">-->
+		<!--<div class="panel-heading">-->
+		<!--<h3 class="panel-title">Panel title</h3>-->
+		<!--</div>-->
+		<!--<div class="panel-body">-->
+		<!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.-->
+		<!--Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi-->
+		<!--vulputate fringilla. Donec lacinia congue felis in faucibus.-->
+		<!--</div>-->
+		<!--</div>-->
+
+
+		<div class="pull-right">
+			<button class="btn btn-primary" ng-if="session.username == user.username" ui-sref="user.agents.new"> Create new
+				agent
+			</button>
+		</div>
+		<h3 class="block-title">Agents</h3>
+		<table class="table table-responsive tile">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>Created</th>
+				<th class="text-right">Victories</th>
+				<th class="text-right hidden-xs">Losses</th>
+				<!--<th class="text-right">Rank</th>-->
+				<th style="width: 75px"></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="agent in agents.docs">
+				<td style="border-left: 2px solid black  !important" ng-style="{'border-left-color':agent.color}">
+					<a ng-if="session._id == agent.user"
+						ui-sref="user.agents.detail({username:user.username, agent: agent._id})">{{agent.name}}</a>
+					<span ng-if="session._id != agent.user">{{agent.name}}</span>
+				</td>
+				<td><span am-time-ago="agent.moment"
+							 tooltip="{{agent.moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span></td>
+				<td class="text-right">{{agent.wins}}</td>
+				<td class="text-right hidden-xs">{{agent.losses}}</td>
+				<!--<td class="text-right">{{agent.rank}}</td>-->
+				<td class="text-center">
+					<button type="button" class="btn btn-xs"
+							  battle-creator-button="{id: agent._id, username: user.username}">Add to Battle
+					</button>
+				</td>
+			</tr>
+			<tr ng-if="agents.docs.length==0">
+				<td colspan="6" style="text-align: center">No agents uploaded already</td>
+			</tr>
+			</tbody>
+		</table>
+		<p class="text-center">
+			<pagination total-items="agents.total" ng-model="page" num-pages="agents.pages"
+							ng-change="userPageChanged()" max-size="5"></pagination>
+		</p>
+
+
+		<!--<h3 class="block-title">Last tournaments</h3>-->
+		<!--<table class="table table-responsive tile">-->
+			<!--<thead>-->
+			<!--<tr>-->
+				<!--<th>Name</th>-->
+				<!--<th>Started</th>-->
+				<!--<th>Ended</th>-->
+				<!--<th class="text-right">Agents</th>-->
+				<!--<th class="text-right">Victories</th>-->
+				<!--<th class="text-right">Losses</th>-->
+				<!--<th class="text-right">Rank</th>-->
+
+			<!--</tr>-->
+			<!--</thead>-->
+			<!--<tbody>-->
+			<!--<tr ng-repeat="tournament in tournaments">-->
+				<!--<td>-->
+					<!--<a ui-sref="tournaments({tournament = tournament._id})">-->
+						<!--{{tournament.name}} <sup><span class="icon"></span></sup>-->
+					<!--</a>-->
+				<!--</td>-->
+				<!--<td>-->
+					<!--<span am-time-ago="tournament.startMoment"-->
+							<!--tooltip="{{tournament.startMoment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>-->
+				<!--</td>-->
+				<!--<td>-->
+                        <!--<span am-time-ago="tournament.endMoment"-->
+										<!--tooltip="{{tournament.endMoment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}"></span>-->
+				<!--</td>-->
+				<!--<td class="text-right">{{tournament.agentsCount}}</td>-->
+				<!--<td class="text-right">{{tournament.wins}}</td>-->
+				<!--<td class="text-right">{{tournament.losses}}</td>-->
+				<!--<td class="text-right">-->
+					<!--<a ui-sref="tournaments({tournament = tournament._id})">-->
+						<!--{{tournament.rank}} <sup><span class="icon"></span></sup>-->
+					<!--</a>-->
+				<!--</td>-->
+			<!--</tr>-->
+			<!--<tr ng-if="tournaments === undefined || tournaments.length === 0">-->
+				<!--<td colspan="7" class="text-center">No tournaments found</td>-->
+			<!--</tr>-->
+			<!--</tbody>-->
+		<!--</table>-->
+
+
+	</div>
+	<div class="col-md-3 p-15">
+
+		<div class="tile">
+			<h2 class="tile-title">About <a class="pull-right" profile-update on-complete="profileUpdated()" href="javascript:void(0)"
+													  ng-if="session.username == user.username"><i
+				class="fa fa-pencil-square"></i></a></h2>
+
+			<div class="listview icon-list">
+
+				<!--<div class="media" ng-if="user.ranking">-->
+				<!-- -->
+
+				<!--<div class="media-body">-->
+				<!--<strong>Ranking</strong>-->
+				<!--<span>{{user.ranking}}</span>-->
+				<!--</div>-->
+				<!--</div>-->
+
+
+				<div class="media" ng-if="user.country">
+					<span class="icon pull-left"></span>
+
+					<div class="media-body"><strong>Lives in </strong>
+						<a ui-sref="country({country: user.country})">
+							<img ng-src="/img/flags/16/{{user.country}}.png"
+								  alt="{{user.country | CountryFilter}}"/> {{user.country | CountryFilter}}</a>
+					</div>
+				</div>
+
+				<div class="media" ng-if="user.created">
+					<span class="icon pull-left"></span>
+
+					<div class="media-body">
+						<strong>User since</strong>
+						{{user.created | date: "MM/dd/yyyy" }}
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--<div ng-include="'views/user/ActivityWidgetView.html'" ></div>-->
+	</div>
+</div>

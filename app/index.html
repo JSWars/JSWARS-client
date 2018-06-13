@@ -1,97 +1,133 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>TFG!</title>
+	<meta charset="UTF-8">
+	<title>JS WARS: Let's create Artificial Intelligence</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <link href="js/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-    <link href="style/style.css" rel="stylesheet"/>
-    <link href="style/form.css" rel="stylesheet"/>
-    <link href="style/font-awesome.css" rel="stylesheet"/>
-    <link href="style/generics.css" rel="stylesheet"/>
-    <link href="style/icons.css" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+			content="Do you know artificial intelligence? Create your JavaScript intelligent agents and fight against your friends. Who will be the winner?">
+	<meta name="author" content="Marcos Pérez & Luis Sebastian">
+	<base href="/">
+	<meta name="fragment" content="!">
 
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="js/components/html5shiv/dist/html5shiv.min."></script>
-    <![endif]-->
+	<link href="style/main.css" rel="stylesheet"/>
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="img/favicon.png">
+	<style>
+		.ng-cloak {
+			display: none;
+		}
+	</style>
 
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="js/components/html5shiv/dist/html5shiv.min.js"></script>
+	<![endif]-->
 
+	<link rel="shortcut icon" href="img/favicon.png">
 </head>
-<body id="skin-blur-yellow">
-
+<body id="skin-blur-violate" ng-controller="RootController">
 
 <header id="header" class="media">
-    <a href="" id="menu-toggle"></a>
-    <a class="logo pull-left" href="index.html">IA Battle</a>
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="#">How it works</a>
-            </li>
-            <li>
-                <a href="../getting-started/">Tournaments</a>
-            </li>
-            <li class="active">
-                <a href="../css/">Training</a>
-            </li>
-            <li>
-                <a href="../javascript/">Rankings</a>
-            </li>
-            <li><a href="http://blog.getbootstrap.com">Blog</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/signin">Sign in</a></li>
-            <li><a href="#/signup" class="btn btn-register">Sign up</a></li>
-        </ul>
-    </nav>
+	<a id="menu-toggle" data-toggle="collapse" data-target=".navbar-collapse"></a>
+	<a class="logo pull-left" href="#">JS WARS</a>
+	<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation" >
+		<ul class="nav navbar-nav">
+			<li>
+				<a ui-sref="start">Start</a>
+			</li>
+			<li>
+				<a ui-sref="last-battles">Last Battles</a>
+			</li>
+			<li>
+				<a ui-sref="tournament-list">Tournaments</a>
+			</li>
+			<!--<li>-->
+			<!--<a ui-sref="rankings">Rankings</a>-->
+			<!--</li>-->
+			<li>
+				<a ui-sref="users">Users</a>
+			</li>
+			<li>
+				<a ui-sref="documentation">Documentation</a>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right ng-cloak">
+			<li ng-if="!session.username"><a class="btn btn-register" ng-click="ghLogin($event)">Sign in with GitHub <i
+				class="fa fa-github"></i></a></li>
+			<li ng-if="session.username"><a class="btn btn-register" ui-sref="user.overall({username: session.username})">Welcome
+				{{session.username}}</a></li>
+		</ul>
+	</nav>
 </header>
 
+<h1 class="text-center ng-cloak" ng-if="title">{{title}}</h1>
+<hr class="whiter ng-cloak" ng-if="title">
 
-<section ui-view></section>
+<section ui-view ng-if="online === true" class="ng-cloak"></section>
+<div class="text-center" style="margin-top: 300px" ng-if="online === undefined"><img src="img/spinner.gif" width="30"
+																												 alt="Loading..."></div>
 
-<footer class="tile-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-2 col-xs-offset-3">
-                <h4>Developers</h4>
-                <ul>
-                    <li><a href="">API</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-2">
-                <h4>Legal information</h4>
-                <ul>
-                    <li><a href="">Terms</a></li>
-                    <li><a href="">Privacy</a></li>
-                    <li><a href="">Cookies</a></li>
+<section id="error-page" ng-if="online === false" class="tile ng-cloak">
+	<h1 class="m-b-10">ERROR 500</h1>
 
-                </ul>
-            </div>
-            <div class="col-sm-2">
-                <h4>Courtesy of</h4>
-                <ul>
-                </ul>
-            </div>
-        </div>
-    </div>
+	<p>Sorry, but the page you are looking for has a problem. Wait some minutes an try again. </p>
+	<a class="underline" href="mailto:">Maybe you want contact us</a>
+</section>
+
+<div class="clearfix"></div>
+<footer class="tile-dark ng-cloak" ng-if="online === true">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2 col-sm-offset-3">
+				<h4>Developers</h4>
+				<ul>
+					<li><a ui-sref="documentation()">Documentation</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-2">
+				<h4>Legal information</h4>
+				<ul>
+					<li><a ui-sref="cookies">Cookies</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-2">
+				<h4>Powered by</h4>
+				<ul>
+					<li>Marcos Pérez Ferro (<a ui-sref="user.overall({username:'djwmarcx'})">djwmarcx</a>)</li>
+					<li>Luis Sebastian Huerta (<a ui-sref="user.overall({username:'LordOkami'})">LordOkami</a>)</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </footer>
 
+<battle-creator ng-if="session.username"></battle-creator>
 
 <!--Le scripts-->
+<script>
+	appVersion = ""
+</script>
 <script type="text/javascript" data-main="/js/main.js" src="js/components/requirejs/require.js"></script>
-
+<script type="text/ng-template" id="template/pagination/pagination.html" style="displayn:none">
+	<div class="btn-group">
+		<button class="btn btn-sm btn-alt" ng-if="boundaryLinks" ng-class="{disabled: noPrevious()}"
+				  ng-click="selectPage(1)">{{getText('first')}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-if="directionLinks" ng-class="{disabled: noPrevious()}"
+				  ng-click="selectPage(page - 1)">{{getText('previous')}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-repeat="page in pages track by $index" ng-class="{active: page.active}"
+				  ng-click="selectPage(page.number)">{{page.text}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-if="directionLinks" ng-class="{disabled: noNext()}"
+				  ng-click="selectPage(page + 1)">{{getText('next')}}
+		</button>
+		<button class="btn btn-sm btn-alt" ng-if="boundaryLinks" ng-class="{disabled: noNext()}"
+				  ng-click="selectPage(totalPages)">{{getText('last')}}
+		</button>
+	</div>
+</script>
 </body>
 </html>

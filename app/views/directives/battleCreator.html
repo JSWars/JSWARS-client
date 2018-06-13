@@ -1,0 +1,64 @@
+<div class="tile battle-creator" ng-if="battle.agents.length>0">
+	<h2 class="tile-title text-center" ng-click="hidden = !hidden" style="cursor:pointer">Create Battle <span
+		class="icon" ng-if="hidden == false"></span>
+		<span class="icon" ng-if="hidden == true"></span></h2>
+
+	<div class="row" ng-if="!hidden">
+		<div class="col-sm-5 text-right">
+			<div class="media p-10">
+				<div class="pull-right">
+					<img width="40" height="40"
+						  ng-src="{{battle.agents[0].user.github.avatar_url || '/img/avatars/default.png'}}"
+						  tooltip="{{battle.agents[0].user.username}}">
+				</div>
+				<div class="media-body">
+					<small class="text-muted">{{battle.agents[0].moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} by
+						<a ui-sref="user.overall({username:battle.agents[0].user.username})">{{battle.agents[0].user.username}}</a>
+					</small>
+					<br>
+					<span class="t-overflow">{{battle.agents[0].name}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2 text-center ">
+			<div class="p-10" ng-if="waiting != true && error === false">
+				<button class="btn btn-lg fight-button" ng-disabled="!battle.agents.length>=2"
+						  ng-click="putInQueue($event)">FIGHT
+				</button>
+				<button class="btn btn-lg " ng-disabled="!battle.agents.length>=2" ng-click="clearQueue($event)">CLEAR
+				</button>
+			</div>
+			<div class="p-10" ng-if="waiting == true">
+				<img src="img/gamerunning.gif" alt="Running battle" width="40"/><br>
+			</div>
+			<div class="p-10" ng-if="error != false">
+				{{error | errorFilter}}. <a href="#" ng-click="cleanError()">Click to try Again.</a>
+			</div>
+
+		</div>
+		<div class="col-sm-5 text-left">
+			<div class="media p-10" ng-if="!battle.agents[1]">
+				<div class="pull-left">
+					<img width="40" height="40" src="/img/avatars/default.png" alt="">
+				</div>
+				<div class="media-body">
+					<a class="t-overflow" ui-sref="users">Please choose another agent</a>
+				</div>
+			</div>
+			<div class="media p-10" ng-if="battle.agents[1]">
+				<div class="pull-left">
+					<img width="40" height="40"
+						  src="{{battle.agents[1].user.github.avatar_url || '/img/avatars/default.png'}}"
+						  tooltip="{{battle.agents[1].user.username}}">
+				</div>
+				<div class="media-body">
+					<small class="text-muted">{{battle.agents[1].moment | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} by
+						<a ui-sref="user.overall({username:battle.agents[1].user.username})">{{battle.agents[1].user.username}}</a>
+					</small>
+					<br>
+					<span class="t-overflow">{{battle.agents[1].name}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

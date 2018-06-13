@@ -1,0 +1,48 @@
+<div class="container">
+	<div class="block-area">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h2 class="block-title">User list</h2>
+
+				<div class="tile">
+					<table class="table table-bordered tile">
+						<thead>
+						<tr>
+							<th>Username</th>
+							<th class="text-center" style="width: 70px">Agent Count</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="user in users.docs">
+							<td>
+								<div class="media p-l-5">
+									<div class="pull-left">
+										<a ui-sref="user.overall({username:user.username})">
+											<img width="40" ng-src="{{user.avatar}}" alt="{{user.username}}">
+										</a>
+									</div>
+									<div class="media-body">
+										<small class="text-muted">Since: {{user.created | amDateFormat:'dddd, MMMM Do YYYY,
+											h:mm:ss a'}}
+										</small>
+										<br>
+										<a class="t-overflow" ui-sref="user.overall({username:user.username})"
+											title="{{user.username}}">{{user.username}}</a>
+									</div>
+								</div>
+							</td>
+							<td class="text-center" style="vertical-align: middle">
+								{{user.agents}}
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<p class="text-center">
+					<pagination total-items="users.total" ng-model="page" num-pages="users.pages"
+									ng-change="pageChanged()" max-size="5"></pagination>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
